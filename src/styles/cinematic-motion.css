@@ -1,0 +1,209 @@
+/**
+ * Cinematic motion layer — minimal, premium, reduced-motion safe.
+ * Utilities: ambient orbs, soft blur reveals, view-timeline parallax, floating chrome.
+ */
+
+:root {
+  --lux-motion-ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --lux-motion-ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+  --lux-motion-duration-slow: 0.65s;
+  --lux-motion-duration-medium: 0.48s;
+  --lux-blur-reveal: 12px;
+  --lux-parallax-shift: 18px;
+}
+
+/* ── Page shell (landing) ─────────────────────────────────────────── */
+.lux-cinematic-surface {
+  position: relative;
+}
+
+.lux-cinematic-surface::before {
+  content: "";
+  position: fixed;
+  inset: -38% -26%;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 92% 58% at 18% -4%, rgba(125, 211, 252, 0.085), transparent 58%),
+    radial-gradient(ellipse 74% 52% at 88% 12%, rgba(56, 189, 248, 0.055), transparent 54%),
+    radial-gradient(ellipse 110% 62% at 48% 108%, rgba(30, 58, 88, 0.12), transparent 52%);
+  opacity: 0.92;
+  animation: lux-cinematic-surface-drift 28s var(--lux-motion-ease-smooth) infinite alternate;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lux-cinematic-surface::before {
+    animation: none;
+    opacity: 0.62;
+  }
+}
+
+@keyframes lux-cinematic-surface-drift {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  100% {
+    transform: translate3d(2%, -1.2%, 0) scale(1.03);
+  }
+}
+
+/* ── Fixed ambient layer (behind content) ───────────────────────── */
+.lux-cinematic-ambient {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.lux-cinematic-ambient__orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(104px);
+  opacity: 0.48;
+  will-change: transform, opacity;
+  animation: lux-ambient-orb-drift 22s var(--lux-motion-ease-smooth) infinite alternate;
+}
+
+.lux-cinematic-ambient__orb--a {
+  width: min(58vw, 720px);
+  height: min(58vw, 720px);
+  top: -14%;
+  left: -10%;
+  background: radial-gradient(circle, rgba(125, 211, 252, 0.11) 0%, transparent 72%);
+  animation-duration: 26s;
+}
+
+.lux-cinematic-ambient__orb--b {
+  width: min(48vw, 580px);
+  height: min(48vw, 580px);
+  bottom: -22%;
+  right: -14%;
+  background: radial-gradient(circle, rgba(186, 230, 253, 0.085) 0%, transparent 74%);
+  animation-duration: 31s;
+  animation-delay: -4s;
+}
+
+.lux-cinematic-ambient__orb--c {
+  width: min(40vw, 480px);
+  height: min(40vw, 480px);
+  top: 38%;
+  right: 8%;
+  background: radial-gradient(circle, rgba(148, 163, 184, 0.07) 0%, transparent 76%);
+  animation-duration: 24s;
+  animation-delay: -9s;
+  opacity: 0.34;
+}
+
+[data-ui-theme="dark"] .lux-cinematic-ambient__orb--a {
+  opacity: 0.34;
+}
+
+[data-ui-theme="dark"] .lux-cinematic-ambient__orb--b {
+  opacity: 0.28;
+}
+
+[data-ui-theme="dark"] .lux-cinematic-ambient__orb--c {
+  opacity: 0.22;
+}
+
+@keyframes lux-ambient-orb-drift {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: var(--orb-o-start, 0.42);
+  }
+  100% {
+    transform: translate3d(3%, -2.5%, 0) scale(1.06);
+    opacity: var(--orb-o-end, 0.5);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lux-cinematic-ambient__orb {
+    animation: none;
+    opacity: 0.26;
+  }
+}
+
+/* ── Scroll-linked parallax (progressive enhancement) ──────────── */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .lux-parallax-view {
+      animation: lux-parallax-view-shift linear both;
+      animation-timeline: view(block);
+      animation-range: entry 0% cover 58%;
+    }
+  }
+}
+
+@keyframes lux-parallax-view-shift {
+  from {
+    transform: translate3d(0, calc(var(--lux-parallax-shift) * 0.55), 0);
+  }
+  to {
+    transform: translate3d(0, calc(var(--lux-parallax-shift) * -0.45), 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lux-parallax-view {
+    animation: none !important;
+  }
+}
+
+.lux-parallax-wrap {
+  width: 100%;
+  will-change: transform;
+}
+
+/* ── Floating nav chrome ─────────────────────────────────────────── */
+@media (prefers-reduced-motion: no-preference) {
+  .lux-navbar-cinematic {
+    animation: lux-navbar-float 8s var(--lux-motion-ease-smooth) infinite alternate;
+  }
+}
+
+@keyframes lux-navbar-float {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(0, 3px, 0);
+  }
+}
+
+/* Subtle depth on scroll state — handoff from gravity.css */
+.lux-navbar-cinematic.scrolled {
+  animation: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lux-navbar-cinematic {
+    animation: none;
+  }
+}
+
+/* ── Cinematic hovers (landing nav CTA) ─────────────────────────── */
+.landing-page .grav-nav-cta.lux-cinematic-target {
+  transition:
+    background var(--lux-motion-duration-slow) var(--lux-motion-ease-out),
+    color var(--lux-motion-duration-medium) var(--lux-motion-ease-out),
+    border-color var(--lux-motion-duration-medium) ease,
+    box-shadow 0.55s var(--lux-motion-ease-out),
+    transform 0.58s var(--lux-motion-ease-out),
+    filter 0.55s var(--lux-motion-ease-out);
+}
+
+.landing-page .grav-nav-cta.lux-cinematic-target:hover {
+  transform: translate3d(0, -2px, 0) scale(1.03);
+  filter: drop-shadow(0 10px 28px rgba(56, 189, 248, 0.12));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .landing-page .grav-nav-cta.lux-cinematic-target:hover {
+    transform: none;
+    filter: none;
+  }
+}
+
+/* Scroll-scrubbed blur is driven from `scrollReveal.ts` + anime.js. */

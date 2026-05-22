@@ -1,0 +1,247 @@
+/* =============================================================================
+   Luxury editorial typography
+   Cinematic serif display + italic accent + thin geometric labels (Satoshi/Inter).
+   Palette: ice white + turquoise on deep navy. Use on .lux-edit-surface or dark sections.
+   ============================================================================= */
+
+:root {
+  /* Surfaces (deep navy stack — Apple / terminal-luxury adjacency) */
+  --lux-edit-bg-deep: #040a14;
+  --lux-edit-bg-mid: #070f1e;
+  --lux-edit-bg-elevated: #0c1628;
+
+  /* Text */
+  --lux-edit-text-primary: #f4f8fc;
+  --lux-edit-text-secondary: rgba(244, 248, 252, 0.72);
+  --lux-edit-text-muted: rgba(244, 248, 252, 0.48);
+  --lux-edit-turquoise: #7ee8f2;
+  --lux-edit-turquoise-soft: #5dd4e0;
+  --lux-edit-turquoise-deep: #2ec4d6;
+
+  /* Type stacks — Bodoni/Cormorant/Instrument (Canela-adj), Satoshi + Inter (Neue Haas / SF adjacency) */
+  --lux-edit-font-display: "Bodoni Moda", "Cormorant Garamond", "Instrument Serif", ui-serif, Georgia, serif;
+  --lux-edit-font-italic: "Instrument Serif", "Bodoni Moda", ui-serif, Georgia, serif;
+  --lux-edit-font-sans: "Satoshi", "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  /* Optical scale + rhythm */
+  --lux-edit-tracking-tight: -0.035em;
+  --lux-edit-tracking-display: -0.02em;
+  --lux-edit-tracking-label: 0.26em;
+  --lux-edit-leading-headline: 0.92;
+  --lux-edit-leading-sub: 1.35;
+  --lux-edit-leading-body: 1.65;
+  --lux-edit-space-after-label: clamp(0.85rem, 1.6vw, 1.35rem);
+  --lux-edit-space-after-sub: clamp(1.25rem, 2.4vw, 2rem);
+
+  /* Cinematic glow + depth (headlines) — layered cyan bloom + ink falloff */
+  --lux-edit-shadow-headline:
+    0 1px 0 rgba(0, 0, 0, 0.5),
+    0 2px 4px rgba(0, 0, 0, 0.35),
+    0 18px 56px rgba(0, 0, 0, 0.45),
+    0 0 48px rgba(94, 234, 255, 0.14),
+    0 0 120px rgba(46, 196, 214, 0.09);
+}
+
+/* —— Surface wrapper: elegant white / turquoise defaults on navy —— */
+.lux-edit-surface {
+  --lux-edit-glow-strength: 1;
+  background:
+    radial-gradient(ellipse 120% 80% at 50% -20%, rgba(94, 234, 255, 0.07), transparent 55%),
+    radial-gradient(ellipse 70% 50% at 100% 50%, rgba(12, 22, 40, 0.9), transparent),
+    linear-gradient(180deg, var(--lux-edit-bg-deep) 0%, var(--lux-edit-bg-mid) 45%, var(--lux-edit-bg-elevated) 100%);
+  color: var(--lux-edit-text-primary);
+  font-family: var(--lux-edit-font-sans);
+  font-weight: 400;
+  font-feature-settings: "kern" 1, "liga" 1;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* —— Thin uppercase label / eyebrow (Neue Haas–like restraint) —— */
+.lux-edit-label {
+  display: block;
+  font-family: var(--lux-edit-font-sans);
+  font-size: clamp(0.625rem, 0.85vw, 0.6875rem);
+  font-weight: 300;
+  letter-spacing: var(--lux-edit-tracking-label);
+  line-height: 1.2;
+  text-transform: uppercase;
+  color: var(--lux-edit-turquoise);
+  margin: 0 0 var(--lux-edit-space-after-label);
+}
+
+.lux-edit-label--muted {
+  color: var(--lux-edit-text-muted);
+}
+
+/* —— Large cinematic serif headline —— */
+.lux-edit-headline {
+  font-family: var(--lux-edit-font-display);
+  font-optical-sizing: auto;
+  font-size: clamp(2.75rem, 7.5vw, 5.75rem);
+  font-weight: 400;
+  line-height: var(--lux-edit-leading-headline);
+  letter-spacing: var(--lux-edit-tracking-tight);
+  color: var(--lux-edit-text-primary);
+  margin: 0 0 var(--lux-edit-space-after-sub);
+  text-wrap: balance;
+  font-feature-settings: "kern" 1, "liga" 1, "dlig" 1;
+}
+
+.lux-edit-headline--xl {
+  font-size: clamp(3.25rem, 9vw, 7rem);
+  letter-spacing: calc(var(--lux-edit-tracking-tight) - 0.005em);
+  line-height: 0.9;
+}
+
+.lux-edit-headline--secondary {
+  font-size: clamp(2rem, 4.5vw, 3.25rem);
+  font-weight: 500;
+  letter-spacing: var(--lux-edit-tracking-display);
+  line-height: 1.02;
+}
+
+/* Turquoise emphasis line or word — high contrast against headline */
+.lux-edit-headline em,
+.lux-edit-headline--secondary em {
+  font-style: normal;
+  color: var(--lux-edit-turquoise);
+  font-weight: 500;
+}
+
+/* Soft cinematic glow + shadow depth */
+.lux-edit-headline--glow,
+.lux-edit-headline--secondary.lux-edit-headline--glow {
+  text-shadow: var(--lux-edit-shadow-headline);
+}
+
+/* —— Elegant italic subheading —— */
+.lux-edit-subhead {
+  font-family: var(--lux-edit-font-italic);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(1.125rem, 2.2vw, 1.75rem);
+  line-height: var(--lux-edit-leading-sub);
+  letter-spacing: 0.01em;
+  color: var(--lux-edit-turquoise-soft);
+  margin: 0 0 var(--lux-edit-space-after-sub);
+  max-width: 38rem;
+  text-wrap: pretty;
+}
+
+.lux-edit-subhead--on-light {
+  color: var(--lux-edit-turquoise-deep);
+}
+
+/* —— Lead / body (Apple-like clarity on sans) —— */
+.lux-edit-lead {
+  font-family: var(--lux-edit-font-sans);
+  font-size: clamp(1rem, 1.35vw, 1.1875rem);
+  font-weight: 400;
+  line-height: 1.55;
+  letter-spacing: 0.004em;
+  color: var(--lux-edit-text-secondary);
+  margin: 0;
+  max-width: 42rem;
+}
+
+.lux-edit-body {
+  font-family: var(--lux-edit-font-sans);
+  font-size: clamp(0.9375rem, 1.15vw, 1.0625rem);
+  font-weight: 400;
+  line-height: var(--lux-edit-leading-body);
+  letter-spacing: 0.006em;
+  color: var(--lux-edit-text-secondary);
+  margin: 0;
+  max-width: 48rem;
+}
+
+.lux-edit-body strong {
+  color: var(--lux-edit-text-primary);
+  font-weight: 500;
+}
+
+/* —— Vertical stack helper (premium spacing between blocks) —— */
+.lux-edit-stack {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: clamp(1rem, 2vw, 1.75rem);
+}
+
+.lux-edit-stack--center {
+  align-items: center;
+  text-align: center;
+}
+
+.lux-edit-stack--center .lux-edit-subhead,
+.lux-edit-stack--center .lux-edit-lead,
+.lux-edit-stack--center .lux-edit-body {
+  margin-inline: auto;
+}
+
+/* —— Captions / meta —— */
+.lux-edit-caption {
+  font-family: var(--lux-edit-font-sans);
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--lux-edit-text-muted);
+  margin: 0;
+}
+
+/* Reduced motion: keep hierarchy, tame glow */
+@media (prefers-reduced-motion: reduce) {
+  .lux-edit-headline--glow,
+  .lux-edit-headline--secondary.lux-edit-headline--glow {
+    text-shadow:
+      0 1px 0 rgba(0, 0, 0, 0.45),
+      0 8px 28px rgba(0, 0, 0, 0.35);
+  }
+}
+
+/* Light theme: same classes read on pale surfaces (optional overrides) */
+[data-ui-theme="light"] .lux-edit-surface,
+[data-theme="light"] .lux-edit-surface {
+  background:
+    radial-gradient(ellipse 100% 70% at 50% 0%, rgba(14, 165, 233, 0.06), transparent 50%),
+    linear-gradient(180deg, #f5f8fc 0%, #eef4fa 100%);
+  color: #0a1628;
+}
+
+[data-ui-theme="light"] .lux-edit-surface .lux-edit-label,
+[data-theme="light"] .lux-edit-surface .lux-edit-label {
+  color: #0e7490;
+}
+
+[data-ui-theme="light"] .lux-edit-surface .lux-edit-headline,
+[data-theme="light"] .lux-edit-surface .lux-edit-headline,
+[data-ui-theme="light"] .lux-edit-surface .lux-edit-headline--secondary,
+[data-theme="light"] .lux-edit-surface .lux-edit-headline--secondary {
+  color: #071018;
+  text-shadow: none;
+}
+
+[data-ui-theme="light"] .lux-edit-surface .lux-edit-headline em,
+[data-theme="light"] .lux-edit-surface .lux-edit-headline em,
+[data-ui-theme="light"] .lux-edit-surface .lux-edit-headline--secondary em,
+[data-theme="light"] .lux-edit-surface .lux-edit-headline--secondary em {
+  color: #0e7490;
+}
+
+[data-ui-theme="light"] .lux-edit-surface .lux-edit-subhead,
+[data-theme="light"] .lux-edit-surface .lux-edit-subhead {
+  color: #155e75;
+}
+
+[data-ui-theme="light"] .lux-edit-surface .lux-edit-lead,
+[data-ui-theme="light"] .lux-edit-surface .lux-edit-body,
+[data-theme="light"] .lux-edit-surface .lux-edit-lead,
+[data-theme="light"] .lux-edit-surface .lux-edit-body {
+  color: rgba(7, 16, 24, 0.68);
+}
+
+[data-ui-theme="light"] .lux-edit-surface .lux-edit-body strong,
+[data-theme="light"] .lux-edit-surface .lux-edit-body strong {
+  color: #071018;
+}

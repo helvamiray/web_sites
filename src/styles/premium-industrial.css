@@ -1,0 +1,352 @@
+/**
+ * Premium industrial landing (2026) — ice white flagship, navy ink, cyan glass accents.
+ * Scoped under .premium-industrial-landing
+ */
+
+.landing-page.vega-enerji-theme.premium-industrial-landing {
+  --pi-navy-deep: #09111f;
+  --pi-navy: #0f172a;
+  --pi-navy-accent: #0f172a;
+  --pi-ice: #f7fafc;
+  --pi-ice-soft: #eef7fb;
+  --pi-blueprint: #ddeef8;
+  --pi-ink: #09111f;
+  --pi-muted: #7b93a7;
+  --pi-white: #ffffff;
+  --pi-cyan: #00c2ff;
+  --pi-glass-bg: rgba(255, 255, 255, 0.72);
+  --pi-glass-border: 1px solid rgba(13, 42, 99, 0.08);
+  --font-pi-serif: var(--font-lux-serif, "Bodoni Moda", "Instrument Serif", ui-serif, Georgia, serif);
+  --font-pi-sans: var(--font-lux-sans, "Manrope", "DM Sans", system-ui, sans-serif);
+  font-family: var(--font-pi-sans);
+}
+
+.premium-industrial-landing .main-content {
+  background: transparent;
+  color: inherit;
+}
+
+/* Hero — serif display, no accent colour */
+.premium-industrial-landing .vega-enerji-hero__stroke {
+  font-family: var(--font-pi-serif);
+  -webkit-text-stroke: 1px rgba(7, 19, 38, 0.18);
+  color: transparent;
+}
+
+.premium-industrial-landing .vega-enerji-hero__title {
+  font-family: var(--font-pi-serif);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+}
+
+.premium-industrial-landing .vega-enerji-hero__explore:hover {
+  color: var(--pi-navy-deep);
+  opacity: 0.88;
+}
+
+.premium-industrial-landing .vega-enerji-logo-hex {
+  border: var(--pi-glass-border);
+  background: var(--pi-glass-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.premium-industrial-landing .vega-enerji-logo-text-main,
+.premium-industrial-landing .vega-enerji-logo-text-sub {
+  font-family: var(--font-pi-serif);
+  color: var(--pi-ink);
+}
+
+/* Asymmetry + calm rhythm */
+.premium-industrial-landing .main-content > * {
+  --pi-section-pad-inline: clamp(1.25rem, 5vw, 4.5rem);
+}
+
+/* Navbar — white glass handled globally in midnight-engineering-system.css */
+
+/* Section headlines — serif */
+/* Note: base partners section uses .lux-partners; colors below support any shared classes */
+.premium-industrial-landing .section-headline,
+.premium-industrial-landing h1,
+.premium-industrial-landing h2,
+.premium-industrial-landing .solution-partners-title {
+  font-family: var(--font-pi-serif);
+  color: var(--me-heading);
+}
+
+.premium-industrial-landing .solution-partners-section {
+  background: transparent;
+  border-top: 1px solid rgba(13, 42, 99, 0.06);
+  border-bottom: 1px solid rgba(13, 42, 99, 0.05);
+}
+
+.premium-industrial-landing .solution-partners-eyebrow {
+  color: var(--me-label);
+  letter-spacing: 0.32em;
+}
+
+.premium-industrial-landing .solution-partners-sub,
+.premium-industrial-landing .solution-partners-logo-text {
+  color: var(--me-body);
+}
+
+.premium-industrial-landing .solution-partners-logo-cell {
+  border: 1px solid rgba(120, 180, 220, 0.2);
+  background: rgba(255, 255, 255, 0.78);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 6px 28px rgba(15, 23, 42, 0.05);
+}
+
+/* Mega — premium glass (see also .premium-mega-* in component) */
+.premium-mega .vega-mega-backdrop {
+  background: rgba(13, 22, 56, 0.52);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.premium-mega .vega-mega-panel {
+  border: var(--pi-glass-border);
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(24px) saturate(150%);
+  -webkit-backdrop-filter: blur(24px) saturate(150%);
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.35);
+}
+
+.premium-mega .vega-mega-panel--light {
+  border: var(--pi-glass-border);
+  background: rgba(26, 35, 126, 0.55);
+}
+
+.premium-mega .vega-mega-card {
+  border: var(--pi-glass-border);
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--pi-white);
+}
+
+.premium-mega .vega-mega-card:hover,
+.premium-mega .vega-mega-card:focus-visible {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.35);
+}
+
+.premium-mega .vega-mega-card--active {
+  background: #ffffff;
+  color: #1a237e;
+  border-color: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 12px 44px rgba(0, 0, 0, 0.15);
+}
+
+.premium-mega .vega-mega-card--active .vega-mega-card__title,
+.premium-mega .vega-mega-card--active .vega-mega-card__tag,
+.premium-mega .vega-mega-card--active .vega-mega-card__icon {
+  color: #1a237e;
+}
+
+.premium-mega .vega-mega-tab--active {
+  background: #ffffff;
+  color: #1a237e;
+  border-color: rgba(255, 255, 255, 0.95);
+}
+
+.premium-mega .vega-mega-panel__detail {
+  border: var(--pi-glass-border);
+  background: rgba(0, 0, 0, 0.15);
+}
+
+.premium-mega .vega-mega-detail-placeholder,
+.premium-mega .vega-mega-model-row {
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.premium-mega .vega-mega-brand-tile {
+  border: var(--pi-glass-border);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.premium-mega .vega-mega-brand-tile__name {
+  color: var(--pi-white);
+}
+
+.premium-mega .vega-mega-cta {
+  border: var(--pi-glass-border);
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--pi-white);
+}
+
+.premium-mega .vega-mega-cta:hover {
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.premium-mega .vega-mega-wizard-back {
+  border: none;
+  background: none;
+  color: rgba(255, 255, 255, 0.75);
+  font-family: var(--font-pi-sans);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  margin-bottom: 0.75rem;
+  padding: 0.25rem 0;
+}
+
+.premium-mega .vega-mega-wizard-back:hover {
+  color: var(--pi-white);
+}
+
+.premium-mega .vega-mega-wizard-pane {
+  will-change: transform, opacity;
+}
+
+.premium-mega .vega-mega-panel__grid--asym {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+@media (min-width: 960px) {
+  .premium-mega .vega-mega-panel__grid--asym {
+    grid-template-columns: minmax(0, 0.42fr) minmax(0, 0.58fr);
+    align-items: start;
+  }
+}
+
+.premium-industrial-landing .grav-nav-links .vega-mega-trigger {
+  color: var(--me-nav-ink) !important;
+}
+
+.premium-industrial-landing .grav-nav-links .vega-mega-trigger:hover {
+  color: #0d7ea8 !important;
+  opacity: 1;
+}
+
+/* Mega — marka kutuları (button) */
+.premium-mega .vega-mega-brand-tile {
+  cursor: pointer;
+  appearance: none;
+  font: inherit;
+  width: 100%;
+}
+
+.premium-mega .vega-mega-brand-tile--active {
+  border-color: rgba(255, 255, 255, 0.55);
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.premium-mega .vega-mega-card__title {
+  font-family: var(--font-pi-serif);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.premium-mega .vega-mega-section-label {
+  margin: 0 0 0.75rem;
+  font-family: var(--font-pi-sans);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.premium-mega .vega-mega-models-block {
+  margin-top: 1.35rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.premium-mega .vega-mega-cta--secondary {
+  background: transparent;
+  border: var(--pi-glass-border);
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.premium-mega .vega-mega-cta--secondary:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.premium-mega .vega-mega-tabs {
+  border-bottom-color: rgba(255, 255, 255, 0.15);
+}
+
+.premium-mega .vega-mega-spec-card {
+  border: var(--pi-glass-border);
+  background: rgba(255, 255, 255, 0.07);
+}
+
+.premium-mega .vega-mega-spec-card__title {
+  color: var(--pi-white);
+  font-family: var(--font-pi-sans);
+}
+
+.premium-mega .vega-mega-spec-list__row dd {
+  border-left-color: rgba(255, 255, 255, 0.45);
+  color: rgba(255, 255, 255, 0.9);
+  background: rgba(0, 0, 0, 0.18);
+}
+
+/* Alt bölümler — iki tonlu sakin yüzey, asimetrik boşluk */
+.premium-industrial-landing .main-content .product-catalog-section {
+  color: var(--me-body);
+}
+
+@media (min-width: 1024px) {
+  .premium-industrial-landing .main-content .catalog-layout {
+    padding-left: clamp(0rem, 4vw, 3rem);
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Ana sayfa hero — tam ekran (100vh) zorlaması kalksın; alta boş lacivert blok yok
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* Mevcut InteractiveShowroomHero: çoğu katman absolute; height:auto için min-height şart */
+.landing-page.vega-enerji-theme.premium-industrial-landing
+  #hero.showroom-hero-fixed.ultra-premium-hero,
+.landing-page.vega-enerji-theme.premium-industrial-landing
+  #hero.showroom-hero-fixed.vega-enerji-showroom-hero {
+  height: auto;
+  min-height: clamp(28rem, 74dvh, 48rem);
+  background-attachment: scroll;
+}
+
+@media (max-width: 767px) {
+  .landing-page.vega-enerji-theme.premium-industrial-landing
+    #hero.showroom-hero-fixed.ultra-premium-hero,
+  .landing-page.vega-enerji-theme.premium-industrial-landing
+    #hero.showroom-hero-fixed.vega-enerji-showroom-hero {
+    min-height: clamp(26rem, 78dvh, 42rem);
+  }
+}
+
+/* Ultra premium hero (vega-hero-premium--ultra) — layout içerik yüksekliğine göre */
+.landing-page.vega-enerji-theme.premium-industrial-landing .vega-hero-premium--ultra.showroom-hero-fixed {
+  height: auto;
+  min-height: 0;
+  background-attachment: scroll;
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing .vega-hero-premium--ultra .vega-hero-premium__inner {
+  min-height: auto;
+  justify-content: flex-start;
+  gap: clamp(0.85rem, 2.2vh, 1.35rem);
+  padding-bottom: clamp(2.25rem, 5vw, 3.5rem);
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing .vega-hero-premium__grid--ultra {
+  align-items: center;
+  flex: 0 1 auto;
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing .vega-hero-premium--ultra .vega-hero-premium__visual {
+  position: relative;
+  overflow: visible;
+  min-height: min(28vh, 260px);
+}
+
+@media (min-width: 900px) {
+  .landing-page.vega-enerji-theme.premium-industrial-landing .vega-hero-premium--ultra .vega-hero-premium__visual {
+    min-height: min(38vh, 380px);
+  }
+}
+

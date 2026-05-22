@@ -1,0 +1,489 @@
+/* ==========================================================================
+   Cinematic hero — fullscreen dark navy, cyan aura, keynote-grade motion
+   Requires: section.ultra-premium-hero.hero-cinematic on homepage shell
+   ========================================================================== */
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  #hero.showroom-hero-fixed.hero-cinematic.ultra-premium-hero {
+  --uph-bg-void: #0f1f34;
+  --uph-bg-deep: #162f46;
+  --uph-bg-mid: #1e3f5c;
+  --uph-cyan: #38bdf8;
+  --uph-cyan-bright: #7dd3fc;
+  --uph-white: #f8fafc;
+  --uph-muted: #b8c9da;
+  --uph-ptr-x: 50%;
+  --uph-ptr-y: 42%;
+
+  height: auto;
+  min-height: 100dvh;
+  min-height: 100vh;
+  background:
+    radial-gradient(ellipse 110% 72% at 52% -14%, rgba(125, 211, 252, 0.11) 0%, transparent 54%),
+    radial-gradient(ellipse 72% 52% at 12% 92%, rgba(56, 189, 248, 0.05) 0%, transparent 52%),
+    linear-gradient(180deg, var(--uph-bg-void) 0%, var(--uph-bg-deep) 46%, var(--uph-bg-mid) 100%);
+  color: var(--uph-white);
+}
+
+@media (max-width: 767px) {
+  .landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  #hero.showroom-hero-fixed.hero-cinematic.ultra-premium-hero {
+    min-height: min(100dvh, 920px);
+  }
+}
+
+/* Bridge to next section — dark continuity (overrides luxury-climate-brand ice bridge) */
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  #hero.showroom-hero-fixed.hero-cinematic.ultra-premium-hero::after {
+  height: clamp(72px, 14vh, 140px);
+  background:
+    radial-gradient(circle 2px at 22% 70%, rgba(125, 211, 252, 0.28), transparent),
+    radial-gradient(circle 1.5px at 78% 58%, rgba(186, 230, 253, 0.22), transparent),
+    linear-gradient(
+      180deg,
+      transparent 0%,
+      rgba(125, 211, 252, 0.055) 42%,
+      rgba(17, 38, 62, 0.82) 100%
+    ),
+    linear-gradient(rgba(125, 211, 252, 0.028) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(125, 211, 252, 0.028) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 100% 100%, 64px 64px, 64px 64px;
+  mask-image: linear-gradient(180deg, transparent 0%, black 38%, black 100%);
+  animation: none;
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell .hero-cinematic .ultra-premium-hero__ambient {
+  background:
+    radial-gradient(ellipse 92% 74% at var(--uph-ptr-x) var(--uph-ptr-y), rgba(125, 211, 252, 0.13) 0%, transparent 48%),
+    radial-gradient(ellipse 74% 58% at 14% 88%, rgba(30, 58, 88, 0.38) 0%, transparent 52%),
+    radial-gradient(ellipse 58% 48% at 90% 14%, rgba(56, 189, 248, 0.09) 0%, transparent 50%),
+    linear-gradient(168deg, #101f34 0%, #162f46 52%, #142838 100%);
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell .hero-cinematic .ultra-premium-hero__grid-layer {
+  opacity: 0.38;
+  background-image:
+    linear-gradient(rgba(125, 211, 252, 0.038) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(125, 211, 252, 0.038) 1px, transparent 1px);
+  background-size: 56px 56px;
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell .hero-cinematic .ultra-premium-hero__fog {
+  background:
+    radial-gradient(ellipse 92% 56% at 50% 108%, rgba(15, 34, 56, 0.38) 0%, transparent 52%),
+    radial-gradient(ellipse 54% 44% at 8% 38%, rgba(125, 211, 252, 0.065) 0%, transparent 54%),
+    radial-gradient(ellipse 48% 40% at 94% 22%, rgba(30, 52, 76, 0.28) 0%, transparent 50%);
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell .hero-cinematic .ultra-premium-hero__energy span {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(125, 211, 252, 0.04) 20%,
+    rgba(186, 230, 253, 0.22) 50%,
+    rgba(125, 211, 252, 0.04) 80%,
+    transparent
+  );
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell .hero-cinematic .ultra-premium-hero__blueprint {
+  opacity: 0.32;
+  color: rgba(186, 230, 253, 0.82);
+}
+
+/* Floating dust / particles */
+.hero-cinematic__particles {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  pointer-events: none;
+  overflow: hidden;
+  opacity: 0.42;
+  background-image:
+    radial-gradient(circle at 12% 18%, rgba(248, 250, 252, 0.06) 0, transparent 1.5px),
+    radial-gradient(circle at 38% 42%, rgba(186, 230, 253, 0.07) 0, transparent 1px),
+    radial-gradient(circle at 72% 28%, rgba(255, 255, 255, 0.045) 0, transparent 1.2px),
+    radial-gradient(circle at 88% 74%, rgba(125, 211, 252, 0.065) 0, transparent 1.4px),
+    radial-gradient(circle at 24% 78%, rgba(255, 255, 255, 0.035) 0, transparent 1px),
+    radial-gradient(circle at 54% 12%, rgba(186, 230, 253, 0.055) 0, transparent 1px);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero-cinematic__particles {
+    animation: hero-cinematic-particles-float 22s ease-in-out infinite alternate;
+  }
+}
+
+@keyframes hero-cinematic-particles-float {
+  0% {
+    transform: translate3d(0, 0, 0);
+    opacity: 0.45;
+  }
+  100% {
+    transform: translate3d(1.2%, -0.8%, 0);
+    opacity: 0.62;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-cinematic__particles {
+    opacity: 0.28;
+    animation: none;
+  }
+}
+
+/* Inner — editorial left / product right */
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell .hero-cinematic .ultra-premium-hero__inner {
+  max-width: 1440px;
+  padding: clamp(5.25rem, 11vw, 7rem) clamp(1.25rem, 5vw, 3rem) clamp(4rem, 9vh, 5rem);
+}
+
+@media (min-width: 1024px) {
+  .landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell .hero-cinematic .ultra-premium-hero__split {
+    grid-template-columns: minmax(0, 0.94fr) minmax(280px, 1.06fr);
+    gap: clamp(2.5rem, 6vw, 4rem);
+    align-items: center;
+  }
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell .hero-cinematic .ultra-premium-hero__watermark {
+  color: rgba(125, 211, 252, 0.045);
+}
+
+/* Spotlight that follows cursor (radial overlay on typography column) */
+.hero-cinematic__copy-spotlight {
+  pointer-events: none;
+  position: absolute;
+  inset: -25% -15%;
+  background: radial-gradient(
+    ellipse 55% 50% at var(--uph-ptr-x) var(--uph-ptr-y),
+    rgba(125, 211, 252, 0.085) 0%,
+    transparent 58%
+  );
+  opacity: 0.9;
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell .hero-cinematic .ultra-premium-hero__copy {
+  position: relative;
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell .hero-cinematic .ultra-premium-hero__eyebrow {
+  color: rgba(186, 230, 253, 0.82);
+  letter-spacing: 0.36em;
+  font-weight: 600;
+}
+
+.hero-cinematic-title-shimmer {
+  position: relative;
+}
+
+.title-shimmer-mask {
+  display: inline;
+}
+
+/* Moving light sweep across headline — CSS + pointer bias */
+.hero-cinematic-title-shimmer::after {
+  content: "";
+  position: absolute;
+  inset: -8% -12%;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(
+    105deg,
+    transparent 38%,
+    rgba(186, 230, 253, 0.11) 48%,
+    rgba(248, 250, 252, 0.14) 50%,
+    rgba(186, 230, 253, 0.09) 52%,
+    transparent 62%
+  );
+  mix-blend-mode: soft-light;
+  animation: hero-cinematic-title-beam 5.8s ease-in-out infinite;
+  mask-image: linear-gradient(90deg, transparent, black 20%, black 80%, transparent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-cinematic-title-shimmer::after {
+    animation: none;
+    opacity: 0.15;
+  }
+}
+
+@keyframes hero-cinematic-title-beam {
+  0%,
+  100% {
+    transform: translateX(-18%) skewX(-10deg);
+    opacity: 0.35;
+  }
+  50% {
+    transform: translateX(18%) skewX(-10deg);
+    opacity: 0.72;
+  }
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell .hero-cinematic .ultra-premium-hero__title {
+  position: relative;
+  z-index: 2;
+  font-size: clamp(2.95rem, 6.8vw, 5.15rem);
+  font-weight: 600;
+  line-height: 1.02;
+  letter-spacing: -0.045em;
+  color: var(--uph-white);
+  text-shadow: 0 6px 72px rgba(12, 28, 48, 0.38);
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell .hero-cinematic .ultra-premium-hero__title-accent {
+  margin-top: 0.2em;
+  font-family: var(--font-lux-serif, "Bodoni Moda", ui-serif, Georgia, serif);
+  font-weight: 500;
+  font-style: italic;
+  font-size: 0.5em;
+  letter-spacing: 0.01em;
+  text-transform: none;
+  background: linear-gradient(118deg, #ecfeff 0%, var(--uph-cyan-bright) 42%, var(--uph-cyan) 72%, #a5f3fc 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: none;
+  filter: drop-shadow(0 0 36px rgba(56, 189, 248, 0.18));
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell .hero-cinematic .ultra-premium-hero__lead {
+  position: relative;
+  z-index: 2;
+  max-width: 36rem;
+  font-size: clamp(1rem, 1.45vw, 1.14rem);
+  line-height: 1.72;
+  color: rgba(203, 213, 225, 0.92);
+}
+
+/* Dark glass product stage */
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell .hero-cinematic .ultra-premium-hero__frame-wrap {
+  width: min(108%, 78vw);
+  max-width: 760px;
+  margin-right: clamp(-2rem, -4vw, -0.5rem);
+  margin-left: auto;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell .hero-cinematic .ultra-premium-hero__frame-wrap {
+    animation: hero-cinematic-product-float 8s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+  }
+}
+
+@keyframes hero-cinematic-product-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-14px);
+  }
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell .hero-cinematic .ultra-premium-hero__glow {
+  inset: 4% -8% -20% -5%;
+  background:
+    radial-gradient(ellipse 78% 68% at 48% 42%, rgba(125, 211, 252, 0.22) 0%, transparent 64%),
+    radial-gradient(ellipse 94% 62% at 50% 108%, rgba(30, 56, 82, 0.28) 0%, transparent 58%);
+  filter: blur(72px);
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell .hero-cinematic .ultra-premium-hero__energy-core {
+  width: min(72%, 420px);
+  height: min(95%, 500px);
+  background: radial-gradient(
+    ellipse at 50% 42%,
+    rgba(103, 232, 249, 0.28) 0%,
+    rgba(34, 211, 238, 0.12) 48%,
+    transparent 72%
+  );
+  filter: blur(36px);
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell .hero-cinematic .ultra-premium-hero__fog-local {
+  background:
+    radial-gradient(ellipse 68% 58% at 50% 38%, transparent 30%, rgba(18, 38, 62, 0.26) 100%),
+    radial-gradient(ellipse 45% 38% at 75% 25%, rgba(34, 211, 238, 0.1) 0%, transparent 55%);
+  mix-blend-mode: multiply;
+  opacity: 0.65;
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell .hero-cinematic .ultra-premium-hero__frame {
+  border-radius: 1.65rem;
+  background: linear-gradient(
+    158deg,
+    rgba(28, 54, 78, 0.42) 0%,
+    rgba(18, 34, 52, 0.58) 45%,
+    rgba(22, 42, 62, 0.52) 100%
+  );
+  border: 1px solid rgba(103, 232, 249, 0.18);
+  box-shadow:
+    0 0 0 1px rgba(0, 0, 0, 0.35) inset,
+    0 56px 120px -48px rgba(0, 0, 0, 0.75),
+    0 0 80px -24px rgba(34, 211, 238, 0.25);
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell .hero-cinematic .ultra-premium-hero__frame::after {
+  background: linear-gradient(
+    125deg,
+    rgba(103, 232, 249, 0.45),
+    rgba(255, 255, 255, 0.08),
+    rgba(34, 211, 238, 0.2),
+    transparent 70%
+  );
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell .hero-cinematic .ultra-premium-hero__product-img {
+  transform: translate(-3%, -6%) scale(1.12);
+  filter:
+    drop-shadow(0 8px 4px rgba(15, 34, 56, 0.28))
+    drop-shadow(0 40px 70px rgba(12, 28, 48, 0.36))
+    drop-shadow(0 0 72px rgba(56, 189, 248, 0.14));
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell .hero-cinematic .ultra-premium-hero__product-shine {
+  background: linear-gradient(
+    110deg,
+    transparent 35%,
+    rgba(103, 232, 249, 0.25) 48%,
+    rgba(255, 255, 255, 0.15) 50%,
+    transparent 62%
+  );
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell .hero-cinematic .ultra-premium-hero__product-reflection {
+  background: radial-gradient(ellipse at 50% 0%, rgba(103, 232, 249, 0.35) 0%, transparent 65%);
+  opacity: 0.45;
+}
+
+/* Spec cards — dark luxe glass */
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell .hero-cinematic .ultra-premium-hero__stats {
+  gap: 0.65rem;
+  width: min(100%, 320px);
+  right: clamp(-0.75rem, 0vw, 1rem);
+  bottom: clamp(6%, 8vh, 14%);
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell .hero-cinematic .ultra-premium-hero__stat {
+  border-radius: 16px;
+  background: linear-gradient(
+    168deg,
+    rgba(255, 255, 255, 0.08) 0%,
+    rgba(18, 34, 52, 0.42) 100%
+  );
+  border-color: rgba(103, 232, 249, 0.14);
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.05) inset,
+    0 22px 48px -28px rgba(12, 28, 48, 0.38),
+    0 0 44px -14px rgba(56, 189, 248, 0.12);
+  backdrop-filter: blur(22px) saturate(160%);
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell .hero-cinematic .ultra-premium-hero__stat-label {
+  color: rgba(148, 163, 184, 0.9);
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell .hero-cinematic .ultra-premium-hero__stat-value {
+  background: linear-gradient(120deg, #f8fafc 0%, #67e8f9 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell .hero-cinematic .ultra-premium-hero__stat:hover {
+  border-color: rgba(103, 232, 249, 0.35);
+}
+
+/* Chromed deck — cue strip (not banner) */
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell .hero-cinematic .ultra-premium-hero__chrome-panel {
+  border-radius: 1.25rem;
+  background: linear-gradient(168deg, rgba(255, 255, 255, 0.07) 0%, rgba(18, 34, 52, 0.42) 100%);
+  border: 1px solid rgba(103, 232, 249, 0.12);
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.05) inset,
+    0 24px 64px -36px rgba(12, 28, 48, 0.38),
+    0 0 52px -18px rgba(56, 189, 248, 0.09);
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell .hero-cinematic .ultra-premium-hero__slide-count {
+  -webkit-text-stroke: 1.5px rgba(103, 232, 249, 0.55);
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell .hero-cinematic .ultra-premium-hero__slide-count small {
+  color: rgba(148, 163, 184, 0.8);
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell .hero-cinematic .ultra-premium-hero__dot {
+  background: rgba(148, 163, 184, 0.2);
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell .hero-cinematic .ultra-premium-hero__arrow-glass {
+  border-color: rgba(103, 232, 249, 0.22);
+  background: rgba(15, 39, 58, 0.45);
+  color: rgba(226, 232, 240, 0.95);
+  box-shadow: 0 14px 40px -22px rgba(15, 34, 56, 0.38);
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell .hero-cinematic .ultra-premium-hero__arrow-glass:hover {
+  background: rgba(34, 211, 238, 0.12);
+  border-color: rgba(103, 232, 249, 0.45);
+  color: #ecfeff;
+}
+
+/* Progress strip */
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell .hero-cinematic .ultra-premium-hero__progress {
+  background: rgba(15, 23, 42, 0.45);
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell .hero-cinematic .ultra-premium-hero__cta-primary.hero-cinematic-btn {
+  padding: 0.95rem 1.85rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  border-radius: 999px;
+  background: linear-gradient(128deg, #0e7490 0%, #0891b2 35%, var(--uph-cyan) 72%, var(--uph-cyan-bright) 100%);
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.18) inset,
+    0 6px 32px rgba(34, 211, 238, 0.25),
+    0 28px 64px rgba(8, 47, 73, 0.45);
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell .hero-cinematic .ultra-premium-hero__cta-secondary.hero-cinematic-btn--ghost {
+  color: rgba(226, 232, 240, 0.95);
+  background: linear-gradient(
+    168deg,
+    rgba(255, 255, 255, 0.08) 0%,
+    rgba(255, 255, 255, 0.03) 100%
+  );
+  border-color: rgba(103, 232, 249, 0.18);
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.05) inset,
+    0 18px 48px -28px rgba(12, 28, 48, 0.32);
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell .hero-cinematic .ultra-premium-hero__cta-secondary.hero-cinematic-btn--ghost:hover {
+  color: #ecfeff;
+  border-color: rgba(103, 232, 249, 0.45);
+  background: linear-gradient(
+    168deg,
+    rgba(125, 211, 252, 0.08) 0%,
+    rgba(22, 42, 62, 0.28) 100%
+  );
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell .hero-cinematic .hero-scroll-cta {
+  border-color: rgba(103, 232, 249, 0.22);
+  background: rgba(8, 20, 33, 0.45);
+  color: rgba(226, 232, 240, 0.95);
+  backdrop-filter: blur(14px);
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell .hero-cinematic .hero-scroll-cta:hover {
+  border-color: rgba(103, 232, 249, 0.45);
+  background: rgba(34, 211, 238, 0.1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell .hero-cinematic .ultra-premium-hero__frame-wrap {
+    animation: none;
+  }
+}

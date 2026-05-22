@@ -1,0 +1,551 @@
+/**
+ * Studio Vega — fullscreen mobile / sidebar navigation
+ * Cinematic navy · cyan glow · glass OS aesthetic (not a flat panel menu)
+ */
+
+.vega-cine-drawer {
+  --vcn-deep: #031b34;
+  --vcn-mid: #07294d;
+  --vcn-glow: #58e7ff;
+  --vcn-mist: #f3f7ff;
+  display: flex !important;
+  flex-direction: column !important;
+  overflow: hidden !important;
+  max-height: 100vh !important;
+  background: transparent !important;
+  border-left: 1px solid rgba(88, 231, 255, 0.14) !important;
+  box-shadow:
+    4px 0 80px rgba(0, 0, 0, 0.35),
+    0 0 0 1px rgba(88, 231, 255, 0.06) inset !important;
+}
+
+/* ── Immersive backdrop ─────────────────────────────────────────── */
+.vega-cine-drawer__backdrop {
+  background:
+    radial-gradient(ellipse 80% 55% at 18% 40%, rgba(88, 231, 255, 0.07) 0%, transparent 58%),
+    radial-gradient(ellipse 70% 50% at 85% 72%, rgba(7, 41, 77, 0.35) 0%, transparent 55%),
+    rgba(3, 27, 52, 0.72) !important;
+  backdrop-filter: blur(20px) saturate(145%);
+  -webkit-backdrop-filter: blur(20px) saturate(145%);
+  transition:
+    opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1),
+    backdrop-filter 0.55s ease;
+}
+
+/* ── Layer stack (inside panel) ─────────────────────────────────── */
+.vega-cine-drawer__layers {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse 90% 70% at 20% 15%, rgba(88, 231, 255, 0.1) 0%, transparent 55%),
+    radial-gradient(ellipse 70% 55% at 100% 80%, rgba(7, 41, 77, 0.55) 0%, transparent 58%),
+    linear-gradient(165deg, rgba(3, 27, 52, 0.97) 0%, rgba(2, 12, 22, 0.99) 48%, #010810 100%);
+}
+
+.vega-cine-drawer__layers::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.14;
+  background-image:
+    linear-gradient(rgba(88, 231, 255, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(88, 231, 255, 0.06) 1px, transparent 1px);
+  background-size: 28px 28px;
+  mask-image: radial-gradient(ellipse 85% 70% at 50% 38%, black 20%, transparent 78%);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .vega-cine-drawer__layers::before {
+    animation: vcn-grid-drift 42s linear infinite;
+  }
+}
+
+@keyframes vcn-grid-drift {
+  to {
+    background-position: 28px 28px;
+  }
+}
+
+.vega-cine-drawer__layers::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse 55% 45% at 50% 0%,
+    rgba(88, 231, 255, 0.06) 0%,
+    transparent 62%
+  );
+}
+
+.vega-cine-drawer__particles {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  overflow: hidden;
+  opacity: 0.45;
+}
+
+.vega-cine-drawer__particles span {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: rgba(88, 231, 255, 0.55);
+  box-shadow: 0 0 12px rgba(88, 231, 255, 0.4);
+}
+
+.vega-cine-drawer__particles span:nth-child(1) {
+  top: 18%;
+  left: 12%;
+}
+.vega-cine-drawer__particles span:nth-child(2) {
+  top: 42%;
+  left: 78%;
+  opacity: 0.7;
+}
+.vega-cine-drawer__particles span:nth-child(3) {
+  top: 68%;
+  left: 22%;
+}
+.vega-cine-drawer__particles span:nth-child(4) {
+  top: 28%;
+  left: 56%;
+  opacity: 0.5;
+}
+.vega-cine-drawer__particles span:nth-child(5) {
+  top: 82%;
+  left: 64%;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .vega-cine-drawer__particles span {
+    animation: vcn-particle-float 8s ease-in-out infinite;
+  }
+  .vega-cine-drawer__particles span:nth-child(2) {
+    animation-delay: 1.2s;
+  }
+  .vega-cine-drawer__particles span:nth-child(3) {
+    animation-delay: 2.1s;
+  }
+  .vega-cine-drawer__particles span:nth-child(4) {
+    animation-delay: 0.6s;
+  }
+  .vega-cine-drawer__particles span:nth-child(5) {
+    animation-delay: 2.8s;
+  }
+}
+
+@keyframes vcn-particle-float {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+    opacity: 0.35;
+  }
+  50% {
+    transform: translate3d(2px, -6px, 0);
+    opacity: 0.85;
+  }
+}
+
+/* Blueprint / schematic (minimal) */
+.vega-cine-drawer__schematic {
+  pointer-events: none;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 38%;
+  z-index: 2;
+  opacity: 0.09;
+  color: var(--vcn-glow);
+}
+
+/* ── Header row (close only) ───────────────────────────────────── */
+.vega-cine-drawer__header {
+  position: relative;
+  z-index: 20;
+  flex-shrink: 0;
+  border-bottom: 1px solid rgba(88, 231, 255, 0.1);
+  background: rgba(3, 27, 52, 0.25);
+  backdrop-filter: blur(18px) saturate(160%);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+  margin: 0;
+  padding: 0.85rem 1rem;
+  min-height: 3.25rem;
+}
+
+.vega-cine-drawer__header h5 {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.vega-cine-drawer__close {
+  margin-inline-start: auto;
+  display: flex;
+  height: 2.65rem;
+  width: 2.65rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  border: 1px solid rgba(88, 231, 255, 0.22);
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.08) 0%, rgba(3, 27, 52, 0.35) 100%);
+  color: rgba(243, 247, 255, 0.92) !important;
+  transition:
+    border-color 0.35s ease,
+    box-shadow 0.35s ease,
+    transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.vega-cine-drawer__close:hover {
+  border-color: rgba(88, 231, 255, 0.45);
+  box-shadow: 0 0 28px rgba(88, 231, 255, 0.18);
+  transform: scale(1.03);
+}
+
+/* Flowbite header inner is flex — push close right */
+.vega-cine-drawer__header > div {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* ── Scroll body ─────────────────────────────────────────────────── */
+.vega-cine-drawer__items {
+  position: relative;
+  z-index: 5;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  padding: 0 !important;
+}
+
+.vega-cine-drawer__scroll {
+  position: relative;
+  z-index: 8;
+  flex: 1;
+  min-height: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding: 1.5rem 1.35rem 1.25rem;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* ── Brand block ─────────────────────────────────────────────────── */
+.vega-cine-drawer__brand {
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid rgba(88, 231, 255, 0.08);
+}
+
+.vega-cine-drawer__brand-kicker {
+  font-family: var(--font-lux-sans, "Satoshi", "Plus Jakarta Sans", system-ui, sans-serif);
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  color: rgba(243, 247, 255, 0.38);
+  margin: 0 0 0.5rem;
+}
+
+.vega-cine-drawer__brand-title {
+  font-family: var(--font-lux-display, "Plus Jakarta Sans", system-ui, sans-serif);
+  font-size: 1.15rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--vcn-mist);
+  margin: 0;
+  line-height: 1.2;
+}
+
+.vega-cine-drawer__brand-line {
+  display: block;
+  font-weight: 500;
+  color: rgba(243, 247, 255, 0.88);
+}
+
+.vega-cine-drawer__brand-tag {
+  margin: 0.55rem 0 0;
+  font-family: var(--font-lux-sans, "Satoshi", sans-serif);
+  font-size: 0.78rem;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  line-height: 1.45;
+  color: rgba(243, 247, 255, 0.5);
+  font-style: italic;
+}
+
+/* ── Digital Twin capsule (featured) ─────────────────────────────── */
+.vega-cine-drawer__twin {
+  position: relative;
+  display: block;
+  width: 100%;
+  margin-bottom: 1.75rem;
+  padding: 0.78rem 1rem 0.78rem 1.1rem;
+  border-radius: 999px;
+  border: 1px solid rgba(88, 231, 255, 0.45);
+  background: linear-gradient(
+    118deg,
+    rgba(88, 231, 255, 0.14) 0%,
+    rgba(7, 41, 77, 0.55) 48%,
+    rgba(3, 27, 52, 0.85) 100%
+  );
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.06) inset,
+    0 0 36px rgba(88, 231, 255, 0.18),
+    0 14px 40px rgba(0, 0, 0, 0.25);
+  text-decoration: none;
+  color: var(--vcn-mist);
+  transition:
+    transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.4s ease,
+    border-color 0.35s ease;
+}
+
+.vega-cine-drawer__twin:hover {
+  transform: translateX(4px);
+  border-color: rgba(88, 231, 255, 0.7);
+  box-shadow:
+    0 0 0 1px rgba(88, 231, 255, 0.12) inset,
+    0 0 48px rgba(88, 231, 255, 0.28);
+}
+
+.vega-cine-drawer__twin-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.vega-cine-drawer__twin-label {
+  font-family: var(--font-lux-sans, "Satoshi", sans-serif);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(243, 247, 255, 0.45);
+}
+
+.vega-cine-drawer__twin-title {
+  display: block;
+  margin-top: 0.2rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: var(--vcn-glow);
+  text-shadow: 0 0 24px rgba(88, 231, 255, 0.35);
+}
+
+.vega-cine-drawer__twin-glyph {
+  flex-shrink: 0;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(88, 231, 255, 0.35);
+  background: rgba(88, 231, 255, 0.08);
+  color: var(--vcn-glow);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .vega-cine-drawer__twin-shimmer {
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    overflow: hidden;
+    pointer-events: none;
+  }
+  .vega-cine-drawer__twin-shimmer::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      100deg,
+      transparent 40%,
+      rgba(255, 255, 255, 0.2) 50%,
+      transparent 60%
+    );
+    transform: translateX(-100%);
+    animation: vcn-twin-sheen 4.5s ease-in-out infinite;
+  }
+}
+
+@keyframes vcn-twin-sheen {
+  0%,
+  60% {
+    transform: translateX(-100%);
+  }
+  85% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* ── Nav links ───────────────────────────────────────────────────── */
+.vega-cine-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.vega-cine-nav__link {
+  position: relative;
+  display: block;
+  width: 100%;
+  padding: 0.72rem 0.25rem 0.72rem 0.15rem;
+  border: none;
+  background: none;
+  cursor: pointer;
+  text-align: left;
+  text-decoration: none;
+  font-family: var(--font-lux-sans, "Satoshi", "Plus Jakarta Sans", sans-serif);
+  font-size: 1.35rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+  color: rgba(243, 247, 255, 0.42);
+  transition:
+    color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    text-shadow 0.35s ease;
+}
+
+.vega-cine-nav__link:hover {
+  color: rgba(243, 247, 255, 0.88);
+  transform: translateX(6px);
+  text-shadow: 0 0 20px rgba(88, 231, 255, 0.12);
+}
+
+.vega-cine-nav__link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0.45rem;
+  width: 0;
+  height: 1px;
+  background: linear-gradient(90deg, var(--vcn-glow), transparent);
+  opacity: 0;
+  transition:
+    width 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 0.35s ease;
+}
+
+.vega-cine-nav__link:hover::after {
+  width: 2.75rem;
+  opacity: 0.65;
+}
+
+.vega-cine-nav__link.is-active {
+  color: var(--vcn-glow);
+  text-shadow: 0 0 28px rgba(88, 231, 255, 0.35);
+}
+
+.vega-cine-nav__link.is-active::before {
+  content: "";
+  position: absolute;
+  left: -0.1rem;
+  top: 50%;
+  width: 6px;
+  height: 6px;
+  margin-top: -3px;
+  border-radius: 50%;
+  background: var(--vcn-glow);
+  box-shadow: 0 0 14px var(--vcn-glow);
+}
+
+.vega-cine-nav__link.is-active::after {
+  width: 100%;
+  max-width: 8rem;
+  opacity: 0.45;
+}
+
+/* ── Footer: glass capsules ──────────────────────────────────────── */
+.vega-cine-drawer__footer {
+  position: relative;
+  z-index: 8;
+  margin-top: auto;
+  padding: 1.25rem 1.35rem 1.5rem;
+  border-top: 1px solid rgba(88, 231, 255, 0.1);
+  background: linear-gradient(180deg, transparent 0%, rgba(3, 27, 52, 0.55) 100%);
+  backdrop-filter: blur(12px);
+}
+
+.vega-cine-drawer__footer-label {
+  font-size: 0.58rem;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(243, 247, 255, 0.32);
+  margin: 0 0 0.85rem;
+}
+
+.vega-cine-drawer__social {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.55rem;
+}
+
+.vega-cine-drawer__pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  padding: 0.55rem 0.65rem;
+  border-radius: 999px;
+  border: 1px solid rgba(88, 231, 255, 0.15);
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(14px) saturate(150%);
+  -webkit-backdrop-filter: blur(14px) saturate(150%);
+  font-family: var(--font-lux-sans, "Satoshi", sans-serif);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: rgba(243, 247, 255, 0.65);
+  transition:
+    border-color 0.35s ease,
+    color 0.35s ease,
+    box-shadow 0.35s ease,
+    transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.vega-cine-drawer__pill:hover {
+  border-color: rgba(88, 231, 255, 0.4);
+  color: var(--vcn-glow);
+  box-shadow: 0 0 22px rgba(88, 231, 255, 0.14);
+  transform: translateY(-2px);
+}
+
+.vega-cine-drawer__pill svg {
+  width: 1rem;
+  height: 1rem;
+  opacity: 0.85;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .vega-cine-drawer__layers::before,
+  .vega-cine-drawer__particles span,
+  .vega-cine-drawer__twin-shimmer::before {
+    animation: none !important;
+  }
+}

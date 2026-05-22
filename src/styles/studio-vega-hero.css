@@ -1,0 +1,2689 @@
+/* Studio Vega — ultra-premium cinematic HVAC hero overrides
+   Stack: after ultra-premium-hero + hero-cinematic-experience */
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell .studio-vega-hero {
+  --sv-deep: #07111f;
+  --sv-mid: #081827;
+  --sv-rise: #0a2236;
+  --sv-surface-a: #123a56;
+  --sv-surface-b: #184b6b;
+  --sv-glow: #5be7ff;
+  --sv-glow-soft: #6fefff;
+  --sv-mist: #c9d7e3;
+  --sv-muted: #6f8395;
+  --sv-mist-dim: rgba(201, 215, 227, 0.82);
+}
+
+/* ── Blueprint layer removed (editorial atmosphere only) ─────────── */
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero
+  .ultra-premium-hero__blueprint {
+  display: none;
+}
+
+/* ── First paint: atmosphere + particles activate (no flash) ────── */
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero:not(.studio-vega-hero--ready)
+  .ultra-premium-hero__ambient,
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero:not(.studio-vega-hero--ready)
+  .ultra-premium-hero__grid-layer,
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero:not(.studio-vega-hero--ready)
+  .ultra-premium-hero__fog,
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero:not(.studio-vega-hero--ready)
+  .hero-cinematic__particles,
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero:not(.studio-vega-hero--ready)
+  .studio-vega-hero__mouse-glow,
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero:not(.studio-vega-hero--ready)
+  .ultra-premium-hero__energy {
+  opacity: 0;
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero.studio-vega-hero--ready
+  .ultra-premium-hero__ambient {
+  transition:
+    opacity 1.15s cubic-bezier(0.16, 1, 0.3, 1),
+    filter 1.2s ease;
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero.studio-vega-hero--ready
+  .ultra-premium-hero__grid-layer,
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero.studio-vega-hero--ready
+  .ultra-premium-hero__fog,
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero.studio-vega-hero--ready
+  .hero-cinematic__particles,
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero.studio-vega-hero--ready
+  .studio-vega-hero__mouse-glow,
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero.studio-vega-hero--ready
+  .ultra-premium-hero__energy {
+  transition: opacity 1.25s cubic-bezier(0.16, 1, 0.35, 1) 0.08s;
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero:not(.studio-vega-hero--ready)
+  .hero-cinematic__particles {
+  transform: translate3d(0, 14px, 0) scale(0.985);
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero.studio-vega-hero--ready
+  .hero-cinematic__particles {
+  transition:
+    opacity 1.25s cubic-bezier(0.16, 1, 0.35, 1) 0.12s,
+    transform 1.35s cubic-bezier(0.16, 1, 0.35, 1) 0.08s;
+}
+
+/* ── Alive background: depth + pointer-reactive glow ─────────────── */
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero.studio-vega-hero
+  .ultra-premium-hero__ambient {
+  background:
+    radial-gradient(
+      ellipse 120% 85% at 50% 100%,
+      rgba(10, 34, 54, 0.92) 0%,
+      var(--sv-deep) 44%,
+      #061018 100%
+    ),
+    radial-gradient(
+      ellipse 55% 45% at var(--uph-ptr-x, 52%) var(--uph-ptr-y, 38%),
+      rgba(91, 231, 255, 0.092) 0%,
+      transparent 58%
+    ),
+    radial-gradient(ellipse 90% 60% at 78% 18%, rgba(18, 58, 86, 0.38) 0%, transparent 55%),
+    linear-gradient(182deg, #07111f 0%, #081827 48%, #0a2236 100%);
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero
+  .studio-vega-hero__mouse-glow {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  mix-blend-mode: screen;
+  opacity: 0.55;
+  background: radial-gradient(
+    circle 42vmax at var(--uph-ptr-x, 50%) var(--uph-ptr-y, 45%),
+    rgba(91, 231, 255, 0.069) 0%,
+    transparent 62%
+  );
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+    .studio-vega-hero
+    .studio-vega-hero__grid-animated {
+    background-size: 48px 48px;
+    opacity: 0.22;
+    animation: studio-vega-grid-drift 38s linear infinite;
+  }
+}
+
+@keyframes studio-vega-grid-drift {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 48px 48px;
+  }
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero
+  .studio-vega-hero__volumetric {
+  background:
+    radial-gradient(ellipse 100% 65% at 50% 108%, rgba(8, 24, 39, 0.55) 0%, transparent 52%),
+    radial-gradient(ellipse 80% 50% at 62% 22%, rgba(91, 231, 255, 0.046) 0%, transparent 58%);
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero
+  .studio-vega-hero__particles-canvas {
+  opacity: 0.55;
+  filter: drop-shadow(0 0 12px rgba(88, 231, 255, 0.2));
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero
+  .studio-vega-hero__light-trails
+  span {
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(88, 231, 255, 0.18),
+    rgba(180, 240, 255, 0.12),
+    transparent
+  );
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+    .studio-vega-hero
+    .studio-vega-hero__light-trails
+    span {
+    animation-duration: 16s;
+  }
+}
+
+/* ── Typography — editorial serif + cyan italic display ──────────── */
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero
+  .studio-vega-hero__eyebrow {
+  letter-spacing: 0.26em;
+  color: rgba(243, 247, 255, 0.58);
+  text-transform: uppercase;
+  font-size: 0.68rem;
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero
+  .studio-vega-hero__title-serif {
+  display: block;
+  font-family: var(--font-lux-serif, "Instrument Serif", "Cormorant Garamond", serif);
+  font-weight: 400;
+  font-style: normal;
+  letter-spacing: -0.03em;
+  color: var(--sv-mist);
+  line-height: 0.98;
+  text-shadow: 0 12px 48px rgba(3, 27, 52, 0.5);
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero
+  .studio-vega-hero__title-italic {
+  font-family: var(--font-lux-serif, "Instrument Serif", "Playfair Display", serif);
+  font-weight: 400;
+  font-style: italic;
+  color: var(--sv-glow);
+  text-shadow:
+    0 0 42px rgba(88, 231, 255, 0.35),
+    0 8px 32px rgba(3, 27, 52, 0.6);
+}
+
+@media (min-width: 1024px) {
+  .landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+    .studio-vega-hero
+    .studio-vega-hero__title-block {
+    font-size: clamp(3.5rem, 6.5vw, 6.25rem);
+  }
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero
+  .studio-vega-hero__lead {
+  max-width: 28rem;
+  color: var(--sv-mist-dim);
+  font-size: clamp(1rem, 1.15vw, 1.125rem);
+  line-height: 1.65;
+}
+
+/* ── CTAs — cyan pulse + frosted outline ─────────────────────────── */
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero
+  .studio-vega-hero__cta-primary {
+  color: var(--sv-mid);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  background: linear-gradient(118deg, #7ef6ff 0%, var(--sv-glow) 42%, #9cf6ff 100%);
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.45) inset,
+    0 6px 32px -4px rgba(88, 231, 255, 0.45),
+    0 0 48px -6px rgba(88, 231, 255, 0.35);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+    .studio-vega-hero
+    .studio-vega-hero__cta-primary {
+    animation: studio-vega-cta-glow-pulse 3.6s ease-in-out infinite;
+  }
+}
+
+@keyframes studio-vega-cta-glow-pulse {
+  0%,
+  100% {
+    box-shadow:
+      0 0 0 1px rgba(255, 255, 255, 0.45) inset,
+      0 6px 32px -4px rgba(88, 231, 255, 0.42),
+      0 0 48px -6px rgba(88, 231, 255, 0.32);
+  }
+  50% {
+    box-shadow:
+      0 0 0 1px rgba(255, 255, 255, 0.55) inset,
+      0 10px 40px -2px rgba(88, 231, 255, 0.55),
+      0 0 64px -2px rgba(88, 231, 255, 0.48);
+  }
+}
+
+@keyframes studio-vega-cta-sheen-x {
+  0% {
+    transform: translateX(-130%);
+    opacity: 0;
+  }
+  8% {
+    opacity: 0.88;
+  }
+  42% {
+    transform: translateX(130%);
+    opacity: 0.38;
+  }
+  100% {
+    transform: translateX(130%);
+    opacity: 0;
+  }
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero
+  .studio-vega-hero__cta-secondary {
+  color: rgba(243, 247, 255, 0.86);
+  border-color: rgba(88, 231, 255, 0.42);
+  background: linear-gradient(
+    165deg,
+    rgba(255, 255, 255, 0.12) 0%,
+    rgba(255, 255, 255, 0.04) 100%
+  );
+  box-shadow:
+    0 0 0 1px rgba(88, 231, 255, 0.14) inset,
+    0 18px 44px -22px rgba(88, 231, 255, 0.2);
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero
+  .studio-vega-hero__cta-secondary:hover {
+  border-color: rgba(88, 231, 255, 0.6);
+  backdrop-filter: blur(22px) saturate(190%);
+  -webkit-backdrop-filter: blur(22px) saturate(190%);
+}
+
+/* ── Product — float, unboxed pedestal, cyan aura ────────────────── */
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero
+  .studio-vega-hero__watermark-dim {
+  color: rgba(243, 247, 255, 0.05);
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero
+  .studio-vega-hero__frame-unbox {
+  filter: drop-shadow(0 28px 64px rgba(3, 27, 52, 0.55));
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+    .studio-vega-hero
+    .studio-vega-hero__frame-unbox {
+    animation-duration: 9.5s;
+  }
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero
+  .studio-vega-hero__cyan-aura {
+  filter: blur(20px);
+  opacity: 0.85;
+  background: radial-gradient(
+    circle at 50% 55%,
+    rgba(88, 231, 255, 0.38) 0%,
+    rgba(10, 60, 90, 0.12) 52%,
+    transparent 72%
+  );
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero
+  .studio-vega-hero__product-pedestal {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  border-radius: 0;
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero
+  .studio-vega-hero__product-pedestal::after {
+  display: none;
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero
+  .studio-vega-hero__product-tilt {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.34s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero
+  .studio-vega-hero__reflection {
+  background: linear-gradient(
+    180deg,
+    rgba(243, 247, 255, 0.22) 0%,
+    rgba(88, 231, 255, 0.06) 46%,
+    transparent 88%
+  );
+  opacity: 0.85;
+}
+
+/* ── Info tags — glass + cyan rim ───────────────────────────────── */
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero
+  .studio-vega-hero__info-tags {
+  gap: 0.65rem;
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero
+  .studio-vega-hero__tag-card {
+  border-radius: 12px;
+  padding: 0.55rem 0.75rem;
+  background: linear-gradient(
+    145deg,
+    rgba(3, 27, 52, 0.5) 0%,
+    rgba(7, 41, 77, 0.38) 100%
+  );
+  border: 1px solid rgba(88, 231, 255, 0.28);
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.06) inset,
+    0 12px 36px -20px rgba(0, 0, 0, 0.45),
+    0 0 32px -16px rgba(88, 231, 255, 0.35);
+  backdrop-filter: blur(16px) saturate(150%);
+  -webkit-backdrop-filter: blur(16px) saturate(150%);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+    .studio-vega-hero
+    .studio-vega-hero__tag-card {
+    animation: studio-vega-tag-float 6.5s ease-in-out infinite;
+  }
+
+  .landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+    .studio-vega-hero
+    .studio-vega-hero__tag-card:nth-child(2) {
+    animation-delay: 0.4s;
+  }
+  .landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+    .studio-vega-hero
+    .studio-vega-hero__tag-card:nth-child(3) {
+    animation-delay: 0.85s;
+  }
+  .landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+    .studio-vega-hero
+    .studio-vega-hero__tag-card:nth-child(4) {
+    animation-delay: 1.2s;
+  }
+}
+
+@keyframes studio-vega-tag-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero
+  .studio-vega-hero__tag-card:hover {
+  border-color: rgba(88, 231, 255, 0.55);
+  box-shadow:
+    0 0 0 1px rgba(88, 231, 255, 0.35) inset,
+    0 16px 42px -18px rgba(88, 231, 255, 0.25);
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero
+  .studio-vega-hero__tag-card::before {
+  opacity: 0;
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero
+  .studio-vega-hero__tag-card
+  .ultra-premium-hero__stat-label {
+  color: rgba(243, 247, 255, 0.58);
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero
+  .studio-vega-hero__tag-card
+  .ultra-premium-hero__stat-value {
+  color: var(--sv-glow);
+}
+
+/* ── Scene navigation (replaces dot carousel) ───────────────────── */
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero
+  .studio-vega-hero__scene-shell {
+  margin-top: 0.5rem;
+  padding: 0;
+  background: transparent;
+  border: none;
+  width: 100%;
+  max-width: none;
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero
+  .studio-vega-hero__scene-rail {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 0.75rem 1.25rem;
+  width: 100%;
+  padding: 1.1rem 0 0.35rem;
+  border-top: 1px solid rgba(88, 231, 255, 0.12);
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero
+  .studio-vega-hero__scene-item {
+  position: relative;
+  flex: 1 1 auto;
+  min-width: min(180px, 100%);
+  cursor: pointer;
+  border: none;
+  background: none;
+  padding: 0.35rem 0 0.85rem;
+  text-align: left;
+  color: rgba(243, 247, 255, 0.38);
+  font-family: var(--font-lux-sans, "Satoshi", "Plus Jakarta Sans", sans-serif);
+  transition:
+    color 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero
+  .studio-vega-hero__scene-item:hover {
+  color: rgba(243, 247, 255, 0.62);
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero
+  .studio-vega-hero__scene-index {
+  display: block;
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  margin-bottom: 0.32rem;
+  color: rgba(243, 247, 255, 0.32);
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero
+  .studio-vega-hero__scene-name {
+  display: block;
+  font-size: clamp(0.78rem, 1.05vw, 0.9rem);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  line-height: 1.25;
+  text-transform: none;
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero
+  .studio-vega-hero__scene-item.is-active {
+  color: rgba(243, 247, 255, 0.98);
+  transform: translateY(-3px);
+  text-shadow: 0 0 28px rgba(88, 231, 255, 0.35);
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero
+  .studio-vega-hero__scene-item.is-active
+  .studio-vega-hero__scene-index {
+  color: var(--sv-glow);
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero
+  .studio-vega-hero__scene-item.is-active::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 2px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, transparent, var(--sv-glow), transparent);
+  box-shadow: 0 0 18px rgba(88, 231, 255, 0.85);
+  animation: studio-vega-nav-underline 2.8s ease-in-out infinite alternate;
+}
+
+@keyframes studio-vega-nav-underline {
+  0% {
+    opacity: 0.55;
+    transform: scaleX(0.85);
+  }
+  100% {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+}
+
+@media (min-width: 1280px) {
+  .landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+    .studio-vega-hero
+    .studio-vega-hero__scene-item.is-active
+    .studio-vega-hero__scene-name {
+    font-size: clamp(1rem, 1.1vw, 1.15rem);
+    font-weight: 600;
+  }
+}
+
+/* ── Navbar — frost white glass at top of landing ───────────────── */
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .grav-navbar:not(.scrolled) {
+  background: rgba(255, 255, 255, 0.74);
+  backdrop-filter: blur(22px) saturate(170%);
+  -webkit-backdrop-filter: blur(22px) saturate(170%);
+  color: var(--sv-mid);
+  border-bottom-color: rgba(88, 231, 255, 0.14);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.65) inset;
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .grav-navbar:not(.scrolled)
+  .grav-nav-brand,
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .grav-navbar:not(.scrolled)
+  .grav-nav-sub {
+  color: var(--sv-mid);
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .grav-navbar:not(.scrolled)
+  .grav-nav-cart {
+  color: var(--sv-mid);
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .grav-navbar:not(.scrolled)
+  button[aria-controls="vega-flowbite-drawer"] {
+  color: var(--sv-mid);
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .grav-navbar:not(.scrolled)
+  button[aria-controls="vega-flowbite-drawer"]:hover {
+  background: rgba(7, 41, 77, 0.06);
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .grav-navbar:not(.scrolled)
+  .grav-nav-cta {
+  border-color: rgba(88, 231, 255, 0.42);
+  color: var(--sv-mid);
+  background: rgba(255, 255, 255, 0.55);
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .grav-navbar:not(.scrolled)
+  .grav-nav-cta:hover {
+  border-color: var(--sv-glow);
+  color: var(--sv-mid);
+  background: rgba(88, 231, 255, 0.14);
+}
+
+/* Beat `hero-cinematic-experience.css` CTA / metric gradients (same section = both modifiers) */
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero.hero-cinematic
+  .ultra-premium-hero__cta-primary.hero-cinematic-btn.studio-vega-hero__cta-primary {
+  color: var(--sv-mid);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  background: linear-gradient(118deg, #7ef6ff 0%, var(--sv-glow) 42%, #9cf6ff 100%);
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.45) inset,
+    0 6px 32px -4px rgba(88, 231, 255, 0.45),
+    0 0 48px -6px rgba(88, 231, 255, 0.35);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+    .studio-vega-hero.hero-cinematic
+    .ultra-premium-hero__cta-primary.hero-cinematic-btn.studio-vega-hero__cta-primary {
+    animation: studio-vega-cta-glow-pulse 3.6s ease-in-out infinite;
+  }
+}
+
+/* Idle light sweep — `::before` reserved by base CSS for hover sweep */
+@media (prefers-reduced-motion: no-preference) {
+  .landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+    .studio-vega-hero.hero-cinematic
+    .ultra-premium-hero__cta-primary.hero-cinematic-btn.studio-vega-hero__cta-primary::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    border-radius: inherit;
+    pointer-events: none;
+    overflow: hidden;
+    background: linear-gradient(
+      105deg,
+      transparent 38%,
+      rgba(255, 255, 255, 0.5) 50%,
+      transparent 62%
+    );
+    transform: translateX(-130%);
+    animation: studio-vega-cta-sheen-x 4.4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  }
+
+  .landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+    .studio-vega-hero.hero-cinematic
+    .ultra-premium-hero__cta-primary.hero-cinematic-btn.studio-vega-hero__cta-primary:hover::after {
+    animation-play-state: paused;
+    opacity: 0.22;
+  }
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero.hero-cinematic
+  .ultra-premium-hero__cta-secondary.hero-cinematic-btn--ghost.studio-vega-hero__cta-secondary {
+  color: rgba(243, 247, 255, 0.86);
+  border-color: rgba(88, 231, 255, 0.42);
+  background: linear-gradient(
+    165deg,
+    rgba(255, 255, 255, 0.12) 0%,
+    rgba(255, 255, 255, 0.04) 100%
+  );
+  box-shadow:
+    0 0 0 1px rgba(88, 231, 255, 0.14) inset,
+    0 18px 44px -22px rgba(88, 231, 255, 0.2);
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero.hero-cinematic
+  .ultra-premium-hero__cta-secondary.hero-cinematic-btn--ghost.studio-vega-hero__cta-secondary:hover {
+  color: rgba(243, 247, 255, 0.95);
+  border-color: rgba(88, 231, 255, 0.58);
+  background: linear-gradient(
+    168deg,
+    rgba(125, 211, 252, 0.1) 0%,
+    rgba(22, 42, 62, 0.35) 100%
+  );
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero.hero-cinematic
+  .studio-vega-hero__tag-card.ultra-premium-hero__stat
+  .ultra-premium-hero__stat-value {
+  background: none;
+  background-clip: border-box;
+  -webkit-background-clip: border-box;
+  -webkit-text-fill-color: var(--sv-glow);
+  color: var(--sv-glow);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+    .studio-vega-hero
+    .studio-vega-hero__grid-animated,
+  .landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+    .studio-vega-hero
+    .studio-vega-hero__tag-card,
+  .landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+    .studio-vega-hero
+    .studio-vega-hero__cta-primary,
+  .landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+    .studio-vega-hero.hero-cinematic
+    .ultra-premium-hero__cta-primary.hero-cinematic-btn.studio-vega-hero__cta-primary,
+  .landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+    .studio-vega-hero.hero-cinematic
+    .ultra-premium-hero__cta-primary.hero-cinematic-btn.studio-vega-hero__cta-primary::after {
+    animation: none !important;
+  }
+
+  .landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+    .studio-vega-hero.hero-cinematic
+    .ultra-premium-hero__cta-primary.hero-cinematic-btn.studio-vega-hero__cta-primary::after {
+    content: none;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Engineering showcase — keynote / configurator pacing (no stat cards, editorial)
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero--engineering-showcase.hero-cinematic
+  .ultra-premium-hero__split.studio-vega-hero__present-split {
+  align-items: center;
+}
+
+@media (min-width: 1024px) {
+  .landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+    .studio-vega-hero--engineering-showcase.hero-cinematic
+    .ultra-premium-hero__split.studio-vega-hero__present-split {
+    grid-template-columns: minmax(0, 0.88fr) minmax(320px, 1.12fr);
+    gap: clamp(2rem, 5vw, 3.5rem);
+  }
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero--engineering-showcase
+  .studio-vega-hero__present-copy {
+  padding-top: clamp(0.5rem, 2vh, 1.25rem);
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero--engineering-showcase
+  .studio-vega-hero__present-category {
+  margin: 0 0 1.25rem;
+  max-width: 20ch;
+  font-family: var(--font-lux-serif, "Instrument Serif", "Cormorant Garamond", serif);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  font-size: clamp(2.15rem, 3.6vw, 3.15rem);
+  color: var(--sv-mist);
+  text-shadow: 0 12px 52px rgba(3, 27, 52, 0.42);
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero--engineering-showcase
+  .studio-vega-hero__present-lead {
+  margin: 0 0 2.25rem;
+  max-width: 26rem;
+  font-family: var(--font-lux-sans, "Satoshi", "Plus Jakarta Sans", system-ui, sans-serif);
+  font-size: clamp(0.95rem, 1.12vw, 1.08rem);
+  line-height: 1.68;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  color: rgba(243, 247, 255, 0.68);
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero--engineering-showcase
+  .ultra-premium-hero__actions {
+  margin-bottom: 0;
+}
+
+/* Single CTA — glass outline, cyan hover bloom (not ecommerce fill) */
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero--engineering-showcase.hero-cinematic
+  .studio-vega-hero__cta-explore.hero-cinematic-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.95rem 2.15rem;
+  border-radius: 999px;
+  border: 1px solid rgba(88, 231, 255, 0.38);
+  background: linear-gradient(
+    165deg,
+    rgba(255, 255, 255, 0.085) 0%,
+    rgba(7, 41, 77, 0.22) 100%
+  );
+  color: rgba(243, 247, 255, 0.92);
+  font-family: var(--font-lux-sans, "Satoshi", "Plus Jakarta Sans", system-ui, sans-serif);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  overflow: hidden;
+  cursor: pointer;
+  backdrop-filter: blur(20px) saturate(165%);
+  -webkit-backdrop-filter: blur(20px) saturate(165%);
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.06) inset,
+    0 18px 48px -26px rgba(3, 12, 24, 0.65),
+    0 0 36px -16px rgba(88, 231, 255, 0.12);
+  transition:
+    border-color 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.55s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+    background 0.45s ease;
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero--engineering-showcase.hero-cinematic
+  .studio-vega-hero__cta-explore.hero-cinematic-btn:hover {
+  border-color: rgba(126, 246, 255, 0.72);
+  background: linear-gradient(
+    168deg,
+    rgba(125, 211, 252, 0.12) 0%,
+    rgba(7, 41, 77, 0.35) 100%
+  );
+  box-shadow:
+    0 0 0 1px rgba(88, 231, 255, 0.22) inset,
+    0 22px 56px -24px rgba(3, 12, 24, 0.55),
+    0 0 48px -8px rgba(88, 231, 255, 0.38);
+  transform: translateY(-2px);
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero--engineering-showcase.hero-cinematic
+  .studio-vega-hero__cta-explore.hero-cinematic-btn:focus-visible {
+  outline: 2px solid rgba(88, 231, 255, 0.65);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+    .studio-vega-hero--engineering-showcase.hero-cinematic
+    .studio-vega-hero__cta-explore.hero-cinematic-btn::before {
+    content: "";
+    position: absolute;
+    inset: -40% -55%;
+    background: radial-gradient(
+      circle at 50% 50%,
+      rgba(88, 231, 255, 0.24) 0%,
+      transparent 58%
+    );
+    opacity: 0.65;
+    transform: translate(-8%, -8%);
+    animation: studio-vega-explore-glow-shift 9s ease-in-out infinite alternate;
+    pointer-events: none;
+    z-index: 0;
+  }
+}
+
+@keyframes studio-vega-explore-glow-shift {
+  0% {
+    transform: translate(-10%, -6%);
+    opacity: 0.28;
+  }
+  100% {
+    transform: translate(6%, 8%);
+    opacity: 0.52;
+  }
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero--engineering-showcase
+  .studio-vega-hero__cta-explore-label {
+  position: relative;
+  z-index: 1;
+}
+
+/* Visual column — large immersive frame, native render background preserved */
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero--engineering-showcase
+  .studio-vega-hero__present-frame-shell {
+  width: min(118%, 78vw);
+  max-width: 820px;
+  margin-left: clamp(-0.75rem, -2vw, 0px);
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero--engineering-showcase
+  .studio-vega-hero__present-stage {
+  min-height: min(58vh, 540px);
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero--engineering-showcase
+  .studio-vega-hero__present-core-glow {
+  opacity: 0.55;
+  filter: blur(28px);
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero--engineering-showcase
+  .studio-vega-hero__present-visual-card {
+  position: relative;
+  z-index: 4;
+  border-radius: 28px;
+  padding: 0;
+  background: transparent;
+  border: none;
+  box-shadow:
+    0 24px 80px -32px rgba(0, 0, 0, 0.65),
+    0 0 0 1px rgba(88, 231, 255, 0.08),
+    0 0 64px -20px rgba(88, 231, 255, 0.18);
+  overflow: visible;
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero--engineering-showcase
+  .studio-vega-hero__present-visual-inner {
+  position: relative;
+  border-radius: 28px;
+  overflow: hidden;
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero--engineering-showcase
+  .studio-vega-hero__cinematic-viewport {
+  position: relative;
+  width: 100%;
+  min-height: min(64vh, 620px);
+  border-radius: 28px;
+  overflow: hidden;
+  background: rgba(2, 10, 20, 0.45);
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero--engineering-showcase
+  .studio-vega-hero__cinematic-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: min(64vh, 620px);
+  object-fit: cover;
+  object-position: center;
+  filter: saturate(1.02) contrast(1.02);
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero--engineering-showcase
+  .studio-vega-hero__cinematic-sheen {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: linear-gradient(
+    125deg,
+    rgba(255, 255, 255, 0.14) 0%,
+    rgba(255, 255, 255, 0.02) 38%,
+    transparent 52%,
+    rgba(88, 231, 255, 0.06) 100%
+  );
+  mix-blend-mode: soft-light;
+  opacity: 0.55;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+    .studio-vega-hero--engineering-showcase
+    .studio-vega-hero__cinematic-sheen {
+    animation: studio-vega-cinematic-sheen-drift 14s ease-in-out infinite alternate;
+  }
+}
+
+@keyframes studio-vega-cinematic-sheen-drift {
+  0% {
+    transform: translateX(-3%) skewX(-2deg);
+    opacity: 0.42;
+  }
+  100% {
+    transform: translateX(4%) skewX(1deg);
+    opacity: 0.58;
+  }
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero--engineering-showcase
+  .studio-vega-hero__cinematic-reflection {
+  bottom: -18%;
+  height: 42%;
+  opacity: 0.35;
+  filter: blur(18px);
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero--engineering-showcase
+  .studio-vega-hero__cinematic-depth-vignette {
+  pointer-events: none;
+  position: absolute;
+  inset: -10%;
+  z-index: 5;
+  border-radius: 0;
+  background: radial-gradient(
+    ellipse 74% 66% at 50% 44%,
+    transparent 42%,
+    rgba(2, 8, 18, 0.38) 78%,
+    rgba(1, 3, 8, 0.82) 100%
+  );
+  mix-blend-mode: multiply;
+  opacity: 0.92;
+}
+
+/* Atmosphere overlays (rays / mist) apply only when keynote preset is inactive */
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero--engineering-showcase:not(.studio-vega-hero--premium-keynote)
+  .studio-vega-hero__cinematic-light-rays,
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero--engineering-showcase:not(.studio-vega-hero--premium-keynote)
+  .studio-vega-hero__cinematic-volumetric-floor {
+  display: none;
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero--engineering-showcase
+  .ultra-premium-hero__fog-local {
+  opacity: 0.22;
+}
+
+/* Bottom nav — minimal selectors */
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero--engineering-showcase
+  .studio-vega-hero__present-nav-shell {
+  margin-top: clamp(1.75rem, 4vh, 2.75rem);
+  padding: 0;
+  background: transparent;
+  border: none;
+  width: 100%;
+  max-width: none;
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero--engineering-showcase
+  .studio-vega-hero__present-nav {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 0.75rem 1rem;
+  width: 100%;
+  padding: 1.15rem 0 0.5rem;
+  border-top: 1px solid rgba(88, 231, 255, 0.12);
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero--engineering-showcase
+  .studio-vega-hero__present-nav::-webkit-scrollbar {
+  display: none;
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero--engineering-showcase
+  .studio-vega-hero__present-tab {
+  position: relative;
+  flex: 1 1 0;
+  min-width: max(0, 5.5rem);
+  cursor: pointer;
+  border: none;
+  background: none;
+  padding: 0.4rem 0.15rem 0.75rem;
+  text-align: center;
+  color: rgba(243, 247, 255, 0.36);
+  font-family: var(--font-lux-sans, "Satoshi", "Plus Jakarta Sans", system-ui, sans-serif);
+  font-size: clamp(0.68rem, 0.85vw, 0.8125rem);
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: none;
+  white-space: nowrap;
+  transition:
+    color 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+    text-shadow 0.45s ease,
+    transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero--engineering-showcase
+  .studio-vega-hero__present-tab:hover {
+  color: rgba(243, 247, 255, 0.62);
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero--engineering-showcase
+  .studio-vega-hero__present-tab.is-active {
+  color: rgba(243, 247, 255, 0.96);
+  text-shadow: 0 0 24px rgba(88, 231, 255, 0.35);
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero--engineering-showcase
+  .studio-vega-hero__present-tab.is-active::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 76%;
+  max-width: 120px;
+  height: 1px;
+  transform: translateX(-50%);
+  background: linear-gradient(90deg, transparent, var(--sv-glow), transparent);
+  box-shadow: 0 0 16px rgba(88, 231, 255, 0.65);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+    .studio-vega-hero--engineering-showcase
+    .studio-vega-hero__present-tab.is-active::after {
+    animation: studio-vega-present-tab-pulse 3.2s ease-in-out infinite alternate;
+  }
+}
+
+@keyframes studio-vega-present-tab-pulse {
+  0% {
+    opacity: 0.55;
+    transform: translateX(-50%) scaleX(0.88);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(-50%) scaleX(1);
+  }
+}
+
+@media (max-width: 1023px) {
+  .landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+    .studio-vega-hero--engineering-showcase
+    .studio-vega-hero__present-tab {
+    flex: 0 0 auto;
+    min-width: auto;
+    padding-inline: 0.5rem;
+  }
+
+  .landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+    .studio-vega-hero--engineering-showcase
+    .studio-vega-hero__present-frame-shell {
+    width: 100%;
+    max-width: 520px;
+    margin: 0 auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+    .studio-vega-hero--engineering-showcase.hero-cinematic
+    .studio-vega-hero__cta-explore.hero-cinematic-btn::before,
+  .landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+    .studio-vega-hero--engineering-showcase
+    .studio-vega-hero__cinematic-sheen,
+  .landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+    .studio-vega-hero--engineering-showcase
+    .studio-vega-hero__present-tab.is-active::after {
+    animation: none !important;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Premium keynote — 45/55 split, volumetric navy, editorial type, bleed render
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  #hero.showroom-hero-fixed.hero-cinematic.ultra-premium-hero.studio-vega-hero--premium-keynote {
+  --sv-show-bg-a: #07111f;
+  --sv-show-bg-b: #081827;
+  --sv-show-bg-c: #0a2236;
+  --sv-show-glow-deep: rgba(18, 58, 86, 0.72);
+  --sv-show-glow-mid: rgba(24, 75, 107, 0.48);
+  --sv-accent: #5be7ff;
+  --sv-accent-soft: #6fefff;
+
+  --uph-bg-void: var(--sv-show-bg-a);
+  --uph-bg-deep: var(--sv-show-bg-b);
+  --uph-bg-mid: var(--sv-show-bg-c);
+
+  min-height: 90dvh;
+  min-height: 90vh;
+  background: linear-gradient(188deg, #07111f 0%, #081827 52%, #0a2236 100%);
+  color: #c9d7e3;
+}
+
+@media (max-width: 767px) {
+  .landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+    #hero.showroom-hero-fixed.hero-cinematic.ultra-premium-hero.studio-vega-hero--premium-keynote {
+    min-height: min(90dvh, 880px);
+  }
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  #hero.showroom-hero-fixed.hero-cinematic.ultra-premium-hero.studio-vega-hero--premium-keynote::after {
+  height: clamp(72px, 11vh, 120px);
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(91, 231, 255, 0.04) 40%,
+    rgba(10, 34, 54, 0.88) 100%
+  );
+  background-size: 100%;
+  mask-image: linear-gradient(180deg, transparent 0%, black 42%, black 100%);
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero--premium-keynote.hero-cinematic
+  .studio-vega-hero__mouse-glow {
+  opacity: 0.48;
+  background: radial-gradient(
+    circle 46vmax at var(--uph-ptr-x, 52%) var(--uph-ptr-y, 40%),
+    rgba(111, 239, 255, 0.055) 0%,
+    rgba(91, 231, 255, 0.028) 32%,
+    transparent 62%
+  );
+}
+
+/* Luxury midnight washes + cyan volume (no harsh black) */
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero--premium-keynote.hero-cinematic .ultra-premium-hero__ambient {
+  background:
+    radial-gradient(
+      ellipse 112% 88% at 74% 38%,
+      var(--sv-show-glow-deep) 0%,
+      transparent 58%
+    ),
+    radial-gradient(ellipse 70% 58% at 18% 12%, rgba(24, 75, 107, 0.22) 0%, transparent 55%),
+    radial-gradient(
+      ellipse 118% 96% at 50% 114%,
+      rgba(10, 34, 54, 0.85) 0%,
+      #081827 50%,
+      #07111f 100%
+    ),
+    radial-gradient(
+      ellipse 62% 52% at var(--uph-ptr-x, 52%) var(--uph-ptr-y, 40%),
+      rgba(91, 231, 255, 0.088) 0%,
+      transparent 64%
+    ),
+    radial-gradient(
+      ellipse 88% 70% at 82% 20%,
+      rgba(111, 239, 255, 0.06) 0%,
+      transparent 54%
+    ),
+    linear-gradient(188deg, #07111f 0%, #081827 44%, #0a2236 100%);
+}
+
+/* Technical grid — orthogonal engineering sheet (subtle) */
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero--premium-keynote.hero-cinematic .ultra-premium-hero__grid-layer,
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero--premium-keynote.hero-cinematic .studio-vega-hero__grid-animated {
+  opacity: 0.072 !important;
+  background-image:
+    linear-gradient(
+      180deg,
+      rgba(111, 239, 255, 0.024) 1px,
+      transparent 1px,
+      transparent 84px
+    ),
+    linear-gradient(90deg, rgba(91, 231, 255, 0.026) 1px, transparent 1px);
+  background-size:
+    100% 84px,
+    68px 68px;
+  mask-image: radial-gradient(ellipse 90% 80% at 55% 45%, black 26%, transparent 78%);
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero--premium-keynote.hero-cinematic .ultra-premium-hero__fog.studio-vega-hero__volumetric {
+  background:
+    radial-gradient(ellipse 100% 74% at 52% 100%, rgba(8, 24, 39, 0.35) 0%, transparent 56%),
+    radial-gradient(
+      ellipse 68% 56% at 70% 30%,
+      rgba(111, 239, 255, 0.045) 0%,
+      rgba(24, 75, 107, 0.12) 42%,
+      transparent 62%
+    ),
+    radial-gradient(ellipse 52% 48% at 14% 32%, rgba(18, 58, 86, 0.2) 0%, transparent 52%);
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero--premium-keynote.hero-cinematic .ultra-premium-hero__inner {
+  width: 100%;
+  max-width: min(1680px, 100%);
+  min-height: 90dvh;
+  min-height: 90vh;
+  padding: clamp(5.25rem, 9vh, 6.75rem) clamp(1.85rem, 6.5vw, 4.85rem)
+    clamp(4.35rem, 8vh, 5.85rem);
+  justify-content: center;
+}
+
+/* Digital showroom canopy — giant watermark & particle haze */
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero--premium-keynote.hero-cinematic
+  .ultra-premium-hero__inner.studio-vega-hero__premium-canopy {
+  position: relative;
+  isolation: isolate;
+  overflow: clip;
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero--premium-keynote
+  .studio-vega-hero__showroom-watermark {
+  pointer-events: none;
+  user-select: none;
+  position: absolute;
+  left: clamp(-4%, -2vw, 0%);
+  right: clamp(-8%, -4vw, 0%);
+  top: 50%;
+  z-index: 0;
+  translate: 0 -52%;
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-lux-serif, "Instrument Serif", "Cormorant Garamond", serif);
+  font-size: clamp(4.85rem, 18.25vw, 15.5rem);
+  font-weight: 300;
+  line-height: 0.92;
+  letter-spacing: -0.06em;
+  text-align: center;
+  text-transform: uppercase;
+  white-space: nowrap;
+  background: linear-gradient(
+    180deg,
+    rgba(201, 215, 227, 0.14) 0%,
+    rgba(111, 239, 255, 0.042) 55%,
+    rgba(201, 215, 227, 0.016) 100%
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: rgba(201, 215, 227, 0.05);
+  -webkit-text-fill-color: transparent;
+  mix-blend-mode: soft-light;
+  filter: drop-shadow(0 0 92px rgba(91, 231, 255, 0.07));
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero--premium-keynote
+  .studio-vega-hero__premium-particle-field {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.082;
+  background-image:
+    radial-gradient(circle at 62% 40%, rgba(226, 252, 255, 0.22) 0, transparent 1.75px),
+    radial-gradient(circle at 28% 22%, rgba(180, 250, 255, 0.16) 0, transparent 1.5px),
+    radial-gradient(circle at 84% 78%, rgba(180, 250, 255, 0.12) 0, transparent 1.65px),
+    radial-gradient(circle at 54% 70%, rgba(180, 250, 255, 0.1) 0, transparent 1.85px),
+    radial-gradient(circle at 18% 64%, rgba(180, 250, 255, 0.08) 0, transparent 1.25px),
+    radial-gradient(circle at 72% 16%, rgba(180, 250, 255, 0.12) 0, transparent 1.25px),
+    radial-gradient(circle at 38% 38%, rgba(180, 250, 255, 0.08) 0, transparent 1.25px),
+    radial-gradient(circle at 90% 48%, rgba(180, 250, 255, 0.08) 0, transparent 1.25px);
+  background-size: 220px 180px;
+  mask-image: radial-gradient(ellipse 116% 90% at 58% 48%, black 20%, transparent 72%);
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero--premium-keynote.hero-cinematic
+  .ultra-premium-hero__split.studio-vega-hero__present-split {
+  position: relative;
+  z-index: 1;
+}
+
+@media (min-width: 1024px) {
+  .landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+    .studio-vega-hero--premium-keynote.hero-cinematic
+    .ultra-premium-hero__split.studio-vega-hero__present-split {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: clamp(2.85rem, 6vw, 5rem);
+    align-items: center;
+    min-height: min(78vh, 820px);
+  }
+
+  /* Anasayfa — sağ vitrin yok: tek sütun, lacivert atmosfer korunur */
+  .landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+    .studio-vega-hero--premium-keynote.studio-vega-hero--copy-only-home.hero-cinematic
+    .ultra-premium-hero__split.studio-vega-hero__present-split {
+    grid-template-columns: minmax(0, 1fr);
+    justify-items: start;
+    max-width: min(52rem, 100%);
+    margin-inline: 0;
+    min-height: min(72vh, 760px);
+  }
+
+  .landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+    .studio-vega-hero--premium-keynote.studio-vega-hero--copy-only-home
+    .studio-vega-hero__present-copy {
+    max-width: min(38rem, 100%);
+    padding-right: clamp(1rem, 4vw, 2.5rem);
+  }
+}
+
+@media (max-width: 1023px) {
+  .landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+    .studio-vega-hero--premium-keynote.hero-cinematic
+    .studio-vega-hero__present-visual {
+    margin-top: 1rem;
+  }
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero--premium-keynote
+  .hero-cinematic__copy-spotlight.studio-vega-hero__copy-spotlight--soft {
+  opacity: 0.36;
+  background: radial-gradient(
+    ellipse 92% 78% at 26% 32%,
+    rgba(91, 231, 255, 0.045) 0%,
+    transparent 58%
+  );
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero--premium-keynote
+  .studio-vega-hero__present-copy {
+  padding-top: 0;
+}
+
+@media (min-width: 1024px) {
+  .landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+    .studio-vega-hero--premium-keynote
+    .studio-vega-hero__present-copy {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: min(74vh, 780px);
+    padding-right: clamp(1rem, 2.75vw, 2rem);
+  }
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero--premium-keynote
+  .studio-vega-hero__present-slide-index {
+  margin: 0;
+  padding: 0;
+  max-width: none;
+  font-family: var(--font-lux-serif, "Instrument Serif", serif);
+  font-size: clamp(3.85rem, 9.5vw, 6.85rem);
+  font-weight: 300;
+  line-height: 0.94;
+  letter-spacing: -0.04em;
+  background: linear-gradient(
+    180deg,
+    rgba(201, 215, 227, 0.95) 0%,
+    rgba(111, 239, 255, 0.62) 100%
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: rgba(201, 215, 227, 0.24);
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 38px rgba(91, 231, 255, 0.18));
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero--premium-keynote
+  .studio-vega-hero__present-studiov-tag {
+  margin: clamp(0.35rem, 1.2vw, 0.75rem) 0 clamp(0.65rem, 1.85vw, 1.05rem);
+  max-width: 36rem;
+  font-family:
+    var(--font-lux-sans, "Satoshi", "Plus Jakarta Sans", system-ui, sans-serif);
+  font-size: 0.65rem;
+  font-weight: 600;
+  line-height: 1.42;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: rgba(111, 131, 149, 0.92);
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero--premium-keynote
+  .studio-vega-hero__present-category {
+  margin: 0 0 clamp(1.75rem, 3.85vw, 2.95rem);
+  max-width: min(22rem, 100%);
+  font-family: var(--font-lux-serif, "Instrument Serif", "Cormorant Garamond", serif);
+  font-weight: 300;
+  font-size: clamp(2.85rem, 5vw, 4.35rem);
+  line-height: 1.06;
+  letter-spacing: -0.028em;
+  color: rgba(248, 252, 255, 0.97);
+  text-shadow:
+    0 12px 48px rgba(7, 17, 31, 0.22),
+    0 0 42px rgba(91, 231, 255, 0.08);
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero--premium-keynote
+  .studio-vega-hero__present-category-primary {
+  font-weight: 400;
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero--premium-keynote
+  .studio-vega-hero__present-category-accent {
+  font-weight: 400;
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero--premium-keynote
+  .studio-vega-hero__present-category-accent-italic {
+  font-family: var(--font-lux-serif, "Instrument Serif", "Cormorant Garamond", serif);
+  font-style: italic;
+  font-weight: 500;
+  color: rgba(91, 231, 255, 0.88);
+  text-shadow:
+    0 0 32px rgba(91, 231, 255, 0.22),
+    0 14px 40px rgba(8, 24, 39, 0.18);
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero--premium-keynote
+  .studio-vega-hero__present-subtitle {
+  margin: 0 0 clamp(1.15rem, 2.2vw, 1.65rem);
+  max-width: min(34rem, 100%);
+  font-family:
+    var(--font-lux-sans, "Satoshi", "Plus Jakarta Sans", system-ui, sans-serif);
+  font-size: clamp(0.9rem, 1.02vw, 1.02rem);
+  font-weight: 400;
+  line-height: 1.62;
+  letter-spacing: 0.016em;
+  color: #c9d7e3;
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero--premium-keynote
+  .studio-vega-hero__present-description {
+  margin: 0 0 clamp(2.35rem, 4.6vw, 3.15rem);
+  max-width: min(28rem, 100%);
+  font-family:
+    var(--font-lux-sans, "Satoshi", "Plus Jakarta Sans", system-ui, sans-serif);
+  font-size: clamp(0.805rem, 0.92vw, 0.895rem);
+  line-height: 1.78;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  color: rgba(111, 131, 149, 0.95);
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero--premium-keynote
+  .studio-vega-hero__cta-duo.ultra-premium-hero__actions {
+  margin-top: 0.85rem;
+  margin-bottom: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: clamp(0.65rem, 2vw, 1.05rem);
+}
+
+/* Primary CTA — electric cyan core (Apple / Tesla keynote cue) */
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero--premium-keynote.hero-cinematic
+  .studio-vega-hero__cta-primary.studio-vega-hero__cta-explore.hero-cinematic-btn {
+  flex: 0 1 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.82rem;
+  min-width: 14.75rem;
+  padding: 1.06rem clamp(2.15rem, 4.5vw, 2.95rem);
+  border-radius: 999px;
+  border: none;
+  background:
+    radial-gradient(circle at 30% -20%, rgba(255, 255, 255, 0.32) 0%, transparent 46%),
+    linear-gradient(154deg, #5be7ff 0%, #62ecff 28%, #6fefff 100%);
+  color: rgba(7, 17, 31, 0.9);
+  font-size: 0.695rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.3);
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.24) inset,
+    0 18px 48px rgba(91, 231, 255, 0.28),
+    0 52px 100px rgba(8, 24, 39, 0.38);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero--premium-keynote.hero-cinematic
+  .studio-vega-hero__cta-primary.studio-vega-hero__cta-explore.hero-cinematic-btn:hover {
+  background: linear-gradient(154deg, #76f0ff 0%, #5be7ff 40%, #4dd8fa 100%);
+  color: rgba(7, 17, 31, 0.94);
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.3) inset,
+    0 22px 58px rgba(91, 231, 255, 0.38),
+    0 72px 120px rgba(8, 24, 39, 0.32);
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero--premium-keynote
+  .studio-vega-hero__cta-primary
+  .studio-vega-hero__cta-explore-label {
+  color: inherit;
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero--premium-keynote
+  .studio-vega-hero__cta-primary
+  .studio-vega-hero__cta-explore-arrow {
+  flex-shrink: 0;
+}
+
+/* Outline CTA — glass ribbon */
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero--premium-keynote.hero-cinematic
+  .studio-vega-hero__cta-explore-outline.hero-cinematic-btn {
+  flex: 0 1 auto;
+  padding: 1.06rem clamp(2.05rem, 4.2vw, 2.75rem);
+  border-radius: 999px;
+  border: 1px solid rgba(201, 215, 227, 0.22);
+  background: rgba(10, 34, 54, 0.22);
+  color: #c9d7e3;
+  font-size: 0.695rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  backdrop-filter: blur(22px) saturate(168%);
+  -webkit-backdrop-filter: blur(22px) saturate(168%);
+  box-shadow:
+    0 0 0 1px rgba(91, 231, 255, 0.07) inset,
+    0 18px 48px rgba(7, 17, 31, 0.28),
+    0 0 32px rgba(91, 231, 255, 0.07);
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero--premium-keynote.hero-cinematic
+  .studio-vega-hero__cta-explore-outline.hero-cinematic-btn:hover {
+  border-color: rgba(111, 239, 255, 0.38);
+  color: rgba(248, 252, 255, 0.98);
+  box-shadow:
+    0 0 0 1px rgba(91, 231, 255, 0.12) inset,
+    0 24px 58px rgba(7, 17, 31, 0.32),
+    0 0 44px rgba(91, 231, 255, 0.16);
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero--premium-keynote
+  .studio-vega-hero__present-visual {
+  overflow: visible;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero--premium-keynote
+  .studio-vega-hero__present-stage {
+  position: relative;
+  isolation: isolate;
+  min-height: min(58vh, 640px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-block: clamp(1.25rem, 3vh, 2.25rem);
+  width: 100%;
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero--premium-keynote
+  .studio-vega-hero__scene-noise {
+  position: absolute;
+  inset: -4%;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.035;
+  mix-blend-mode: soft-light;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
+  background-size: 280px 280px;
+}
+
+/* Extra slow environmental rays — sahne derinliği (ürünün dışında, atmosfer içinde) */
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero--premium-keynote
+  .studio-vega-hero__ambient-rays {
+  position: absolute;
+  inset: -8%;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 92% 74% at 52% 118%, rgba(8, 24, 39, 0.32) 0%, transparent 62%),
+    conic-gradient(from 210deg at 70% 28%, transparent 40%, rgba(111, 239, 255, 0.034) 52%, transparent 64%),
+    linear-gradient(125deg, transparent 55%, rgba(201, 215, 227, 0.028) 62%, transparent 72%);
+  opacity: 0.55;
+  filter: blur(1.25px);
+  mask-image: radial-gradient(ellipse 88% 88% at 50% 45%, black 52%, transparent 100%);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+    .studio-vega-hero--premium-keynote
+    .studio-vega-hero__ambient-rays {
+    animation: studio-vega-premium-environment-drift 18s ease-in-out infinite alternate;
+  }
+}
+
+@keyframes studio-vega-premium-environment-drift {
+  0% {
+    transform: rotate(-0.35deg) scale(1);
+    opacity: 0.48;
+  }
+
+  100% {
+    transform: rotate(0.25deg) scale(1.02);
+    opacity: 0.58;
+  }
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero--premium-keynote
+  .studio-vega-hero__present-frame-shell
+  .studio-vega-hero__render-atmosphere {
+  position: absolute;
+  inset: -10% -14% -14% -8%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero--premium-keynote
+  .studio-vega-hero__render-halo {
+  position: absolute;
+  left: 50%;
+  top: 46%;
+  width: min(92%, 40vw);
+  height: min(82%, 52vh);
+  transform: translate(-50%, -50%);
+  border-radius: 52%;
+  background: radial-gradient(
+    ellipse at 48% 50%,
+    rgba(111, 239, 255, 0.22) 0%,
+    rgba(24, 75, 107, 0.16) 42%,
+    transparent 76%
+  );
+  filter: blur(56px);
+  opacity: 0.72;
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero--premium-keynote
+  .studio-vega-hero__render-halo-secondary {
+  position: absolute;
+  left: 56%;
+  top: 52%;
+  width: min(78%, 32vw);
+  height: min(64%, 42vh);
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 50% 50%,
+    rgba(18, 58, 86, 0.35) 0%,
+    transparent 66%
+  );
+  filter: blur(42px);
+  opacity: 0.58;
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero--premium-keynote
+  .ultra-premium-hero__glow.studio-vega-hero__cyan-aura--soft {
+  opacity: 0.44 !important;
+  filter: blur(42px);
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero--premium-keynote
+  .ultra-premium-hero__energy-core.studio-vega-hero__present-core-glow--premium {
+  opacity: 0.26 !important;
+  filter: blur(52px);
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero--premium-keynote
+  .ultra-premium-hero__fog-local.studio-vega-hero__local-haze {
+  opacity: 0.4;
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero--premium-keynote
+  .studio-vega-hero__present-frame-shell {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: min(760px, 100%);
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0;
+  border-radius: 0;
+  border: none;
+  background: none;
+  box-shadow: none;
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero--premium-keynote
+  .studio-vega-hero__immersive-render-root {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  padding: 0;
+  border: none;
+  background: transparent;
+  box-shadow: none;
+  border-radius: 0;
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero--premium-keynote
+  .studio-vega-hero__present-visual-inner.studio-vega-hero__present-visual-inner--immersive {
+  border-radius: 0;
+  overflow: visible;
+  width: 100%;
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero--premium-keynote
+  .studio-vega-hero__cinematic-parallax-shell {
+  position: relative;
+  transform-origin: 50% 60%;
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero--premium-keynote
+  .studio-vega-hero__cinematic-float-shell {
+  position: relative;
+  transform-origin: 50% 55%;
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero--premium-keynote
+  .studio-vega-hero__cinematic-viewport.studio-vega-hero__cinematic-viewport--bleed {
+  z-index: 2;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: min(50vh, 520px);
+  padding: clamp(0.85rem, 2.75vw, 1.85rem);
+  margin: clamp(0.85rem, 2.5vh, 1.85rem);
+  border-radius: 0;
+  overflow: visible;
+  background: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+  isolation: isolate;
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero--premium-keynote
+  .studio-vega-hero__cinematic-photo-wrap {
+  position: relative;
+  z-index: 3;
+  display: grid;
+  place-items: center;
+  width: 100%;
+  max-width: min(34vw, 520px);
+  overflow: visible;
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero--premium-keynote
+  .studio-vega-hero__cinematic-photo-wrap::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 2%;
+  width: min(88%, 400px);
+  height: clamp(48px, 8.5vh, 88px);
+  transform: translateX(-50%);
+  pointer-events: none;
+  border-radius: 50%;
+  z-index: 0;
+  background: radial-gradient(
+    ellipse 100% 100% at 50% 52%,
+    rgba(18, 58, 86, 0.45) 0%,
+    rgba(24, 75, 107, 0.24) 38%,
+    rgba(91, 231, 255, 0.1) 52%,
+    transparent 78%
+  );
+  filter: blur(22px);
+  opacity: 0.68;
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero--premium-keynote
+  .studio-vega-hero__cinematic-rim-overlay {
+  position: absolute;
+  inset: 8% 6% auto 6%;
+  height: min(62vh, 420px);
+  z-index: 4;
+  pointer-events: none;
+  border-radius: 50%;
+  background:
+    radial-gradient(
+      ellipse 58% 64% at 50% 42%,
+      transparent 42%,
+      rgba(91, 231, 255, 0.06) 72%,
+      transparent 94%
+    ),
+    radial-gradient(
+      ellipse 80% 90% at 50% 50%,
+      rgba(111, 239, 255, 0.1) 0%,
+      transparent 68%
+    );
+  mix-blend-mode: soft-light;
+  opacity: 0.54;
+  filter: blur(11px);
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero--premium-keynote
+  .studio-vega-hero__cinematic-viewport.studio-vega-hero__cinematic-viewport--bleed
+  .studio-vega-hero__showroom-focal {
+  position: relative;
+  z-index: 2;
+  pointer-events: none;
+  width: min(32vw, 300px);
+  height: min(44vh, 400px);
+  margin-inline: auto;
+  translate: 0 -2%;
+  border-radius: 1.05rem;
+  background:
+    radial-gradient(ellipse 112% 74% at 50% 26%, rgba(111, 239, 255, 0.12) 0%, transparent 62%),
+    linear-gradient(178deg, rgba(18, 58, 86, 0.38) 0%, rgba(10, 34, 54, 0.12) 72%, rgba(8, 24, 39, 0.06) 100%);
+  box-shadow:
+    inset 0 0 0 1px rgba(91, 231, 255, 0.12),
+    inset 0 -24px 72px rgba(7, 17, 31, 0.12),
+    inset 0 42px 92px rgba(91, 231, 255, 0.04),
+    0 0 100px rgba(18, 58, 86, 0.42),
+    0 0 60px rgba(91, 231, 255, 0.1);
+  filter: saturate(1.06);
+  transition:
+    transform 1.12s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 1.08s cubic-bezier(0.16, 1, 0.3, 1),
+    filter 0.95s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero--premium-keynote
+  .studio-vega-hero__showroom-focal::after {
+  content: "";
+  position: absolute;
+  inset: -8% -28% auto -28%;
+  height: min(62%, 200px);
+  border-radius: 50%;
+  background: radial-gradient(
+    ellipse 100% 100% at 50% 104%,
+    rgba(111, 239, 255, 0.14) 0%,
+    rgba(91, 231, 255, 0.04) 45%,
+    transparent 74%
+  );
+  filter: blur(16px);
+  opacity: 0.88;
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero--premium-keynote
+  .studio-vega-hero__cinematic-reflection.studio-vega-hero__reflection {
+  z-index: 1;
+  bottom: -14%;
+  left: 10%;
+  right: 10%;
+  height: 36%;
+  opacity: 0;
+  filter: blur(28px);
+  mix-blend-mode: lighten;
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero--premium-keynote
+  .studio-vega-hero__cinematic-sheen {
+  z-index: 5;
+  opacity: 0.14;
+  mix-blend-mode: soft-light;
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero--premium-keynote
+  .studio-vega-hero__cinematic-volumetric-floor {
+  position: absolute;
+  left: -14%;
+  right: -14%;
+  bottom: -24%;
+  top: auto;
+  height: min(68%, 520px);
+  z-index: 4;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      ellipse 94% 62% at 50% 100%,
+      rgba(111, 239, 255, 0.16) 0%,
+      rgba(24, 75, 107, 0.18) 44%,
+      transparent 74%
+    ),
+    linear-gradient(180deg, transparent 42%, rgba(7, 17, 31, 0.22) 100%);
+  mix-blend-mode: screen;
+  filter: blur(38px);
+  opacity: 0.56;
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero--premium-keynote
+  .studio-vega-hero__cinematic-light-rays {
+  position: absolute;
+  inset: -28% -10% -32% 8%;
+  z-index: 5;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      ellipse 124% 100% at 98% -2%,
+      rgba(226, 252, 255, 0.11) 0%,
+      transparent 48%
+    ),
+    radial-gradient(
+      ellipse 72% 60% at 82% 6%,
+      rgba(156, 240, 255, 0.08) 0%,
+      transparent 54%
+    ),
+    linear-gradient(208deg, transparent 40%, rgba(206, 250, 255, 0.05) 52%, transparent 66%),
+    linear-gradient(258deg, transparent 54%, rgba(240, 250, 255, 0.04) 62%, transparent 74%);
+  mix-blend-mode: soft-light;
+  opacity: 0.42;
+  filter: blur(5px);
+  mask-image: radial-gradient(ellipse 96% 90% at 50% 48%, black 60%, transparent 100%);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+    .studio-vega-hero--premium-keynote
+    .studio-vega-hero__cinematic-light-rays {
+    animation: studio-vega-premium-rays-breathe 11s ease-in-out infinite alternate;
+  }
+}
+
+@keyframes studio-vega-premium-rays-breathe {
+  0% {
+    opacity: 0.32;
+    transform: translate3d(-0.45%, -0.2%, 0) scale(1);
+  }
+
+  100% {
+    opacity: 0.48;
+    transform: translate3d(0.38%, 0.22%, 0) scale(1.02);
+  }
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero--premium-keynote
+  .studio-vega-hero__cinematic-depth-vignette {
+  inset: -10%;
+  z-index: 6;
+  background:
+    radial-gradient(
+      ellipse 88% 78% at 50% 46%,
+      transparent 56%,
+      rgba(7, 17, 31, 0.08) 78%,
+      rgba(8, 24, 39, 0.22) 100%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(8, 24, 39, 0.05) 0%,
+      transparent 32%,
+      transparent 62%,
+      rgba(7, 17, 31, 0.16) 100%
+    );
+  mix-blend-mode: multiply;
+  opacity: 0.28;
+}
+
+/* Holographic engineering HUD — dekoratif cam katman (canlı telemetry değil) */
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero--premium-keynote
+  .studio-vega-hero__showcase-hud-root {
+  position: absolute;
+  inset: 0;
+  z-index: 8;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  pointer-events: none;
+  overflow: visible;
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero--premium-keynote
+  .studio-vega-hero__showcase-hud-grid-lines {
+  position: absolute;
+  inset: clamp(15%, 23vh, 28%) clamp(22%, 20vw, 36%) clamp(16%, 20vh, 26%) clamp(52%, 32vw, 58%);
+  background:
+    repeating-linear-gradient(
+      -52deg,
+      transparent 0 18px,
+      rgba(124, 240, 255, 0.018) 18px 19px,
+      transparent 19px 40px
+    ),
+    radial-gradient(circle at 22% 10%, transparent 74%, rgba(88, 231, 255, 0.03) 100%);
+  mix-blend-mode: soft-light;
+  opacity: 0.55;
+  mask-image: radial-gradient(ellipse 98% 90% at 70% 50%, transparent 52%, black 112%);
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero--premium-keynote
+  .studio-vega-hero__showcase-hud-corner {
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  border-color: rgba(152, 250, 255, 0.45);
+  border-style: solid;
+  border-width: 0;
+  opacity: 0.7;
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero--premium-keynote
+  .studio-vega-hero__showcase-hud-corner--tl {
+  top: clamp(13%, 8vh, 18%);
+  right: clamp(9%, 4vw, 14%);
+  border-top-width: 1px;
+  border-right-width: 1px;
+  box-shadow: 0 -1px 16px rgba(88, 231, 255, 0.22);
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero--premium-keynote
+  .studio-vega-hero__showcase-hud-corner--tr {
+  top: clamp(13%, 8vh, 18%);
+  right: clamp(1.85rem, 3.5vw, 3.25rem);
+  border-top-width: 1px;
+  border-left-width: 1px;
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero--premium-keynote
+  .studio-vega-hero__showcase-hud-corner--br {
+  bottom: clamp(9%, 5vh, 14%);
+  right: clamp(1.35rem, 3.2vw, 2.75rem);
+  border-bottom-width: 1px;
+  border-right-width: 1px;
+  box-shadow: 0 2px 12px rgba(88, 231, 255, 0.28);
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero--premium-keynote
+  .studio-vega-hero__showcase-hud-chip {
+  position: absolute;
+  top: clamp(10%, 5vh, 16%);
+  right: clamp(1.25rem, 3vw, 2.5rem);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.38rem 0.82rem;
+  overflow: hidden;
+  border-radius: 999px;
+  border: 1px solid rgba(124, 240, 255, 0.22);
+  background: rgba(6, 18, 36, 0.28);
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.04) inset,
+    0 12px 40px rgba(0, 0, 10, 0.45),
+    0 0 28px rgba(88, 231, 255, 0.12);
+  backdrop-filter: blur(16px) saturate(165%);
+  -webkit-backdrop-filter: blur(16px) saturate(165%);
+  font-family: var(--font-lux-sans, "Satoshi", "JetBrains Mono", monospace, system-ui, sans-serif);
+  font-size: clamp(9px, 0.74vw, 10.5px);
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(246, 250, 255, 0.88);
+  text-shadow: 0 0 18px rgba(88, 231, 255, 0.28);
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero--premium-keynote
+  .studio-vega-hero__showcase-hud-chip-prefix {
+  color: rgba(122, 240, 255, 0.56);
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero--premium-keynote
+  .studio-vega-hero__showcase-hud-chip-divider {
+  width: 1px;
+  height: 0.92rem;
+  background: linear-gradient(transparent 0%, rgba(150, 250, 255, 0.35) 50%, transparent 100%);
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero--premium-keynote
+  .studio-vega-hero__showcase-hud-chip-id {
+  letter-spacing: 0.12em;
+  color: rgba(252, 254, 255, 0.96);
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero--premium-keynote
+  .studio-vega-hero__showcase-hud-chip-scan {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 38%;
+  background: linear-gradient(
+    100deg,
+    transparent 38%,
+    rgba(226, 252, 255, 0.15) 50%,
+    transparent 62%
+  );
+  mix-blend-mode: soft-light;
+  opacity: 0.72;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+    .studio-vega-hero--premium-keynote
+    .studio-vega-hero__showcase-hud-chip-scan {
+    animation: studio-vega-hud-chip-scan-glide 9.5s ease-in-out infinite;
+  }
+
+  .landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+    .studio-vega-hero--premium-keynote
+    .studio-vega-hero__showcase-hud-card-glint {
+    animation: studio-vega-hud-card-glint-drift 7.5s linear infinite alternate;
+  }
+}
+
+@keyframes studio-vega-hud-chip-scan-glide {
+  0% {
+    translate: -100% 0;
+    opacity: 0.52;
+  }
+
+  50% {
+    opacity: 0.78;
+  }
+
+  100% {
+    translate: 180% 0;
+    opacity: 0.5;
+  }
+}
+
+@keyframes studio-vega-hud-card-glint-drift {
+  0% {
+    transform: translate3d(-12%, -8%, 0);
+    opacity: 0;
+  }
+
+  40% {
+    opacity: 0.35;
+  }
+
+  100% {
+    transform: translate3d(118%, 64%, 0);
+    opacity: 0;
+  }
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero--premium-keynote
+  .studio-vega-hero__showcase-hud-cards {
+  position: absolute;
+  top: auto;
+  right: clamp(0.65rem, 2.2vw, 2rem);
+  bottom: clamp(11%, 5.5vh, 18%);
+  left: clamp(36%, 28vw, 52%);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  justify-content: flex-end;
+  gap: 0.4rem 0.48rem;
+  width: auto;
+  max-width: min(540px, 52vw);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero--premium-keynote
+  .studio-vega-hero__showcase-hud-card {
+  position: relative;
+  overflow: hidden;
+  flex: 1 1 22%;
+  min-width: clamp(112px, 18vw, 132px);
+  max-width: 160px;
+  display: grid;
+  gap: 0.16rem;
+  padding: 0.38rem 0.62rem 0.5rem;
+  border-radius: 0.72rem;
+  border: 1px solid rgba(124, 240, 255, 0.16);
+  background: rgba(5, 16, 32, 0.32);
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.035) inset,
+    0 16px 48px rgba(0, 4, 12, 0.55),
+    0 0 24px rgba(88, 231, 255, 0.08);
+  backdrop-filter: blur(18px) saturate(168%);
+  -webkit-backdrop-filter: blur(18px) saturate(168%);
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero--premium-keynote
+  .studio-vega-hero__showcase-hud-card-label {
+  font-family: var(--font-lux-sans, "Satoshi", system-ui, sans-serif);
+  font-size: 8px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(138, 220, 246, 0.46);
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero--premium-keynote
+  .studio-vega-hero__showcase-hud-card-value {
+  font-family: var(--font-lux-sans, "Satoshi", "JetBrains Mono", monospace, system-ui, sans-serif);
+  font-size: clamp(0.8rem, 1.06vw, 0.9625rem);
+  font-weight: 500;
+  letter-spacing: 0.035em;
+  color: rgba(252, 254, 255, 0.96);
+  text-shadow: 0 0 22px rgba(88, 231, 255, 0.25);
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero--premium-keynote
+  .studio-vega-hero__showcase-hud-card-glint {
+  position: absolute;
+  inset: -30% auto auto -120%;
+  width: 140%;
+  height: 220%;
+  background: linear-gradient(
+    138deg,
+    transparent 52%,
+    rgba(226, 252, 255, 0.14) 60%,
+    transparent 74%
+  );
+  mix-blend-mode: overlay;
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero--premium-keynote
+  .studio-vega-hero__showcase-hud-card-corner {
+  position: absolute;
+  right: 10px;
+  bottom: 8px;
+  width: 8px;
+  height: 8px;
+  border-right: 1px solid rgba(124, 240, 255, 0.35);
+  border-bottom: 1px solid rgba(124, 240, 255, 0.35);
+  opacity: 0.82;
+}
+
+@media (max-width: 640px) {
+  .landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+    .studio-vega-hero--premium-keynote
+    .studio-vega-hero__showcase-hud-root {
+    display: none;
+  }
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero--premium-keynote.studio-vega-hero--showcase-visual-hover
+  .studio-vega-hero__render-halo {
+  opacity: 0.9;
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero--premium-keynote.studio-vega-hero--showcase-visual-hover
+  .studio-vega-hero__render-halo-secondary {
+  opacity: 0.72;
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero--premium-keynote.studio-vega-hero--showcase-visual-hover
+  .ultra-premium-hero__glow.studio-vega-hero__cyan-aura--soft {
+  opacity: 0.54 !important;
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero--premium-keynote.studio-vega-hero--showcase-visual-hover
+  .studio-vega-hero__cinematic-light-rays {
+  opacity: 0.52 !important;
+  filter: blur(4px);
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero--premium-keynote.studio-vega-hero--showcase-visual-hover
+  .studio-vega-hero__cinematic-volumetric-floor {
+  opacity: 0.54;
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero--premium-keynote.studio-vega-hero--showcase-visual-hover
+  .studio-vega-hero__cinematic-viewport.studio-vega-hero__cinematic-viewport--bleed
+  .studio-vega-hero__showroom-focal {
+  box-shadow:
+    inset 0 0 0 1px rgba(111, 239, 255, 0.16),
+    inset 0 -24px 72px rgba(7, 17, 31, 0.1),
+    inset 0 48px 100px rgba(111, 239, 255, 0.06),
+    0 0 120px rgba(18, 58, 86, 0.48),
+    0 0 72px rgba(91, 231, 255, 0.14);
+  filter: saturate(1.08);
+}
+
+/* Alt seçici — daha ince, pasif daha silik, aktif cyan glow çizgi */
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero--premium-keynote
+  .studio-vega-hero__present-nav {
+  gap: 0.35rem 0.62rem;
+  padding: clamp(2.35rem, 5.5vh, 3.35rem) 0 0.28rem;
+  border-top: 1px solid rgba(91, 231, 255, 0.082);
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero--premium-keynote
+  .studio-vega-hero__present-tab {
+  min-width: 0;
+  display: inline-flex;
+  align-items: baseline;
+  justify-content: center;
+  flex-wrap: wrap;
+  column-gap: 0.26em;
+  row-gap: 0.06em;
+  padding: 0.28rem 0.06rem 0.58rem;
+  font-size: clamp(0.62rem, 0.74vw, 0.7425rem);
+  font-weight: 500;
+  color: rgba(201, 215, 227, 0.28);
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero--premium-keynote
+  .studio-vega-hero__present-tab-idx {
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.045em;
+  font-weight: 600;
+  color: rgba(112, 234, 255, 0.38);
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero--premium-keynote
+  .studio-vega-hero__present-tab.is-active
+  .studio-vega-hero__present-tab-idx {
+  color: rgba(122, 250, 255, 0.78);
+  text-shadow: 0 0 18px rgba(88, 231, 255, 0.35);
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero--premium-keynote
+  .studio-vega-hero__present-tab-sep {
+  opacity: 0.38;
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero--premium-keynote
+  .studio-vega-hero__present-tab-name {
+  letter-spacing: 0.04em;
+  font-weight: 500;
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero--premium-keynote
+  .studio-vega-hero__present-tab--hot {
+  padding-top: 0.45rem;
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero--premium-keynote
+  .studio-vega-hero__present-tab--hot::before {
+  content: "";
+  position: absolute;
+  top: -0.04rem;
+  left: 50%;
+  translate: -50% 0;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, rgba(240, 255, 255, 0.95), rgba(0, 226, 255, 0.85) 55%, transparent 72%);
+  box-shadow:
+    0 0 0 1px rgba(164, 250, 255, 0.35),
+    0 0 14px rgba(88, 231, 255, 0.85),
+    0 0 28px rgba(56, 189, 248, 0.45);
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+    .studio-vega-hero--premium-keynote
+    .studio-vega-hero__present-tab--hot::before {
+    animation: studio-vega-present-hot-dot-pulse 2.4s ease-in-out infinite alternate;
+  }
+}
+
+@keyframes studio-vega-present-hot-dot-pulse {
+  from {
+    opacity: 0.72;
+    filter: saturate(1);
+    box-shadow:
+      0 0 0 1px rgba(164, 250, 255, 0.28),
+      0 0 10px rgba(88, 231, 255, 0.55),
+      0 0 22px rgba(56, 189, 248, 0.32);
+  }
+
+  to {
+    opacity: 1;
+    filter: saturate(1.15);
+    box-shadow:
+      0 0 0 1px rgba(206, 252, 255, 0.55),
+      0 0 18px rgba(88, 231, 255, 1),
+      0 0 36px rgba(56, 189, 248, 0.58);
+  }
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero--premium-keynote
+  .studio-vega-hero__present-tab:hover {
+  color: rgba(201, 215, 227, 0.45);
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero--premium-keynote
+  .studio-vega-hero__present-tab.is-active {
+  color: rgba(248, 252, 255, 0.98);
+  text-shadow: 0 0 26px rgba(91, 231, 255, 0.3);
+}
+
+.landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+  .studio-vega-hero--premium-keynote
+  .studio-vega-hero__present-tab.is-active::after {
+  box-shadow:
+    0 0 20px rgba(111, 239, 255, 0.62),
+    0 0 44px rgba(91, 231, 255, 0.28);
+  height: 1.5px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+    .studio-vega-hero--premium-keynote
+    .studio-vega-hero__ambient-rays {
+    animation: none !important;
+    opacity: 0.42 !important;
+    transform: none !important;
+  }
+
+  .landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+    .studio-vega-hero--premium-keynote
+    .studio-vega-hero__present-tab--hot::before {
+    animation: none !important;
+  }
+
+  .landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+    .studio-vega-hero--premium-keynote
+    .studio-vega-hero__scene-noise {
+    opacity: 0.05;
+  }
+
+  .landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+    .studio-vega-hero--premium-keynote
+    .studio-vega-hero__cinematic-viewport.studio-vega-hero__cinematic-viewport--bleed
+    .studio-vega-hero__showroom-focal {
+    translate: 0 -2%;
+    transform: none;
+    filter: saturate(1.04);
+  }
+
+  .landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+    .studio-vega-hero--premium-keynote
+    .studio-vega-hero__cinematic-light-rays {
+    animation: none !important;
+    transform: none !important;
+    opacity: 0.36 !important;
+  }
+
+  .landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+    .studio-vega-hero--premium-keynote
+    .studio-vega-hero__showcase-hud-chip-scan,
+  .landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+    .studio-vega-hero--premium-keynote
+    .studio-vega-hero__showcase-hud-card-glint {
+    animation: none !important;
+  }
+}
+
+@media (max-width: 1180px) {
+  .landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+    .studio-vega-hero--premium-keynote
+    .studio-vega-hero__showcase-hud-cards {
+    left: clamp(28%, 18vw, 44%);
+    max-width: min(420px, 86vw);
+  }
+
+  .landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+    .studio-vega-hero--premium-keynote
+    .studio-vega-hero__showcase-hud-card {
+    flex: 1 1 40%;
+    min-width: clamp(108px, 36vw, 148px);
+    max-width: none;
+  }
+}
+
+@media (max-width: 1023px) {
+  .landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+    .studio-vega-hero--premium-keynote
+    .studio-vega-hero__present-frame-shell {
+    max-width: min(560px, 100%);
+    padding: 0;
+  }
+
+  .landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+    .studio-vega-hero--premium-keynote
+    .studio-vega-hero__present-copy {
+    min-height: 0;
+  }
+
+  .landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+    .studio-vega-hero--premium-keynote
+    .studio-vega-hero__cinematic-viewport.studio-vega-hero__cinematic-viewport--bleed {
+    min-height: min(50vh, 480px);
+    margin-inline: clamp(0.35rem, 2vw, 0.85rem);
+  }
+
+  .landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+    .studio-vega-hero--premium-keynote
+    .studio-vega-hero__cinematic-photo-wrap {
+    max-width: min(88vw, 420px);
+  }
+
+  .landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+    .studio-vega-hero--premium-keynote
+    .studio-vega-hero__cinematic-viewport.studio-vega-hero__cinematic-viewport--bleed
+    .studio-vega-hero__showroom-focal {
+    width: min(78vw, 320px);
+    height: min(38vh, 360px);
+    translate: 0 -1%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+    .studio-vega-hero--engineering-showcase.hero-cinematic
+    .studio-vega-hero__cta-explore.hero-cinematic-btn::before,
+  .landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+    .studio-vega-hero--engineering-showcase
+    .studio-vega-hero__cinematic-sheen,
+  .landing-page.vega-enerji-theme.premium-industrial-landing.hp-premium-shell
+    .studio-vega-hero--engineering-showcase
+    .studio-vega-hero__present-tab.is-active::after {
+    animation: none !important;
+  }
+}

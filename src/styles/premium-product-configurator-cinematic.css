@@ -1,0 +1,673 @@
+/**
+ * Cinematic HVAC configurator — blueprint grid, glass orbit UI, reveal stage.
+ * Scoped to `.premium-product-selection--cinematic`.
+ */
+
+/* ── Force immersive dark cockpit (even in light UI theme) ───────────── */
+[data-ui-theme="light"] .premium-product-selection--cinematic {
+  --pps-bg: #173553;
+  --pps-bg-deep: #142f46;
+  --pps-surface: rgba(28, 54, 82, 0.52);
+  --pps-surface-elevated: rgba(34, 62, 92, 0.62);
+  --pps-text: #f8fafc;
+  --pps-text-muted: #94adc4;
+  --pps-border: rgba(148, 187, 233, 0.14);
+  --pps-glow: rgba(125, 211, 252, 0.11);
+  color: var(--pps-text);
+  background:
+    radial-gradient(ellipse 98% 74% at 50% -18%, rgba(125, 211, 252, 0.11) 0%, transparent 58%),
+    radial-gradient(ellipse 58% 48% at 100% 85%, rgba(56, 189, 248, 0.055) 0%, transparent 56%),
+    linear-gradient(185deg, var(--pps-bg-deep) 0%, var(--pps-bg) 42%, #1c4063 100%);
+}
+
+.premium-product-selection--cinematic {
+  position: relative;
+}
+
+.premium-product-selection__ambient--blueprint {
+  opacity: 0.38;
+  background-image:
+    linear-gradient(rgba(186, 230, 253, 0.032) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(186, 230, 253, 0.032) 1px, transparent 1px),
+    radial-gradient(circle at 50% 20%, rgba(125, 211, 252, 0.045) 0%, transparent 42%);
+  background-size: 56px 56px, 56px 56px, 100% 100%;
+  mask-image: radial-gradient(ellipse 92% 72% at 50% 38%, black 14%, transparent 78%);
+}
+
+.premium-product-selection__header--cinema {
+  margin-bottom: clamp(2.25rem, 4.5vw, 3rem);
+}
+
+.pps-cine-stepper .premium-product-selection__step--active {
+  box-shadow:
+    0 0 40px rgba(56, 189, 248, 0.12),
+    0 0 0 1px rgba(103, 232, 249, 0.25) inset;
+}
+
+.pps-cine-panel {
+  min-height: clamp(18rem, 42vh, 32rem);
+}
+
+@media (min-width: 1024px) {
+  .pps-cine-panel {
+    min-height: clamp(22rem, 48vh, 38rem);
+  }
+}
+
+/* ── Product glyphs ───────────────────────────────────────────────── */
+.pps-cine-glyph {
+  width: clamp(52px, 8vw, 64px);
+  height: clamp(52px, 8vw, 64px);
+}
+
+.pps-cine-glyph__stroke,
+.pps-cine-glyph__ring,
+.pps-cine-glyph__core,
+.pps-cine-glyph__fan {
+  stroke: rgba(165, 243, 252, 0.92);
+  fill: none;
+}
+
+.pps-cine-glyph__core {
+  fill: rgba(56, 189, 248, 0.08);
+}
+
+.pps-cine-type-card:hover .pps-cine-glyph__ring,
+.pps-cine-type-card--active .pps-cine-glyph__ring {
+  stroke: rgba(103, 232, 249, 1);
+  filter: drop-shadow(0 0 12px rgba(56, 189, 248, 0.55));
+}
+
+@keyframes pps-glyph-pulse {
+  50% {
+    opacity: 0.72;
+    transform: scale(1.03);
+  }
+}
+
+.pps-cine-type-card--active .pps-cine-glyph {
+  animation: pps-glyph-pulse 3.2s ease-in-out infinite;
+}
+
+/* ── Step 1: product type glass cards ─────────────────────────────── */
+.pps-cine-type-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 158px), 1fr));
+  gap: clamp(0.85rem, 2vw, 1.15rem);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+@media (min-width: 1100px) {
+  .pps-cine-type-grid {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+}
+
+.pps-cine-type-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.55rem;
+  width: 100%;
+  padding: clamp(1.05rem, 2vw, 1.35rem);
+  border-radius: 18px;
+  border: 1px solid rgba(103, 232, 249, 0.14);
+  background:
+    radial-gradient(120% 80% at 18% 8%, rgba(255, 255, 255, 0.06) 0%, transparent 52%),
+    rgba(10, 22, 36, 0.55);
+  backdrop-filter: blur(22px) saturate(165%);
+  box-shadow:
+    0 14px 48px rgba(0, 0, 0, 0.42),
+    0 0 0 1px rgba(255, 255, 255, 0.04) inset;
+  color: var(--pps-text, #f5faff);
+  cursor: pointer;
+  text-align: left;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.pps-cine-type-card__float-shade {
+  position: absolute;
+  inset: -40%;
+  background: radial-gradient(circle at 40% 30%, rgba(56, 189, 248, 0.09), transparent 52%);
+  opacity: 0.85;
+  pointer-events: none;
+  z-index: 0;
+  animation: pps-shade-drift 9s ease-in-out infinite;
+}
+
+.pps-cine-type-grid > li:nth-child(2) .pps-cine-type-card__float-shade {
+  animation-delay: 1.2s;
+}
+.pps-cine-type-grid > li:nth-child(3) .pps-cine-type-card__float-shade {
+  animation-delay: 2.4s;
+}
+.pps-cine-type-grid > li:nth-child(4) .pps-cine-type-card__float-shade {
+  animation-delay: 3.6s;
+}
+.pps-cine-type-grid > li:nth-child(5) .pps-cine-type-card__float-shade {
+  animation-delay: 4.8s;
+}
+
+@keyframes pps-shade-drift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+    opacity: 0.75;
+  }
+  50% {
+    transform: translate3d(4%, -7%, 0);
+    opacity: 1;
+  }
+}
+
+.pps-cine-type-card__edge {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 0.45s ease;
+  box-shadow:
+    0 0 0 1px rgba(103, 232, 249, 0.35) inset,
+    0 0 48px rgba(56, 189, 248, 0.15);
+}
+
+.pps-cine-type-card:hover .pps-cine-type-card__edge,
+.pps-cine-type-card:focus-visible .pps-cine-type-card__edge {
+  opacity: 1;
+}
+
+.pps-cine-type-card__icon {
+  position: relative;
+  z-index: 2;
+}
+
+.pps-cine-type-card__label {
+  position: relative;
+  z-index: 2;
+  font-family: var(--pps-font-sans, system-ui);
+  font-size: clamp(0.92rem, 1.05vw, 1.05rem);
+  font-weight: 650;
+  letter-spacing: -0.02em;
+}
+
+.pps-cine-type-card__desc {
+  position: relative;
+  z-index: 2;
+  font-size: 10px;
+  line-height: 1.45;
+  color: var(--pps-text-muted, #7e9cbb);
+  margin: 0;
+}
+
+.pps-cine-type-card--active {
+  transform: translateY(-4px) scale(1.045);
+  border-color: rgba(103, 232, 249, 0.48);
+  box-shadow:
+    0 22px 70px rgba(0, 0, 0, 0.48),
+    0 0 60px rgba(56, 189, 248, 0.18),
+    0 0 0 1px rgba(165, 243, 252, 0.28) inset;
+}
+
+.pps-cine-type-card:focus-visible {
+  outline: 2px solid rgba(56, 189, 248, 0.85);
+  outline-offset: 4px;
+}
+
+/* ── Step 2: brand orbit tiles ─────────────────────────────────────── */
+.pps-cine-brand-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 148px), 1fr));
+  gap: clamp(0.85rem, 2vw, 1.25rem);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.pps-cine-brand {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.65rem;
+  width: 100%;
+  padding: 1.15rem 0.85rem;
+  border-radius: 20px;
+  border: 1px solid rgba(103, 232, 249, 0.15);
+  background:
+    radial-gradient(95% 70% at 50% -12%, rgba(255, 255, 255, 0.07), transparent 55%),
+    rgba(8, 18, 30, 0.62);
+  backdrop-filter: blur(24px) saturate(170%);
+  cursor: pointer;
+  overflow: hidden;
+  isolation: isolate;
+  box-shadow: 0 16px 56px rgba(0, 0, 0, 0.38);
+}
+
+.pps-cine-brand__halo {
+  position: absolute;
+  inset: -35%;
+  background: radial-gradient(circle at 50% 50%, rgba(56, 189, 248, 0.12), transparent 58%);
+  opacity: 0.65;
+  pointer-events: none;
+  animation: pps-brand-halo 5s ease-in-out infinite;
+}
+
+@keyframes pps-brand-halo {
+  50% {
+    transform: rotate(18deg) scale(1.06);
+    opacity: 0.85;
+  }
+}
+
+.pps-cine-brand__chrome {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    115deg,
+    transparent 38%,
+    rgba(255, 255, 255, 0.22) 48%,
+    rgba(255, 255, 255, 0.06) 54%,
+    transparent 68%
+  );
+  background-size: 240% 100%;
+  animation: pps-chrome-sweep 4.8s ease-in-out infinite;
+  opacity: 0.55;
+  pointer-events: none;
+  mix-blend-mode: screen;
+}
+
+@keyframes pps-chrome-sweep {
+  0% {
+    background-position: 120% 0;
+  }
+  100% {
+    background-position: -120% 0;
+  }
+}
+
+.pps-cine-brand__mono {
+  position: relative;
+  z-index: 2;
+  font-family: var(--font-premium-mono, "JetBrains Mono", monospace);
+  font-size: clamp(1.15rem, 2vw, 1.35rem);
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: #ecfeff;
+  text-shadow:
+    0 0 28px rgba(56, 189, 248, 0.55),
+    0 1px 2px rgba(0, 0, 0, 0.65);
+}
+
+.pps-cine-brand__name {
+  position: relative;
+  z-index: 2;
+  font-family: var(--pps-font-sans, system-ui);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-align: center;
+  line-height: 1.35;
+  color: rgba(226, 241, 255, 0.88);
+}
+
+.pps-cine-brand:hover {
+  border-color: rgba(103, 232, 249, 0.42);
+  box-shadow:
+    0 22px 72px rgba(0, 0, 0, 0.44),
+    0 0 46px rgba(56, 189, 248, 0.18);
+}
+
+/* ── Step 3: category cinematic rail ───────────────────────────────── */
+.pps-cine-category__signal {
+  font-family: var(--font-premium-mono, "JetBrains Mono", monospace);
+  font-size: 10px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(148, 184, 214, 0.92);
+  margin: 0 0 1.35rem;
+}
+
+.pps-cine-category__signal-accent {
+  display: inline-block;
+  margin-left: 0.65rem;
+  color: rgba(103, 232, 249, 0.82);
+}
+
+.pps-cine-category__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.pps-cine-category__chip {
+  position: relative;
+  display: block;
+  width: 100%;
+  padding: 1rem 1.15rem;
+  border-radius: 14px;
+  border: 1px solid rgba(103, 232, 249, 0.14);
+  background:
+    linear-gradient(105deg, rgba(56, 189, 248, 0.06), transparent),
+    rgba(8, 18, 30, 0.52);
+  backdrop-filter: blur(18px);
+  font-family: var(--pps-font-sans, system-ui);
+  font-size: clamp(0.88rem, 1vw, 0.98rem);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--pps-text, #f5faff);
+  cursor: pointer;
+  text-align: left;
+  overflow: hidden;
+  box-shadow: 0 12px 44px rgba(0, 0, 0, 0.28);
+}
+
+.pps-cine-category__chip-line {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: linear-gradient(180deg, rgba(165, 243, 252, 0.95), rgba(56, 189, 248, 0.15));
+  opacity: 0.85;
+}
+
+.pps-cine-category__chip:hover {
+  border-color: rgba(103, 232, 249, 0.38);
+}
+
+/* ── Step 4: reveal stage ──────────────────────────────────────────── */
+.pps-cine-reveal__shell {
+  display: grid;
+  gap: clamp(1.25rem, 3vw, 1.85rem);
+}
+
+@media (min-width: 1024px) {
+  .pps-cine-reveal__shell {
+    grid-template-columns: minmax(0, 1fr) minmax(240px, 300px);
+    align-items: start;
+  }
+}
+
+.pps-cine-stage {
+  --pps-ptr-x: 50%;
+  --pps-ptr-y: 42%;
+  position: relative;
+  border-radius: 22px;
+  padding: clamp(0.85rem, 2vw, 1.15rem);
+  border: 1px solid rgba(103, 232, 249, 0.18);
+  background:
+    radial-gradient(
+      ellipse 80% 65% at var(--pps-ptr-x) var(--pps-ptr-y),
+      rgba(56, 189, 248, 0.14),
+      transparent 52%
+    ),
+    radial-gradient(circle at 50% 108%, rgba(15, 56, 92, 0.55), transparent 52%),
+    linear-gradient(165deg, rgba(8, 18, 30, 0.92), rgba(5, 12, 22, 0.98));
+  overflow: hidden;
+  isolation: isolate;
+  box-shadow:
+    0 28px 90px rgba(0, 0, 0, 0.52),
+    0 0 80px rgba(56, 189, 248, 0.08);
+}
+
+.pps-cine-stage__halo {
+  position: absolute;
+  inset: -15%;
+  background: radial-gradient(circle at 50% 48%, rgba(56, 189, 248, 0.14), transparent 58%);
+  pointer-events: none;
+  z-index: 0;
+  animation: pps-stage-halo 8s ease-in-out infinite;
+}
+
+@keyframes pps-stage-halo {
+  50% {
+    transform: scale(1.05);
+    opacity: 0.85;
+  }
+}
+
+.pps-cine-stage__fog {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.pps-cine-stage__fog--deep {
+  background: radial-gradient(ellipse 95% 75% at 50% 85%, rgba(3, 10, 18, 0.55), transparent 62%);
+}
+
+.pps-cine-stage__fog--mist {
+  opacity: 0.65;
+  mix-blend-mode: screen;
+  background:
+    radial-gradient(ellipse 120% 90% at 30% 30%, rgba(200, 244, 255, 0.08), transparent 55%),
+    radial-gradient(ellipse 90% 70% at 78% 22%, rgba(56, 189, 248, 0.06), transparent 48%);
+  animation: pps-mist-drift 14s ease-in-out infinite;
+}
+
+@keyframes pps-mist-drift {
+  50% {
+    transform: translate3d(2%, -1%, 0) scale(1.02);
+  }
+}
+
+.pps-cine-stage__viz {
+  position: relative;
+  z-index: 3;
+  border-radius: 16px;
+  overflow: hidden;
+  aspect-ratio: 16 / 10;
+  border: 1px solid rgba(103, 232, 249, 0.15);
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.04),
+    0 18px 60px rgba(0, 0, 0, 0.45);
+}
+
+.pps-cine-stage__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.02);
+  filter: saturate(1.05) contrast(1.04);
+}
+
+.pps-cine-stage__hud {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.58;
+  pointer-events: none;
+}
+
+.pps-cine-hud__dash {
+  animation: pps-dash-flow 14s linear infinite;
+}
+
+@keyframes pps-dash-flow {
+  to {
+    stroke-dashoffset: -240;
+  }
+}
+
+.pps-cine-hud__pulse {
+  animation: pps-hud-twinkle 3.6s ease-in-out infinite;
+}
+
+@keyframes pps-hud-twinkle {
+  50% {
+    opacity: 0.35;
+    filter: drop-shadow(0 0 12px rgba(103, 232, 249, 0.55));
+  }
+}
+
+.pps-cine-stage__corner {
+  position: absolute;
+  z-index: 4;
+  font-family: var(--font-premium-mono, "JetBrains Mono", monospace);
+  font-size: 8px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: rgba(226, 241, 255, 0.78);
+  padding: 0.55rem 0.65rem;
+  border: 1px solid rgba(103, 232, 249, 0.22);
+  background: rgba(5, 12, 22, 0.52);
+  backdrop-filter: blur(10px);
+}
+
+.pps-cine-stage__corner strong {
+  display: block;
+  margin-top: 0.35rem;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: none;
+  color: #ecfeff;
+}
+
+.pps-cine-stage__corner--tl {
+  top: 0.85rem;
+  left: 0.85rem;
+}
+
+.pps-cine-stage__corner--br {
+  bottom: 0.85rem;
+  right: 0.85rem;
+  text-align: right;
+}
+
+.pps-cine-reveal__title-float {
+  position: relative;
+  z-index: 5;
+  margin-top: clamp(1rem, 2vw, 1.35rem);
+  padding: 0 0.25rem;
+}
+
+.pps-cine-reveal__eyebrow {
+  font-family: var(--font-premium-mono, "JetBrains Mono", monospace);
+  font-size: 9px;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: rgba(148, 184, 214, 0.92);
+  margin: 0 0 0.45rem;
+}
+
+.pps-cine-reveal__headline {
+  font-family: var(--pps-font-serif, ui-serif);
+  font-weight: 600;
+  font-size: clamp(1.35rem, 2.8vw, 2rem);
+  letter-spacing: -0.03em;
+  margin: 0 0 0.35rem;
+  color: #f8fafc;
+}
+
+.pps-cine-reveal__slash {
+  margin: 0 0.35rem;
+  color: rgba(103, 232, 249, 0.65);
+  font-weight: 400;
+}
+
+.pps-cine-reveal__sub {
+  margin: 0;
+  font-family: var(--pps-font-sans, system-ui);
+  font-size: 12px;
+  color: rgba(186, 214, 236, 0.85);
+}
+
+/* Floating specification rail */
+.pps-cine-spec-rail {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  perspective: 900px;
+}
+
+.pps-cine-spec-card {
+  position: relative;
+  padding: 0.95rem 1rem;
+  border-radius: 14px;
+  border: 1px solid rgba(103, 232, 249, 0.14);
+  background:
+    radial-gradient(120% 80% at 0% 0%, rgba(56, 189, 248, 0.09), transparent 52%),
+    rgba(8, 18, 30, 0.72);
+  backdrop-filter: blur(18px);
+  box-shadow:
+    0 14px 44px rgba(0, 0, 0, 0.35),
+    0 0 36px rgba(56, 189, 248, 0.06);
+  overflow: hidden;
+  transform-style: preserve-3d;
+}
+
+.pps-cine-spec-card__shine {
+  position: absolute;
+  inset: -40%;
+  background: linear-gradient(
+    108deg,
+    transparent 42%,
+    rgba(255, 255, 255, 0.07) 50%,
+    transparent 58%
+  );
+  animation: pps-chrome-sweep 7s linear infinite;
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+.pps-cine-spec-card__title {
+  position: relative;
+  z-index: 1;
+  font-family: var(--font-premium-mono, "JetBrains Mono", monospace);
+  font-size: 8px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(148, 184, 214, 0.92);
+  margin: 0 0 0.35rem;
+}
+
+.pps-cine-spec-card__value {
+  position: relative;
+  z-index: 1;
+  font-family: var(--pps-font-sans, system-ui);
+  font-size: clamp(0.95rem, 1.15vw, 1.08rem);
+  font-weight: 650;
+  margin: 0 0 0.25rem;
+  color: #ecfeff;
+}
+
+.pps-cine-spec-card__detail {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  font-size: 11px;
+  line-height: 1.45;
+  color: rgba(186, 214, 236, 0.82);
+}
+
+.pps-cine-reveal__cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: clamp(1.35rem, 3vw, 1.85rem);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pps-cine-type-card__float-shade,
+  .pps-cine-brand__halo,
+  .pps-cine-brand__chrome,
+  .pps-cine-stage__halo,
+  .pps-cine-stage__fog--mist,
+  .pps-cine-hud__dash,
+  .pps-cine-hud__pulse,
+  .pps-cine-spec-card__shine,
+  .pps-cine-type-card--active .pps-cine-glyph {
+    animation: none !important;
+  }
+}

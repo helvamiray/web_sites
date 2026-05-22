@@ -1,0 +1,531 @@
+/* Engineering Configuration Studio — luxury HVAC lab, not cyberpunk */
+.ecs-studio {
+  --ecs-bg-a: #071521;
+  --ecs-bg-b: #0d2d4d;
+  --ecs-bg-c: #12395e;
+  --ecs-accent: #67e8f9;
+  --ecs-accent-soft: rgba(103, 232, 249, 0.14);
+  --ecs-text: #f4f8fc;
+  --ecs-muted: #b8c7d9;
+  --ecs-label: #8fb8d4;
+  --ecs-card-bg: rgba(10, 25, 45, 0.55);
+  --ecs-border: rgba(120, 220, 255, 0.15);
+  --ecs-radius: 1.35rem;
+
+  position: relative;
+  overflow: hidden;
+  color: var(--ecs-text);
+  background: linear-gradient(
+    165deg,
+    var(--ecs-bg-a) 0%,
+    var(--ecs-bg-b) 42%,
+    var(--ecs-bg-c) 100%
+  );
+  font-family: "Satoshi", "Plus Jakarta Sans", system-ui, sans-serif;
+}
+
+/* Blueprint grid — ultra subtle */
+.ecs-studio__grid-layer {
+  pointer-events: none;
+  position: absolute;
+  inset: -20%;
+  background-image:
+    linear-gradient(rgba(103, 232, 249, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(103, 232, 249, 0.045) 1px, transparent 1px);
+  background-size: 56px 56px;
+  opacity: 0.35;
+  animation: ecs-grid-drift 90s linear infinite;
+}
+
+@keyframes ecs-grid-drift {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(-56px, -56px);
+  }
+}
+
+/* Radial atmospheres */
+.ecs-studio__glow {
+  pointer-events: none;
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(120px);
+  opacity: 0.38;
+  will-change: transform;
+}
+
+.ecs-studio__glow--a {
+  width: min(72vw, 820px);
+  height: min(72vw, 820px);
+  top: -18%;
+  left: -12%;
+  background: radial-gradient(circle, rgba(103, 232, 249, 0.2) 0%, transparent 68%);
+}
+
+.ecs-studio__glow--b {
+  width: min(56vw, 520px);
+  height: min(56vw, 520px);
+  bottom: -10%;
+  right: -8%;
+  background: radial-gradient(circle, rgba(11, 35, 94, 0.45) 0%, transparent 65%);
+}
+
+/* Slow particles — soft bokeh */
+.ecs-studio__particles {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(circle at 12% 24%, rgba(245, 247, 251, 0.07) 0, transparent 1.5px),
+    radial-gradient(circle at 78% 18%, rgba(103, 232, 249, 0.06) 0, transparent 1.2px),
+    radial-gradient(circle at 44% 72%, rgba(245, 247, 251, 0.045) 0, transparent 1px),
+    radial-gradient(circle at 88% 64%, rgba(103, 232, 249, 0.05) 0, transparent 1.3px);
+  opacity: 0.55;
+  animation: ecs-parallax-particles 32s ease-in-out infinite alternate;
+}
+
+@keyframes ecs-parallax-particles {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  100% {
+    transform: translate3d(-1.2%, 0.8%, 0) scale(1.02);
+  }
+}
+
+/* Engineering UI tick marks — edge frame */
+.ecs-studio__frame-lines {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  border: 1px solid rgba(103, 232, 249, 0.06);
+  box-shadow: inset 0 0 0 1px rgba(245, 247, 251, 0.03);
+  mask-image: linear-gradient(
+    to bottom,
+    black 0%,
+    black 70%,
+    transparent 100%
+  );
+}
+
+.ecs-studio__inner {
+  position: relative;
+  z-index: 1;
+}
+
+/* Typography */
+.ecs-studio__label {
+  font-family: "Rajdhani", "Lexend", system-ui, sans-serif;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.42em;
+  text-transform: uppercase;
+  color: var(--ecs-label);
+}
+
+.ecs-studio__title-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: center;
+  gap: 0.35em 0.65em;
+}
+
+.ecs-studio__title {
+  font-family: "Cormorant Garamond", "Instrument Serif", Georgia, serif;
+  font-size: clamp(2.75rem, 6vw, 4.25rem);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  color: var(--ecs-text);
+}
+
+.ecs-studio__title-italic {
+  font-family: "Instrument Serif", "Cormorant Garamond", Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(2.1rem, 4.8vw, 3.25rem);
+  color: rgba(245, 247, 251, 0.82);
+}
+
+.ecs-studio__lede {
+  max-width: 36rem;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 0.9375rem;
+  font-weight: 400;
+  line-height: 1.65;
+  color: var(--ecs-muted);
+}
+
+/* Step nav */
+.ecs-studio-steps {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem 0.25rem;
+}
+
+.ecs-studio-steps__item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.85rem;
+  border-radius: 999px;
+  border: 1px solid rgba(142, 163, 184, 0.15);
+  background: rgba(6, 20, 33, 0.35);
+  color: var(--ecs-muted);
+  font-size: 0.625rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  transition:
+    border-color 0.45s ease,
+    background 0.45s ease,
+    color 0.45s ease,
+    box-shadow 0.45s ease;
+}
+
+.ecs-studio-steps__num {
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 0.5625rem;
+  opacity: 0.75;
+}
+
+.ecs-studio-steps__item--active {
+  border-color: rgba(103, 232, 249, 0.45);
+  background: rgba(103, 232, 249, 0.1);
+  color: var(--ecs-text);
+  box-shadow:
+    0 0 0 1px rgba(103, 232, 249, 0.12),
+    0 0 28px -6px rgba(103, 232, 249, 0.45);
+}
+
+.ecs-studio-steps__item--complete {
+  border-color: rgba(103, 232, 249, 0.22);
+  color: rgba(245, 247, 251, 0.72);
+}
+
+.ecs-studio-steps__item--idle {
+  opacity: 0.55;
+}
+
+/* Product cards */
+.ecs-studio-card-wrap {
+  flex: 1 1 9.5rem;
+  min-width: 9rem;
+  max-width: 14rem;
+}
+
+.ecs-studio-card {
+  --ecs-prox: 0;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  height: 100%;
+  padding: 1.35rem 1rem 1.2rem;
+  border-radius: var(--ecs-radius);
+  border: 1px solid var(--ecs-border);
+  background:
+    linear-gradient(145deg, rgba(103, 232, 249, 0.05) 0%, transparent 42%),
+    var(--ecs-card-bg);
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
+  box-shadow:
+    0 4px 40px -16px rgba(0, 0, 0, 0.55),
+    inset 0 1px 0 rgba(245, 247, 251, 0.06);
+  cursor: pointer;
+  transition:
+    transform 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.45s ease,
+    box-shadow 0.45s ease;
+}
+
+.ecs-studio-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background-image:
+    linear-gradient(rgba(103, 232, 249, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(103, 232, 249, 0.04) 1px, transparent 1px);
+  background-size: 12px 12px;
+  opacity: 0.5;
+  animation: ecs-card-blueprint 24s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes ecs-card-blueprint {
+  0% {
+    background-position: 0 0;
+    opacity: 0.45;
+  }
+  100% {
+    background-position: 12px 12px;
+    opacity: 0.62;
+  }
+}
+
+.ecs-studio-card::after {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: linear-gradient(
+    120deg,
+    transparent 0%,
+    transparent 38%,
+    rgba(103, 232, 249, 0.18) 50%,
+    transparent 62%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  opacity: 0.35;
+  animation: ecs-sweep 6.5s ease-in-out infinite;
+  pointer-events: none;
+  mix-blend-mode: screen;
+}
+
+@keyframes ecs-sweep {
+  0% {
+    background-position: 120% 0;
+    opacity: 0.2;
+  }
+  45% {
+    opacity: 0.42;
+  }
+  100% {
+    background-position: -20% 0;
+    opacity: 0.2;
+  }
+}
+
+.ecs-studio-card:hover,
+.ecs-studio-card:focus-visible {
+  transform: translateY(-6px);
+  border-color: rgba(103, 232, 249, 0.42);
+  box-shadow:
+    0 12px 48px -18px rgba(103, 232, 249, 0.35),
+    0 24px 60px -30px rgba(0, 0, 0, 0.45),
+    inset 0 1px 0 rgba(245, 247, 251, 0.08);
+}
+
+.ecs-studio-card--selected {
+  border-color: rgba(103, 232, 249, 0.55);
+  box-shadow:
+    0 0 0 1px rgba(103, 232, 249, 0.18),
+    0 16px 50px -20px rgba(103, 232, 249, 0.4),
+    inset 0 1px 0 rgba(245, 247, 251, 0.1);
+}
+
+/* Mouse proximity — glow intensity */
+.ecs-studio-card:hover::after {
+  animation-duration: 4.2s;
+  opacity: calc(0.35 + var(--ecs-prox) * 0.45);
+}
+
+.ecs-studio-card__icon-wrap {
+  position: relative;
+  z-index: 1;
+  width: 4.25rem;
+  height: 4.25rem;
+  margin-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.ecs-studio-card:hover .ecs-studio-card__icon-wrap,
+.ecs-studio-card:focus-visible .ecs-studio-card__icon-wrap {
+  transform: rotate(-4deg) scale(1.03);
+}
+
+.ecs-studio-card__title {
+  position: relative;
+  z-index: 1;
+  font-family: "Cormorant Garamond", serif;
+  font-size: 1.2rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--ecs-text);
+}
+
+.ecs-studio-card__desc {
+  position: relative;
+  z-index: 1;
+  margin-top: 0.4rem;
+  font-size: 0.6875rem;
+  line-height: 1.5;
+  color: var(--ecs-muted);
+}
+
+/* Glyph override inside studio */
+.ecs-studio .pps-cine-glyph__stroke,
+.ecs-studio .pps-cine-glyph__ring,
+.ecs-studio .pps-cine-glyph__core,
+.ecs-studio .pps-cine-glyph__fan {
+  stroke: rgba(103, 232, 249, 0.55);
+}
+
+.ecs-studio .pps-cine-glyph__core {
+  fill: none;
+}
+
+.ecs-studio-card:hover .pps-cine-glyph__ring {
+  stroke: rgba(103, 232, 249, 0.85);
+  filter: drop-shadow(0 0 8px rgba(103, 232, 249, 0.35));
+}
+
+/* Preview panel */
+.ecs-studio-preview {
+  position: relative;
+  border-radius: calc(var(--ecs-radius) + 0.15rem);
+  border: 1px solid rgba(103, 232, 249, 0.2);
+  background: rgba(6, 20, 33, 0.5);
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
+  padding: 1.35rem 1.35rem 1.5rem;
+  box-shadow:
+    0 24px 80px -40px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(245, 247, 251, 0.06);
+}
+
+.ecs-studio-preview__image-wrap {
+  position: relative;
+  border-radius: 1rem;
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+  background: linear-gradient(180deg, rgba(11, 35, 64, 0.45) 0%, rgba(6, 20, 33, 0.85) 100%);
+}
+
+.ecs-studio-preview__image-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.96;
+}
+
+.ecs-studio-preview__metric-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.65rem;
+  margin-top: 1.1rem;
+}
+
+.ecs-studio-preview__metric {
+  padding: 0.55rem 0.65rem;
+  border-radius: 0.65rem;
+  border: 1px solid rgba(142, 163, 184, 0.12);
+  background: rgba(6, 20, 33, 0.4);
+}
+
+.ecs-studio-preview__metric-label {
+  font-size: 0.5625rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ecs-muted);
+}
+
+.ecs-studio-preview__metric-value {
+  margin-top: 0.15rem;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--ecs-text);
+}
+
+.ecs-studio-preview__metric-hint {
+  margin-top: 0.2rem;
+  font-size: 0.6rem;
+  color: rgba(142, 163, 184, 0.75);
+}
+
+/* Floating data nodes */
+.ecs-studio-node {
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: rgba(103, 232, 249, 0.7);
+  box-shadow: 0 0 14px 2px rgba(103, 232, 249, 0.25);
+  animation: ecs-node-float 7s ease-in-out infinite;
+}
+
+@keyframes ecs-node-float {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+    opacity: 0.55;
+  }
+  50% {
+    transform: translate3d(3px, -6px, 0);
+    opacity: 0.92;
+  }
+}
+
+.ecs-studio-preview__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 1.15rem;
+}
+
+.ecs-studio-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.6rem 1rem;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  border-radius: 0.65rem;
+  transition:
+    background 0.35s ease,
+    border-color 0.35s ease,
+    color 0.35s ease;
+}
+
+.ecs-studio-btn--primary {
+  border: 1px solid rgba(103, 232, 249, 0.35);
+  background: rgba(103, 232, 249, 0.12);
+  color: var(--ecs-text);
+}
+
+.ecs-studio-btn--primary:hover {
+  border-color: rgba(103, 232, 249, 0.55);
+  background: rgba(103, 232, 249, 0.2);
+}
+
+.ecs-studio-btn--ghost {
+  border: 1px solid rgba(142, 163, 184, 0.2);
+  background: transparent;
+  color: var(--ecs-muted);
+}
+
+.ecs-studio-btn--ghost:hover {
+  border-color: rgba(103, 232, 249, 0.25);
+  color: var(--ecs-text);
+}
+
+.ecs-studio-cards-scroll {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.85rem;
+}
+
+@media (min-width: 1024px) {
+  .ecs-studio-cards-scroll {
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    overflow: visible;
+  }
+}

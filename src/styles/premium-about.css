@@ -1,0 +1,1008 @@
+/* Premium futuristic — Hakkımızda / Mission / Vision */
+
+.lux-about.about-section {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding: clamp(4.25rem, 10vw, 7.25rem) clamp(1.25rem, 5vw, 4rem);
+  background:
+    radial-gradient(ellipse 92% 72% at 82% 18%, rgba(125, 211, 252, 0.085) 0%, transparent 56%),
+    radial-gradient(ellipse 74% 58% at 10% 82%, rgba(56, 189, 248, 0.055) 0%, transparent 52%),
+    linear-gradient(172deg, #121f36 0%, #172f46 38%, #142838 100%);
+  border-top: 1px solid rgba(125, 211, 252, 0.1);
+  border-bottom: 1px solid rgba(125, 211, 252, 0.07);
+}
+
+.lux-about.about-section::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: clamp(48px, 12vh, 120px);
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    rgba(125, 211, 252, 0.055) 0%,
+    transparent 100%
+  );
+}
+
+/* ── Tight join after product configurator (#urun-konfigurator) — continuous storytelling */
+.premium-product-selection + .lux-about.about-section {
+  padding-top: clamp(1.35rem, 2.85vw, 2.5rem);
+  border-top-color: rgba(34, 211, 238, 0.08);
+  box-shadow: inset 0 36px 72px -48px rgba(34, 211, 238, 0.07);
+}
+
+.premium-product-selection + .lux-about .lux-about__ambient {
+  mask-image: radial-gradient(ellipse 90% 72% at 35% 36%, black 17%, transparent 74%);
+  opacity: 0.78;
+}
+
+.premium-product-selection + .lux-about .lux-about__eyebrow {
+  margin-bottom: 0.85rem;
+}
+
+.premium-product-selection + .lux-about .lux-about__lead {
+  margin-bottom: clamp(1.35rem, 2.75vw, 2rem);
+}
+
+.lux-about__ambient {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(rgba(125, 211, 252, 0.022) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(125, 211, 252, 0.022) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse 78% 62% at 35% 42%, black 18%, transparent 72%);
+  opacity: 0.62;
+}
+
+.lux-about__glow-orb {
+  position: absolute;
+  width: min(70vw, 540px);
+  height: min(70vw, 540px);
+  left: 15%;
+  top: 55%;
+  transform: translate(-50%, -50%);
+  z-index: 0;
+  pointer-events: none;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(125, 211, 252, 0.065) 0%, transparent 72%);
+  filter: blur(72px);
+}
+
+.lux-about__inner {
+  position: relative;
+  z-index: 2;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.lux-about__layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(260px, 0.92fr);
+  gap: clamp(2.25rem, 6vw, 5rem);
+  align-items: center;
+}
+
+/* Typography & intro */
+.lux-about__eyebrow {
+  display: inline-block;
+  font-family: var(--font-premium-mono, "JetBrains Mono", ui-monospace, monospace);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  color: rgba(186, 230, 253, 0.82);
+  margin: 0 0 1.1rem;
+}
+
+.lux-about__title {
+  font-family: var(--font-lux-serif, "Bodoni Moda", "Instrument Serif", ui-serif, Georgia, serif);
+  font-weight: 600;
+  font-size: clamp(2.5rem, 5.2vw, 3.85rem);
+  line-height: 1.08;
+  letter-spacing: 0.02em;
+  color: #f8fafc;
+  margin: 0 0 clamp(1.1rem, 2.2vw, 1.5rem);
+  text-shadow: 0 8px 52px rgba(12, 28, 48, 0.32);
+}
+
+.lux-about__title-accent {
+  display: block;
+  margin-top: 0.12em;
+  font-style: italic;
+  font-weight: 500;
+  background: linear-gradient(115deg, #67e8f9 0%, #22d3ee 45%, #a5f3fc 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.lux-about__lead {
+  font-family: var(--font-premium-body, "Inter", system-ui, sans-serif);
+  font-size: clamp(0.95rem, 1.35vw, 1.07rem);
+  font-weight: 500;
+  line-height: 1.65;
+  letter-spacing: 0.02em;
+  color: rgba(226, 232, 240, 0.91);
+  max-width: 46ch;
+  margin: 0 0 clamp(2rem, 4vw, 2.75rem);
+}
+
+/* Glass cards */
+.lux-about__cards {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(0.9rem, 2vw, 1.25rem);
+  margin-bottom: 0;
+}
+
+.lux-about-card {
+  position: relative;
+  border-radius: 16px;
+  padding: clamp(1.25rem, 2.2vw, 1.65rem);
+  background:
+    linear-gradient(160deg, rgba(15, 23, 42, 0.72) 0%, rgba(15, 23, 42, 0.38) 100%);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid rgba(148, 163, 184, 0.12);
+  box-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.08),
+    0 24px 56px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  transition:
+    transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.35s ease,
+    box-shadow 0.45s ease;
+}
+
+.lux-about-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    135deg,
+    rgba(34, 211, 238, 0.35) 0%,
+    transparent 42%,
+    transparent 58%,
+    rgba(59, 130, 246, 0.22) 100%
+  );
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  opacity: 0.65;
+  transition: opacity 0.35s ease;
+}
+
+.lux-about-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(34, 211, 238, 0.28);
+  box-shadow:
+    0 4px 8px rgba(0, 0, 0, 0.1),
+    0 28px 64px rgba(0, 0, 0, 0.4),
+    0 0 48px rgba(34, 211, 238, 0.07),
+    inset 0 1px 0 rgba(255, 255, 255, 0.09);
+}
+
+.lux-about-card:hover::before {
+  opacity: 1;
+}
+
+.lux-about-card__head {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.85rem;
+  margin-bottom: 0.85rem;
+}
+
+.lux-about-card__icon-wrap {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  background: linear-gradient(145deg, rgba(34, 211, 238, 0.12) 0%, rgba(15, 23, 42, 0.8) 100%);
+  border: 1px solid rgba(34, 211, 238, 0.2);
+  box-shadow: 0 0 24px rgba(34, 211, 238, 0.08);
+}
+
+.lux-about-card__icon {
+  width: 22px;
+  height: 22px;
+  color: #67e8f9;
+  filter: drop-shadow(0 0 6px rgba(34, 211, 238, 0.45));
+}
+
+.lux-about-card__label {
+  font-family: var(--font-premium-body, "Inter", system-ui, sans-serif);
+  font-size: clamp(0.72rem, 1.05vw, 0.8125rem);
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #f1f5f9;
+  margin: 0.15rem 0 0;
+  line-height: 1.25;
+}
+
+.lux-about-card__body {
+  font-family: var(--font-premium-body, "Inter", system-ui, sans-serif);
+  font-size: clamp(0.84rem, 1.15vw, 0.94rem);
+  font-weight: 500;
+  line-height: 1.62;
+  letter-spacing: 0.02em;
+  color: rgba(186, 198, 216, 0.92);
+  margin: 0;
+}
+
+.lux-about-card--vision .lux-about-card__icon-wrap {
+  background: linear-gradient(145deg, rgba(96, 165, 250, 0.14) 0%, rgba(15, 23, 42, 0.82) 100%);
+  border-color: rgba(96, 165, 250, 0.28);
+  box-shadow: 0 0 22px rgba(59, 130, 246, 0.1);
+}
+
+.lux-about-card--vision .lux-about-card__icon {
+  color: #93c5fd;
+  filter: drop-shadow(0 0 6px rgba(96, 165, 250, 0.45));
+}
+
+/* Right visual */
+.lux-about-visual {
+  position: relative;
+  min-height: min(52vw, 460px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lux-about-visual__blueprint {
+  position: absolute;
+  inset: 8% 4%;
+  z-index: 0;
+  border-radius: 20px;
+  border: 1px solid rgba(34, 211, 238, 0.1);
+  background:
+    linear-gradient(rgba(34, 211, 238, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(34, 211, 238, 0.04) 1px, transparent 1px);
+  background-size: 24px 24px;
+  mask-image: radial-gradient(ellipse 75% 75% at 50% 50%, black 30%, transparent 100%);
+  pointer-events: none;
+}
+
+.lux-about-visual__blueprint svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.35;
+}
+
+.lux-about-visual__rim {
+  position: absolute;
+  width: min(88%, 380px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  z-index: 1;
+  pointer-events: none;
+  background: radial-gradient(circle at 40% 35%, rgba(34, 211, 238, 0.15) 0%, transparent 55%);
+  box-shadow:
+    0 0 0 1px rgba(34, 211, 238, 0.25),
+    0 0 60px rgba(34, 211, 238, 0.12),
+    inset 0 0 80px rgba(6, 182, 212, 0.08);
+  filter: blur(0.5px);
+}
+
+.lux-about-visual__wash {
+  position: absolute;
+  width: 120%;
+  height: 70%;
+  left: -10%;
+  bottom: -5%;
+  z-index: 1;
+  pointer-events: none;
+  background: radial-gradient(ellipse at 50% 0%, rgba(15, 23, 42, 0.85) 0%, transparent 70%);
+}
+
+.lux-about-visual__stage {
+  position: relative;
+  z-index: 2;
+  width: min(92%, 400px);
+  animation: lux-about-float 7s ease-in-out infinite;
+  filter: drop-shadow(0 32px 48px rgba(0, 0, 0, 0.65)) drop-shadow(0 0 40px rgba(34, 211, 238, 0.12));
+}
+
+.lux-about-visual__stage img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 12px;
+  object-fit: contain;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lux-about-visual__stage {
+    animation: none;
+  }
+
+  .lux-about-manifesto-orb {
+    animation: none;
+  }
+
+  .lux-about-card:hover {
+    transform: none;
+  }
+
+  .lux-about__particles,
+  .lux-about__light-sweep::before,
+  .lux-about-manifesto-orb__ring-group,
+  .lux-about-manifesto-orb__scan,
+  .lux-about-blueprint-energy,
+  .lux-about-manifesto-orb__halo,
+  .lux-about-manifesto-orb__pulse-ring,
+  .lux-about-telemetry {
+    animation: none !important;
+  }
+
+  .lux-about-blueprint-path {
+    stroke-dashoffset: 0;
+    animation: none;
+  }
+
+  .lux-about-engineering-studio__dust,
+  .lux-about-engineering-studio__ambient-pulse,
+  .lux-about-engineering-studio__bloom {
+    animation: none !important;
+  }
+}
+
+@keyframes lux-about-float {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-0.3deg);
+  }
+
+  50% {
+    transform: translateY(-14px) rotate(0.45deg);
+  }
+}
+
+/* Responsive */
+@media (max-width: 968px) {
+  .lux-about__layout {
+    grid-template-columns: 1fr;
+    gap: clamp(2.5rem, 6vw, 3.5rem);
+  }
+
+  .lux-about-visual {
+    order: -1;
+    min-height: min(68vw, 360px);
+  }
+
+  .lux-about__cards:not(.lux-about__cards--manifesto) {
+    grid-template-columns: 1fr;
+  }
+
+  .lux-about__cards--manifesto {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "mission"
+      "vision";
+  }
+}
+
+/* ── Light theme ─────────────────────────────────────────────────────────── */
+[data-ui-theme="light"] .premium-product-selection + .lux-about.about-section,
+[data-theme="light"] .premium-product-selection + .lux-about.about-section,
+[data-ui-theme="light"] .main-content .premium-product-selection + .lux-about.about-section,
+[data-theme="light"] .main-content .premium-product-selection + .lux-about.about-section {
+  box-shadow: inset 0 36px 72px -44px rgba(125, 211, 252, 0.14);
+  border-top-color: rgba(56, 189, 248, 0.14);
+}
+
+[data-ui-theme="light"] .lux-about.about-section,
+[data-theme="light"] .lux-about.about-section,
+[data-ui-theme="light"] .main-content .lux-about.about-section,
+[data-theme="light"] .main-content .lux-about.about-section {
+  background:
+    radial-gradient(ellipse 92% 68% at 82% 14%, rgba(186, 230, 253, 0.35) 0%, transparent 56%),
+    radial-gradient(ellipse 70% 54% at 12% 86%, rgba(125, 211, 252, 0.14) 0%, transparent 52%),
+    linear-gradient(175deg, #c9dae9 0%, #bdd3e6 46%, #b3cfe4 100%) !important;
+  border-top-color: rgba(56, 189, 248, 0.14);
+  border-bottom-color: rgba(56, 189, 248, 0.12);
+}
+
+[data-ui-theme="light"] .lux-about__ambient,
+[data-theme="light"] .lux-about__ambient {
+  background:
+    linear-gradient(rgba(30, 64, 92, 0.048) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(30, 64, 92, 0.048) 1px, transparent 1px);
+  opacity: 0.46;
+}
+
+[data-ui-theme="light"] .lux-about__eyebrow,
+[data-theme="light"] .lux-about__eyebrow {
+  color: rgba(14, 72, 104, 0.62);
+}
+
+[data-ui-theme="light"] .lux-about__title,
+[data-theme="light"] .lux-about__title {
+  color: #0f2744;
+  text-shadow:
+    0 0 72px rgba(125, 211, 252, 0.28),
+    0 8px 36px rgba(30, 58, 88, 0.08);
+}
+
+[data-ui-theme="light"] .lux-about__lead,
+[data-theme="light"] .lux-about__lead {
+  color: rgba(30, 58, 88, 0.82);
+}
+
+[data-ui-theme="light"] .lux-about-card,
+[data-theme="light"] .lux-about-card {
+  background: linear-gradient(
+    165deg,
+    rgba(255, 255, 255, 0.46) 0%,
+    rgba(214, 232, 246, 0.38) 52%,
+    rgba(198, 220, 242, 0.42) 100%
+  );
+  border-color: rgba(56, 189, 248, 0.18);
+  box-shadow:
+    0 2px 8px rgba(30, 58, 88, 0.05),
+    0 22px 52px rgba(30, 58, 88, 0.09),
+    inset 0 1px 0 rgba(255, 255, 255, 0.42);
+}
+
+[data-ui-theme="light"] .lux-about-card__label,
+[data-theme="light"] .lux-about-card__label {
+  color: #0f2744;
+}
+
+[data-ui-theme="light"] .lux-about-card__body,
+[data-theme="light"] .lux-about-card__body {
+  color: rgba(30, 58, 88, 0.82);
+}
+
+[data-ui-theme="light"] .lux-about-visual__rim,
+[data-theme="light"] .lux-about-visual__rim {
+  box-shadow:
+    0 0 0 1px rgba(56, 189, 248, 0.28),
+    0 0 52px rgba(125, 211, 252, 0.18);
+}
+
+[data-ui-theme="light"] .lux-about-visual__wash,
+[data-theme="light"] .lux-about-visual__wash {
+  background: radial-gradient(
+    ellipse at 50% 0%,
+    rgba(226, 240, 252, 0.72) 0%,
+    rgba(203, 223, 235, 0.35) 52%,
+    transparent 74%
+  );
+}
+
+[data-ui-theme="light"] .lux-about.about-section::before,
+[data-theme="light"] .lux-about.about-section::before {
+  background: linear-gradient(
+    180deg,
+    rgba(186, 230, 253, 0.38) 0%,
+    transparent 100%
+  );
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Manifesto cinematic refresh — holographic centerpiece, editorial column
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.lux-about--manifesto.about-section {
+  background:
+    radial-gradient(ellipse 88% 72% at 82% 18%, rgba(125, 211, 252, 0.09) 0%, transparent 56%),
+    radial-gradient(ellipse 62% 50% at 8% 88%, rgba(56, 189, 248, 0.055) 0%, transparent 52%),
+    radial-gradient(ellipse 55% 40% at 50% 120%, rgba(30, 56, 82, 0.26) 0%, transparent 58%),
+    linear-gradient(174deg, #101f34 0%, #172f46 38%, #142838 100%);
+}
+
+.lux-about__particles {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.34;
+  background-image: radial-gradient(rgba(186, 230, 253, 0.22) 1px, transparent 1px);
+  background-size: 64px 64px;
+  animation: lux-about-particle-drift 96s linear infinite;
+  mask-image: radial-gradient(ellipse 92% 78% at 48% 42%, black 14%, transparent 76%);
+}
+
+@keyframes lux-about-particle-drift {
+  to {
+    background-position: 80px 56px;
+  }
+}
+
+.lux-about__light-sweep {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.lux-about__light-sweep::before {
+  content: "";
+  position: absolute;
+  top: -25%;
+  bottom: -25%;
+  width: min(42%, 520px);
+  left: -45%;
+  background: linear-gradient(
+    95deg,
+    transparent 36%,
+    rgba(255, 255, 255, 0.045) 50%,
+    transparent 64%
+  );
+  animation: lux-about-light-sweep 18s ease-in-out infinite;
+}
+
+@keyframes lux-about-light-sweep {
+  0%,
+  100% {
+    transform: skewX(-12deg) translateX(0);
+    opacity: 0.55;
+  }
+
+  45% {
+    transform: skewX(-12deg) translateX(260%);
+    opacity: 0.95;
+  }
+}
+
+.lux-about--manifesto .lux-about__inner {
+  position: relative;
+  z-index: 2;
+}
+
+.lux-about__title--mega {
+  font-size: clamp(3rem, 7.5vw, 5.25rem);
+  line-height: 0.98;
+  letter-spacing: -0.035em;
+  margin-bottom: clamp(1.35rem, 2.8vw, 2rem);
+}
+
+.lux-about__manifesto-stack {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(0.85rem, 1.6vw, 1.15rem);
+  margin-bottom: clamp(1.85rem, 3.5vw, 2.65rem);
+  max-width: 52ch;
+}
+
+.lux-about__manifesto-line {
+  font-family: var(--font-premium-body, "Inter", system-ui, sans-serif);
+  font-size: clamp(0.92rem, 1.28vw, 1.08rem);
+  font-weight: 500;
+  line-height: 1.62;
+  letter-spacing: 0.03em;
+  color: rgba(226, 236, 247, 0.88);
+  margin: 0;
+}
+
+.lux-about__manifesto-line--italic {
+  font-family: var(--font-lux-serif, "Bodoni Moda", ui-serif, Georgia, serif);
+  font-style: italic;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: rgba(186, 230, 253, 0.82);
+}
+
+.lux-about-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(0.65rem, 2vw, 1.25rem);
+  margin-bottom: clamp(2rem, 4vw, 2.85rem);
+}
+
+.lux-about-stat {
+  padding: clamp(0.85rem, 1.8vw, 1.15rem);
+  border-radius: 14px;
+  border: 1px solid rgba(103, 232, 249, 0.14);
+  background:
+    radial-gradient(120% 90% at 20% 0%, rgba(56, 189, 248, 0.08), transparent 52%),
+    rgba(15, 23, 42, 0.42);
+  backdrop-filter: blur(14px);
+  box-shadow:
+    0 14px 36px rgba(0, 0, 0, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.lux-about-stat__num {
+  display: block;
+  margin-bottom: 0.35rem;
+}
+
+.lux-about-stat .lux-about-stat__counter.stat-number,
+.lux-about-stat__counter.stat-number {
+  font-family: var(--font-lux-serif, "Bodoni Moda", ui-serif, Georgia, serif);
+  font-size: clamp(1.65rem, 3vw, 2.35rem);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  color: #f8fafc;
+  text-shadow: 0 0 40px rgba(56, 189, 248, 0.18);
+}
+
+.lux-about-stat__num--mono {
+  font-family: var(--font-premium-mono, "JetBrains Mono", monospace);
+  font-size: clamp(1.45rem, 2.6vw, 2rem);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: rgba(224, 242, 254, 0.92);
+}
+
+.lux-about-stat__label {
+  display: block;
+  font-family: var(--font-premium-mono, "JetBrains Mono", monospace);
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(148, 184, 214, 0.82);
+  line-height: 1.35;
+}
+
+/* Asymmetric mission / vision grid */
+.lux-about__cards--manifesto {
+  grid-template-columns: 1fr;
+  grid-template-areas:
+    "mission"
+    "vision";
+  gap: clamp(1rem, 2.5vw, 1.35rem);
+}
+
+.lux-about-card--mission {
+  grid-area: mission;
+}
+
+.lux-about-card--vision {
+  grid-area: vision;
+}
+
+@media (min-width: 720px) {
+  .lux-about__cards--manifesto {
+    grid-template-columns: minmax(0, 1.18fr) minmax(0, 0.82fr);
+    grid-template-areas:
+      "mission mission"
+      ". vision";
+    align-items: start;
+  }
+
+  .lux-about-card--vision {
+    margin-left: clamp(1.25rem, 9vw, 4rem);
+    margin-top: -0.35rem;
+    transform: rotate(-0.35deg);
+  }
+
+  .lux-about-card--mission {
+    transform: rotate(0.25deg);
+  }
+}
+
+.lux-about-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.55s ease;
+  background: linear-gradient(
+    118deg,
+    transparent 38%,
+    rgba(255, 255, 255, 0.06) 48%,
+    transparent 58%
+  );
+}
+
+.lux-about--manifesto .lux-about-card:hover::after {
+  opacity: 1;
+}
+
+/* Manifesto visual column */
+.lux-about-visual--manifesto {
+  min-height: min(56vw, 500px);
+}
+
+.lux-about-visual__blueprint--manifesto svg {
+  opacity: 0.42;
+}
+
+.lux-about-blueprint-path {
+  stroke-dasharray: 420;
+  stroke-dashoffset: 420;
+  animation: lux-about-blueprint-draw 14s ease-out forwards;
+}
+
+@keyframes lux-about-blueprint-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.lux-about-blueprint-energy {
+  animation: lux-about-energy-flow 4s ease-in-out infinite;
+}
+
+@keyframes lux-about-energy-flow {
+  50% {
+    opacity: 0.35;
+    filter: drop-shadow(0 0 14px rgba(103, 232, 249, 0.55));
+  }
+}
+
+/* Holographic orb centerpiece */
+.lux-about-manifesto-orb {
+  --lux-orb-x: 50%;
+  --lux-orb-y: 45%;
+  position: relative;
+  z-index: 2;
+  width: min(94%, 420px);
+  aspect-ratio: 1;
+  margin-inline: auto;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  isolation: isolate;
+  animation: lux-about-float 9s ease-in-out infinite;
+  filter: drop-shadow(0 36px 56px rgba(0, 0, 0, 0.62)) drop-shadow(0 0 52px rgba(56, 189, 248, 0.14));
+}
+
+.lux-about-manifesto-orb::before {
+  content: "";
+  position: absolute;
+  inset: -12%;
+  border-radius: 50%;
+  pointer-events: none;
+  background: radial-gradient(
+    circle at var(--lux-orb-x, 50%) var(--lux-orb-y, 45%),
+    rgba(103, 232, 249, 0.22) 0%,
+    transparent 55%
+  );
+  opacity: 0.85;
+  z-index: 0;
+}
+
+.lux-about-manifesto-orb__halo {
+  position: absolute;
+  inset: -18%;
+  border-radius: 50%;
+  pointer-events: none;
+  background: radial-gradient(circle, rgba(56, 189, 248, 0.14) 0%, transparent 62%);
+  filter: blur(28px);
+  z-index: 0;
+  animation: lux-about-halo-pulse 7s ease-in-out infinite;
+}
+
+@keyframes lux-about-halo-pulse {
+  50% {
+    transform: scale(1.06);
+    opacity: 0.75;
+  }
+}
+
+.lux-about-manifesto-orb__pulse-ring {
+  position: absolute;
+  inset: 6%;
+  border-radius: 50%;
+  pointer-events: none;
+  border: 1px solid rgba(165, 243, 252, 0.22);
+  box-shadow:
+    0 0 40px rgba(56, 189, 248, 0.12),
+    inset 0 0 40px rgba(56, 189, 248, 0.06);
+  z-index: 1;
+  animation: lux-about-ring-pulse 5s ease-in-out infinite;
+}
+
+@keyframes lux-about-ring-pulse {
+  50% {
+    opacity: 0.65;
+    transform: scale(1.03);
+  }
+}
+
+.lux-about-manifesto-orb__svg {
+  position: relative;
+  z-index: 2;
+  width: 88%;
+  height: auto;
+}
+
+.lux-about-manifesto-orb__ring-group {
+  transform-origin: 210px 210px;
+}
+
+.lux-about-manifesto-orb__ring-group--outer {
+  animation: lux-about-spin-slow 52s linear infinite;
+}
+
+.lux-about-manifesto-orb__ring-group--mid {
+  animation: lux-about-spin-mid 38s linear infinite reverse;
+}
+
+.lux-about-manifesto-orb__ring-group--inner {
+  animation: lux-about-spin-fast 26s linear infinite;
+}
+
+@keyframes lux-about-spin-slow {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes lux-about-spin-mid {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes lux-about-spin-fast {
+  to {
+    transform: rotate(-360deg);
+  }
+}
+
+.lux-about-manifesto-orb__scan {
+  animation: lux-about-scan-dash 10s linear infinite;
+}
+
+@keyframes lux-about-scan-dash {
+  to {
+    stroke-dashoffset: -120;
+  }
+}
+
+/* Floating telemetry */
+.lux-about-telemetry {
+  position: absolute;
+  z-index: 4;
+  font-family: var(--font-premium-mono, "JetBrains Mono", monospace);
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 0.38rem 0.55rem;
+  border-radius: 8px;
+  border: 1px solid rgba(103, 232, 249, 0.22);
+  background: rgba(5, 12, 22, 0.52);
+  backdrop-filter: blur(10px);
+  color: rgba(224, 242, 254, 0.88);
+  white-space: nowrap;
+  animation: lux-about-telemetry-float 6s ease-in-out infinite;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35);
+}
+
+.lux-about-telemetry--cop {
+  top: 12%;
+  left: -4%;
+  animation-delay: 0s;
+}
+
+.lux-about-telemetry--flow {
+  top: 58%;
+  left: -10%;
+  animation-delay: 1.2s;
+}
+
+.lux-about-telemetry--quiet {
+  bottom: 18%;
+  right: -6%;
+  animation-delay: 0.6s;
+}
+
+.lux-about-telemetry--sys {
+  top: 8%;
+  right: -8%;
+  animation-delay: 1.8s;
+}
+
+@keyframes lux-about-telemetry-float {
+  50% {
+    transform: translate3d(0, -8px, 0);
+  }
+}
+
+@media (max-width: 720px) {
+  .lux-about-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .lux-about-telemetry--cop {
+    left: 2%;
+  }
+
+  .lux-about-telemetry--flow {
+    left: 2%;
+  }
+
+  .lux-about-telemetry--quiet {
+    right: 2%;
+  }
+
+  .lux-about-telemetry--sys {
+    right: 2%;
+  }
+
+  .lux-about-card--vision {
+    transform: none !important;
+    margin-left: 0 !important;
+    margin-top: 0 !important;
+  }
+
+  .lux-about-card--mission {
+    transform: none !important;
+  }
+}
+
+[data-ui-theme="light"] .lux-about--manifesto.about-section,
+[data-theme="light"] .lux-about--manifesto.about-section {
+  background:
+    radial-gradient(ellipse 92% 68% at 84% 14%, rgba(186, 230, 253, 0.38) 0%, transparent 56%),
+    radial-gradient(ellipse 58% 46% at 10% 88%, rgba(125, 211, 252, 0.14) 0%, transparent 52%),
+    linear-gradient(178deg, #d0e3f4 0%, #c4daf0 44%, #b9d4ec 100%) !important;
+}
+
+[data-ui-theme="light"] .lux-about--manifesto .lux-about__manifesto-line,
+[data-theme="light"] .lux-about--manifesto .lux-about__manifesto-line {
+  color: rgba(15, 39, 68, 0.82);
+}
+
+[data-ui-theme="light"] .lux-about--manifesto .lux-about__manifesto-line--italic,
+[data-theme="light"] .lux-about--manifesto .lux-about__manifesto-line--italic {
+  color: rgba(14, 96, 130, 0.72);
+}
+
+[data-ui-theme="light"] .lux-about-stat,
+[data-theme="light"] .lux-about-stat {
+  background:
+    radial-gradient(120% 90% at 18% 0%, rgba(125, 211, 252, 0.18), transparent 55%),
+    linear-gradient(165deg, rgba(255, 255, 255, 0.44) 0%, rgba(206, 226, 244, 0.52) 100%);
+  border-color: rgba(56, 189, 248, 0.18);
+}
+
+[data-ui-theme="light"] .lux-about-stat .lux-about-stat__counter.stat-number,
+[data-theme="light"] .lux-about-stat .lux-about-stat__counter.stat-number {
+  color: #0f2744;
+  text-shadow:
+    0 0 42px rgba(125, 211, 252, 0.35),
+    0 4px 24px rgba(30, 58, 88, 0.08);
+}
+
+[data-ui-theme="light"] .lux-about-stat__num--mono,
+[data-theme="light"] .lux-about-stat__num--mono {
+  color: #155e97;
+}
+
+[data-ui-theme="light"] .lux-about-stat__label,
+[data-theme="light"] .lux-about-stat__label {
+  color: rgba(30, 58, 88, 0.58);
+}
+
+[data-ui-theme="light"] .lux-about-telemetry,
+[data-theme="light"] .lux-about-telemetry {
+  background: linear-gradient(
+    165deg,
+    rgba(255, 255, 255, 0.42) 0%,
+    rgba(214, 232, 246, 0.48) 100%
+  );
+  border-color: rgba(56, 189, 248, 0.22);
+  color: rgba(15, 39, 68, 0.82);
+}

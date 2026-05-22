@@ -1,0 +1,268 @@
+/* Vega Enerji — vegaa/vega-enerji-hero.html ile uyumlu tema (landing) */
+
+:root {
+  --vega-enerji-navy-1: #0a0e3f;
+  --vega-enerji-navy-2: #1a237e;
+  --vega-enerji-navy-3: #0d1642;
+  --vega-enerji-green: #00c853;
+  --vega-enerji-green-hover: #00e676;
+}
+
+.landing-page.vega-enerji-theme {
+  background: linear-gradient(135deg, var(--vega-enerji-navy-1) 0%, var(--vega-enerji-navy-2) 50%, var(--vega-enerji-navy-3) 100%);
+  color: #fff;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.landing-page.vega-enerji-theme .showroom-hero-fixed {
+  --vega-hero-progress: 0%;
+}
+
+/* Showroom görseli üzerine hafif lacivert sıcaklık */
+.vega-enerji-hero__navyWash {
+  background: linear-gradient(
+    135deg,
+    rgba(10, 14, 63, 0.55) 0%,
+    rgba(26, 35, 126, 0.35) 45%,
+    rgba(13, 22, 66, 0.5) 100%
+  );
+}
+
+/* Üst çizgi dekoru, sol büyük ürün görseli ve sağ alt “önizleme” kartı kaldırıldı —
+   eski tarayıcı önbelleği / chunk ile gelirse gizlenir */
+.vega-enerji-hero__product-visual,
+.vega-enerji-hero__preview {
+  display: none !important;
+}
+
+/* Sağ metin bloğu */
+.vega-enerji-hero__copy {
+  position: absolute;
+  top: 50%;
+  right: clamp(1rem, 4vw, 4rem);
+  transform: translateY(-50%);
+  z-index: 44;
+  max-width: min(22rem, 88vw);
+  pointer-events: none;
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .vega-enerji-hero__copy {
+    display: block;
+  }
+}
+
+.vega-enerji-hero__stroke {
+  font-size: clamp(2.5rem, 5.5vw, 4.25rem);
+  font-weight: 900;
+  line-height: 1;
+  color: transparent;
+  -webkit-text-stroke: 2px rgba(0, 200, 83, 0.35);
+  letter-spacing: 0.02em;
+  margin: 0 0 0.25rem;
+  font-family: var(--font-premium-display, "Poppins", sans-serif);
+  opacity: 0.95;
+}
+
+.vega-enerji-hero__title {
+  margin: 0;
+  font-size: clamp(1.85rem, 3.2vw, 2.75rem);
+  font-weight: 800;
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+  font-family: var(--font-premium-display, "Poppins", sans-serif);
+  color: #fff;
+  text-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+}
+
+.vega-enerji-hero__explore {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1.75rem;
+  padding: 0.85rem 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  font-size: 1.05rem;
+  font-weight: 600;
+  font-family: var(--font-premium-body, "Poppins", sans-serif);
+  color: #fff;
+  position: relative;
+  pointer-events: auto;
+  transition: color 0.25s ease;
+}
+
+.vega-enerji-hero__explore::after {
+  content: "";
+  position: absolute;
+  bottom: 0.65rem;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.28);
+}
+
+.vega-enerji-hero__explore:hover {
+  color: var(--vega-enerji-green);
+}
+
+.vega-enerji-hero__explore svg {
+  transition: transform 0.25s ease;
+}
+
+.vega-enerji-hero__explore:hover svg {
+  transform: translateX(5px);
+}
+
+/* Slide numarası */
+.vega-enerji-hero__slide-num {
+  position: absolute;
+  bottom: clamp(6rem, 18vh, 8.5rem);
+  right: clamp(10rem, 28vw, 17.5rem);
+  z-index: 52;
+  font-size: clamp(4rem, 12vw, 7.5rem);
+  font-weight: 900;
+  line-height: 1;
+  color: transparent;
+  -webkit-text-stroke: 3px var(--vega-enerji-green);
+  font-family: var(--font-premium-display, "Poppins", sans-serif);
+  pointer-events: none;
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .vega-enerji-hero__slide-num {
+    display: block;
+  }
+}
+
+.vega-enerji-hero__slide-num small {
+  font-size: 0.33em;
+  -webkit-text-stroke-width: 2px;
+  margin-left: 0.35em;
+  vertical-align: super;
+}
+
+/* Oklar */
+.vega-enerji-hero__arrows {
+  position: absolute;
+  bottom: clamp(6rem, 18vh, 8.5rem);
+  right: clamp(1rem, 4vw, 3.75rem);
+  z-index: 54;
+  display: none;
+  flex-direction: column;
+  gap: 2px;
+}
+
+@media (min-width: 768px) {
+  .vega-enerji-hero__arrows {
+    display: flex;
+  }
+}
+
+.vega-enerji-hero__arrow {
+  width: 56px;
+  height: 56px;
+  border: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  background: var(--vega-enerji-green);
+  color: #fff;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.vega-enerji-hero__arrow:hover {
+  background: var(--vega-enerji-green-hover);
+  transform: scale(1.04);
+}
+
+.vega-enerji-hero__arrow:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+
+/* İlerleme çubuğu */
+.vega-enerji-hero__progress-track {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  z-index: 56;
+  background: rgba(255, 255, 255, 0.12);
+  pointer-events: none;
+}
+
+.vega-enerji-hero__progress-fill {
+  height: 100%;
+  width: var(--vega-hero-progress, 0%);
+  background: var(--vega-enerji-green);
+  transition: width 0.05s linear;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .vega-enerji-hero__progress-fill {
+    transition: none;
+  }
+}
+
+/* Navbar — alt çizgi hover (HTML ile uyumlu) */
+.landing-page.vega-enerji-theme .grav-nav-cta {
+  background: var(--vega-enerji-green);
+  color: #fff;
+}
+
+.landing-page.vega-enerji-theme .grav-nav-cta:hover {
+  background: var(--vega-enerji-green-hover);
+  color: #fff;
+}
+
+.landing-page.vega-enerji-theme .vega-enerji-logo-hex {
+  width: 50px;
+  height: 50px;
+  background: linear-gradient(135deg, #fff 0%, #e0e0e0 100%);
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.landing-page.vega-enerji-theme .vega-enerji-logo-hex span {
+  font-size: 1.45rem;
+  font-weight: 900;
+  color: var(--vega-enerji-navy-2);
+  line-height: 1;
+  margin-top: 2px;
+}
+
+.landing-page.vega-enerji-theme .vega-enerji-logo-text-main {
+  font-size: clamp(1.25rem, 2vw, 1.65rem);
+  font-weight: 800;
+  letter-spacing: 0.22em;
+  line-height: 1;
+  color: #fff;
+  font-family: var(--font-premium-display, "Poppins", sans-serif);
+}
+
+[data-ui-theme="light"] .landing-page.vega-enerji-theme .vega-enerji-logo-text-main {
+  color: var(--vega-enerji-navy-2);
+}
+
+[data-ui-theme="light"] .landing-page.vega-enerji-theme .vega-enerji-logo-text-sub {
+  color: rgba(26, 35, 126, 0.72);
+}
+
+[data-ui-theme="light"] .landing-page.vega-enerji-theme .vega-enerji-logo-hex {
+  background: linear-gradient(135deg, var(--vega-enerji-navy-2) 0%, #3949ab 100%);
+}
+
+[data-ui-theme="light"] .landing-page.vega-enerji-theme .vega-enerji-logo-hex span {
+  color: #fff;
+}
