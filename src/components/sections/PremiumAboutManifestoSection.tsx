@@ -25,7 +25,7 @@ const ITEM_REVEAL = {
  * Cinematic three-column About / Mission / Vision — Apple-keynote engineering mood.
  */
 export function PremiumAboutManifestoSection() {
-  const { lang } = useLanguage();
+  const { lang, t } = useLanguage();
   const reduceMotion = useReducedMotion();
   const isTr = lang === "tr";
 
@@ -51,30 +51,36 @@ export function PremiumAboutManifestoSection() {
           viewport={{ once: true, margin: "-60px", amount: 0.25 }}
           variants={COL_REVEAL}
         >
-          <div className="premium-about-manifesto__title-stage">
-            <h2 id="pam-heading" className="premium-about-manifesto__screen-title">
-              <span className="premium-about-manifesto__sr-only">
-                {isTr ? "Hakkımızda" : "About us"}
-              </span>
-              {/* H + figür: sütun genişliği yalnızca H — A’ya yapışık okunur */}
-              <span className="premium-about-manifesto__mega" aria-hidden>
-                <span className="premium-about-manifesto__h-cluster">
-                  <span className="premium-about-manifesto__mega-h">H</span>
-                  <div className="premium-about-manifesto__tech-figure">
-                    <img
-                      src={ABOUT_MANIFESTO_IMAGES.technician}
-                      alt=""
-                      width={240}
-                      height={432}
-                      decoding="async"
-                      className="premium-about-manifesto__tech-img"
-                    />
-                  </div>
-                </span>
-                <span className="premium-about-manifesto__mega-a">A</span>
-                <span className="premium-about-manifesto__mega-rest">KKIMIZDA</span>
-              </span>
-            </h2>
+          <div className="premium-about-manifesto__hero-layout">
+            <div className="premium-about-manifesto__hero-copy">
+              <div className="premium-about-manifesto__title-stage">
+                <h2 id="pam-heading" className="premium-about-manifesto__screen-title">
+                  <span className="premium-about-manifesto__sr-only">
+                    {isTr ? "Hakkımızda" : "About us"}
+                  </span>
+                  {/* Decorative mega wordmark — typography only; figure sits in adjacent column */}
+                  <span className="premium-about-manifesto__mega" aria-hidden>
+                    <span className="premium-about-manifesto__h-cluster">
+                      <span className="premium-about-manifesto__mega-h">H</span>
+                    </span>
+                    <span className="premium-about-manifesto__mega-a">A</span>
+                    <span className="premium-about-manifesto__mega-rest">KKIMIZDA</span>
+                  </span>
+                </h2>
+              </div>
+              <p className="premium-about-manifesto__hero-subtitle">{t("about.manifesto.heroSubtitle")}</p>
+            </div>
+            <div className="premium-about-manifesto__hero-visual" aria-hidden>
+              <img
+                src={ABOUT_MANIFESTO_IMAGES.technician}
+                alt=""
+                width={360}
+                height={440}
+                decoding="async"
+                loading="eager"
+                className="premium-about-manifesto__hero-figure-img"
+              />
+            </div>
           </div>
         </motion.header>
 
@@ -100,6 +106,7 @@ export function PremiumAboutManifestoSection() {
                   width={88}
                   height={56}
                   decoding="async"
+                  loading="lazy"
                   className="premium-about-manifesto__about-thumb-img"
                 />
               </div>
@@ -118,21 +125,8 @@ export function PremiumAboutManifestoSection() {
               {copy.missionClose}
             </p>
             <div className="premium-about-manifesto__truck-wrap" aria-hidden>
-              <motion.div
-                className="premium-about-manifesto__truck-float"
-                animate={
-                  reduceMotion
-                    ? undefined
-                    : {
-                        x: [0, 5, -3, 0],
-                        opacity: [0.88, 1, 0.92, 0.88],
-                      }
-                }
-                transition={{
-                  duration: 18,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
+              <div
+                className={`premium-about-manifesto__truck-float${reduceMotion ? " premium-about-manifesto__truck-float--static" : ""}`}
               >
                 <img
                   src={ABOUT_MANIFESTO_IMAGES.truck}
@@ -140,9 +134,10 @@ export function PremiumAboutManifestoSection() {
                   width={420}
                   height={260}
                   decoding="async"
+                  loading="lazy"
                   className="premium-about-manifesto__truck-img"
                 />
-              </motion.div>
+              </div>
             </div>
           </motion.article>
 
@@ -162,6 +157,7 @@ export function PremiumAboutManifestoSection() {
                   width={96}
                   height={72}
                   decoding="async"
+                  loading="lazy"
                   className="premium-about-manifesto__vision-thumb-img"
                 />
               </div>

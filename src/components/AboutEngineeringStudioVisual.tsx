@@ -1,6 +1,3 @@
-import { useRef } from "react";
-import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
-
 import { useLanguage } from "@/i18n/LanguageContext";
 
 /** Full-bleed asset for Engineering Philosophy / Hakkımızda hero column */
@@ -15,19 +12,6 @@ interface AboutEngineeringStudioVisualProps {
  */
 export function AboutEngineeringStudioVisual({ className = "" }: AboutEngineeringStudioVisualProps) {
   const { lang } = useLanguage();
-  const rootRef = useRef<HTMLDivElement>(null);
-  const reducedMotion = useReducedMotion();
-
-  const { scrollYProgress } = useScroll({
-    target: rootRef,
-    offset: ["start end", "end start"],
-  });
-
-  const parallaxY = useTransform(
-    scrollYProgress,
-    [0, 1],
-    reducedMotion ? [0, 0] : [12, -12],
-  );
 
   const alt =
     lang === "tr"
@@ -35,10 +19,10 @@ export function AboutEngineeringStudioVisual({ className = "" }: AboutEngineerin
       : "Futuristic HVAC engineering studio — floating system assembly, cyan volumetric light in a dark architectural space";
 
   return (
-    <div ref={rootRef} className={`lux-about-engineering-studio${className ? ` ${className}` : ""}`}>
+    <div className={`lux-about-engineering-studio${className ? ` ${className}` : ""}`}>
       <div className="lux-about-engineering-studio__dust" aria-hidden />
       <div className="lux-about-engineering-studio__ambient-pulse" aria-hidden />
-      <motion.div className="lux-about-engineering-studio__parallax" style={{ y: parallaxY }}>
+      <div className="lux-about-engineering-studio__parallax">
         <figure className="lux-about-engineering-studio__figure">
           <span className="lux-about-engineering-studio__bloom" aria-hidden />
           <span className="lux-about-engineering-studio__bloom lux-about-engineering-studio__bloom--delay" aria-hidden />
@@ -54,7 +38,7 @@ export function AboutEngineeringStudioVisual({ className = "" }: AboutEngineerin
           <span className="lux-about-engineering-studio__vignette" aria-hidden />
           <span className="lux-about-engineering-studio__depth-fog" aria-hidden />
         </figure>
-      </motion.div>
+      </div>
     </div>
   );
 }

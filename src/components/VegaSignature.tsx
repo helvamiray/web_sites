@@ -1,32 +1,29 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-gsap.registerPlugin(ScrollTrigger);
+import { revealOnView } from "@/utils/revealOnView";
 
 const VegaSignature = () => {
   const wrapperRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const motionOk = !window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
-    ).matches;
-    if (!motionOk) return;
+    const wrapper = wrapperRef.current;
+    if (
+      !wrapper ||
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    ) {
+      return undefined;
+    }
 
-    const ctx = gsap.context(() => {
-      gsap.to(".signature-path", {
+    return revealOnView(wrapper, () => {
+      const path = wrapper.querySelector<SVGPathElement>(".signature-path");
+      if (!path) return;
+      gsap.to(path, {
         strokeDashoffset: 0,
         duration: 2.5,
         ease: "power2.inOut",
-        scrollTrigger: {
-          trigger: wrapperRef.current,
-          start: "top 80%",
-          once: true,
-        },
       });
-    }, wrapperRef);
-
-    return () => ctx.revert();
+    });
   }, []);
 
   return (

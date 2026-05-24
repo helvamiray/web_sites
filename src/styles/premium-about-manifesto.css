@@ -1,18 +1,27 @@
 /**
  * Premium About Manifesto — cinematic HVAC engineering (#hakkimizda).
- * Serif mega wordmark, glass columns, small integrated technician + logistics truck.
+ * Two-column hero: serif mega wordmark + subtitle · large engineer figure · glass manifesto rail.
  */
 
 .premium-about-manifesto {
   --pam-cyan: #5be7ff;
-  --pam-cyan-soft: rgba(91, 231, 255, 0.14);
+  --pam-cyan-soft: rgba(120, 220, 255, 0.14);
   --pam-cyan-bloom: rgba(111, 239, 255, 0.28);
-  --pam-glass-fill: rgba(7, 17, 31, 0.42);
-  --pam-glass-edge: rgba(255, 255, 255, 0.08);
+  --pam-glass-fill: rgba(8, 20, 35, 0.45);
+  --pam-glass-edge: rgba(120, 220, 255, 0.14);
+  /* Shared rhythm — tighter join from hero headline to glass columns */
+  --pam-card-py: clamp(1.25rem, 2.2vw, 1.625rem);
+  --pam-card-px: clamp(1.2rem, 2.35vw, 1.625rem);
+  --pam-columns-gap: clamp(0.95rem, 2vw, 1.25rem);
+  --pam-stack-gap: clamp(0.5rem, 1.2vw, 0.95rem);
+
   position: relative;
   overflow: hidden;
+  background: var(--site-canvas-bg, #0d2d4a);
   padding:
-    clamp(4rem, 9.25vw, 7.75rem) clamp(1.25rem, 4vw, 3rem) clamp(4rem, 10vw, 7.5rem);
+    clamp(3rem, 6.5vw, 4.65rem)
+    clamp(1.25rem, 4vw, 3rem)
+    clamp(2.85rem, 6.25vw, 4.75rem);
 }
 
 .premium-about-manifesto__inner {
@@ -20,6 +29,9 @@
   z-index: 2;
   margin-inline: auto;
   width: min(112rem, 100%);
+  display: flex;
+  flex-direction: column;
+  gap: var(--pam-stack-gap);
 }
 
 /* Atmospheric layers */
@@ -82,9 +94,30 @@
     inset 0 -80px 100px rgba(4, 10, 20, 0.55);
 }
 
-/* Hero typography */
+/* Hero — two-column: copy (title + subtitle) | large 3D figure */
 .premium-about-manifesto__hero {
-  margin-bottom: clamp(1.5rem, 3.75vw, 2.65rem);
+  margin-top: clamp(0rem, 0.85vw, 0.5rem);
+  margin-bottom: 0;
+}
+
+.premium-about-manifesto__hero-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(1.35rem, 4vw, 2.85rem);
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .premium-about-manifesto__hero-layout {
+    grid-template-columns: minmax(0, 1.05fr) minmax(200px, 0.82fr);
+    column-gap: clamp(1.5rem, 4.5vw, 3.5rem);
+    row-gap: clamp(1rem, 3vw, 1.75rem);
+  }
+}
+
+.premium-about-manifesto__hero-copy {
+  min-width: 0;
 }
 
 .premium-about-manifesto__title-stage {
@@ -93,8 +126,8 @@
   flex-wrap: wrap;
   align-items: flex-end;
   gap: clamp(0.5rem, 2vw, 1.5rem);
-  min-height: clamp(6.5rem, 18vw, 10.5rem);
-  padding-bottom: 0.25rem;
+  min-height: 0;
+  padding-bottom: 0.15rem;
 }
 
 .premium-about-manifesto__screen-title {
@@ -115,7 +148,7 @@
   border: 0;
 }
 
-/* Tek satır: [H+figür kümesi] | A | KKIMIZDA — figür absolute; sütun genişliği H ile biter, H–A boşluğu kapanır */
+/* Single-line decorative wordmark: H | A | KKIMIZDA (figure is in __hero-visual) */
 .premium-about-manifesto__mega {
   position: relative;
   display: inline-grid;
@@ -124,9 +157,9 @@
   column-gap: 0;
   align-items: end;
   justify-items: start;
-  padding-bottom: clamp(4.75rem, 12vw, 7.25rem);
+  padding-bottom: 0;
   font-family: var(--font-premium-display, "Bodoni Moda", ui-serif, Georgia, serif);
-  font-size: clamp(1.95rem, 7.8vw, 4.65rem);
+  font-size: clamp(1.62rem, 6.35vw, 3.85rem);
   font-weight: 500;
   letter-spacing: -0.035em;
   line-height: 0.92;
@@ -188,63 +221,71 @@
   margin-inline-start: -0.04em;
 }
 
-/* Technician — H kümesinin dibinde, ortalanmış; grid sütununu genişletmez */
-.premium-about-manifesto__tech-figure {
-  position: absolute;
-  left: 50%;
-  top: calc(100% - 0.06em);
-  z-index: 3;
-  width: clamp(6.5rem, 15.5vw, 9.75rem);
-  max-width: min(50vw, 10.75rem);
+.premium-about-manifesto__hero-subtitle {
+  margin: clamp(1rem, 2.35vw, 1.65rem) 0 0;
+  max-width: min(48ch, 100%);
+  font-family: var(--font-premium-body, "Satoshi", system-ui, sans-serif);
+  font-size: clamp(0.9rem, 1.28vw, 1.0625rem);
+  font-weight: 400;
+  line-height: 1.62;
+  letter-spacing: 0.02em;
+  color: rgba(200, 218, 235, 0.86);
+}
+
+.premium-about-manifesto__hero-visual {
+  justify-self: center;
+  align-self: center;
+  width: min(100%, 22rem);
+  max-height: clamp(300px, 38vh, 400px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   pointer-events: none;
-  transform: translateX(-50%);
 }
 
 @media (min-width: 768px) {
-  .premium-about-manifesto__tech-figure {
-    top: calc(100% - 0.12em);
-    width: clamp(6.85rem, 13.25vw, 9.25rem);
-    max-width: none;
+  .premium-about-manifesto__hero-visual {
+    justify-self: end;
+    width: min(100%, 22rem);
   }
 }
 
-@media (min-width: 1200px) {
-  .premium-about-manifesto__tech-figure {
-    width: clamp(7rem, 10.5vw, 9.75rem);
-  }
-}
-
-.premium-about-manifesto__tech-img {
+.premium-about-manifesto__hero-figure-img {
   display: block;
-  width: 100%;
-  height: auto;
+  width: auto;
+  height: clamp(280px, 36vh, 400px);
+  max-width: 100%;
   object-fit: contain;
-  /* Bias toward the “reaching up” technician at left of the PNG */
-  object-position: 28% 100%;
+  object-position: 50% 100%;
   filter:
-    drop-shadow(0 18px 36px rgba(0, 0, 0, 0.65))
-    brightness(1.04)
-    contrast(1.05);
-  mix-blend-mode: normal;
+    drop-shadow(0 20px 40px rgba(0, 0, 0, 0.55))
+    brightness(1.03)
+    contrast(1.04);
 }
 
 /* Three-column glass rail */
 .premium-about-manifesto__columns {
   display: grid;
   grid-template-columns: 1fr;
-  gap: clamp(1.25rem, 3vw, 1.75rem);
+  gap: var(--pam-columns-gap);
+  row-gap: var(--pam-columns-gap);
 }
 
 @media (min-width: 1024px) {
   .premium-about-manifesto__columns {
     grid-template-columns: repeat(3, minmax(0, 1fr));
     align-items: stretch;
+    column-gap: var(--pam-columns-gap);
   }
 }
 
 .premium-about-manifesto__card {
   position: relative;
-  padding: clamp(1.35rem, 2.8vw, 2rem) clamp(1.25rem, 2.5vw, 1.75rem);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  padding: var(--pam-card-py) var(--pam-card-px);
   border-radius: 1.15rem;
   background: var(--pam-glass-fill);
   border: 1px solid var(--pam-cyan-soft);
@@ -257,7 +298,7 @@
 }
 
 .premium-about-manifesto__card-kicker {
-  margin: 0 0 0.85rem;
+  margin: 0 0 clamp(0.65rem, 1.35vw, 0.85rem);
   font-family: var(--font-premium-display, "Bodoni Moda", ui-serif, Georgia, serif);
   font-size: clamp(1.35rem, 2.2vw, 1.65rem);
   font-weight: 500;
@@ -271,8 +312,8 @@
   flex-wrap: nowrap;
   align-items: center;
   justify-content: flex-start;
-  gap: clamp(0.5rem, 1.5vw, 0.85rem);
-  margin-bottom: 0.85rem;
+  gap: clamp(0.5rem, 1.35vw, 0.85rem);
+  margin-bottom: clamp(0.65rem, 1.35vw, 0.85rem);
 }
 
 .premium-about-manifesto__card-kicker--about {
@@ -300,7 +341,7 @@
 }
 
 .premium-about-manifesto__lead {
-  margin: 0 0 0.75rem;
+  margin: 0 0 clamp(0.6rem, 1.25vw, 0.72rem);
   font-family: var(--font-premium-body, "Satoshi", system-ui, sans-serif);
   font-size: clamp(0.9rem, 1.35vw, 1rem);
   font-weight: 300;
@@ -310,10 +351,11 @@
 }
 
 .premium-about-manifesto__lead--tight {
-  margin-bottom: 1rem;
+  margin-bottom: clamp(0.6rem, 1.25vw, 0.72rem);
 }
 
 .premium-about-manifesto__body {
+  flex-grow: 0;
   margin: 0;
   font-family: var(--font-premium-body, "Satoshi", system-ui, sans-serif);
   font-size: clamp(0.78rem, 1.1vw, 0.875rem);
@@ -325,16 +367,22 @@
 }
 
 .premium-about-manifesto__body--accent {
-  margin-top: 0.5rem;
+  margin-top: clamp(0.35rem, 1vw, 0.55rem);
   color: rgba(91, 231, 255, 0.82);
   letter-spacing: 0.12em;
   font-size: clamp(0.68rem, 1vw, 0.75rem);
 }
 
-/* Mission — subtle truck */
+/* Mission — subtle truck: extra bottom space only where the asset sits */
 .premium-about-manifesto__card--mission {
   overflow: visible;
-  min-height: clamp(16rem, 28vw, 19rem);
+  padding-bottom: calc(var(--pam-card-py) + clamp(4rem, 10.5vw, 5.75rem));
+}
+
+.premium-about-manifesto__card--mission .premium-about-manifesto__body--accent {
+  margin-top: auto;
+  margin-bottom: 0;
+  padding-top: 0.35rem;
 }
 
 .premium-about-manifesto__truck-wrap {
@@ -345,6 +393,32 @@
   max-width: 200px;
   opacity: 0.94;
   pointer-events: none;
+}
+
+/* GPU-friendly drift — replaces infinite Framer layout updates */
+.premium-about-manifesto__truck-float {
+  will-change: transform;
+  animation: pam-truck-drift 22s ease-in-out infinite;
+}
+
+.premium-about-manifesto__truck-float--static {
+  animation: none;
+}
+
+@keyframes pam-truck-drift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+    opacity: 0.9;
+  }
+  40% {
+    transform: translate3d(6px, 0, 0);
+    opacity: 1;
+  }
+  70% {
+    transform: translate3d(-4px, 0, 0);
+    opacity: 0.92;
+  }
 }
 
 .premium-about-manifesto__truck-img {
@@ -387,7 +461,7 @@
   align-items: center;
   justify-content: flex-start;
   gap: clamp(0.5rem, 1.35vw, 0.8rem);
-  margin-bottom: 0.85rem;
+  margin-bottom: clamp(0.65rem, 1.35vw, 0.85rem);
 }
 
 .premium-about-manifesto__card-kicker--vision {
@@ -416,7 +490,9 @@
 }
 
 .premium-about-manifesto__vision-tag {
-  margin: 0;
+  margin-top: auto;
+  padding-top: 0.5rem;
+  margin-bottom: 0;
   font-family: var(--font-premium-body, "Satoshi", system-ui, sans-serif);
   font-size: clamp(0.62rem, 0.95vw, 0.7rem);
   font-weight: 300;
@@ -426,8 +502,17 @@
   text-shadow: 0 0 24px rgba(91, 231, 255, 0.25);
 }
 
+/*
+ * Homepage only: shorten the padded band above the parametrik seçici after manifesto —
+ * avoids a tall “neutral zone” between #hakkimizda and #urun-konfigurator.
+ */
+.landing-page .premium-about-manifesto + .lux-parallax-wrap > .premium-product-selection {
+  padding-top: clamp(2.05rem, 4.65vw, 3.05rem);
+}
+
 @media (prefers-reduced-motion: reduce) {
   .premium-about-manifesto__truck-float {
+    animation: none !important;
     transform: none !important;
   }
 }

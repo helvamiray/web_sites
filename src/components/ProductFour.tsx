@@ -1,10 +1,9 @@
 import { useEffect, useRef } from "react";
 import { useNavigate } from "@tanstack/react-router";
 import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { animate, spring } from "animejs";
 
-gsap.registerPlugin(ScrollTrigger);
+import { revealOnView } from "@/utils/revealOnView";
 
 interface CardDef {
   slug: string;
@@ -23,7 +22,8 @@ const CARDS: CardDef[] = [
     label: "Klima Sistemleri",
     category: "COOLING / AIR-CON",
     spec: "A+++ · 5–28 kW",
-    description: "Inverter ve VRF teknolojisiyle bireysel, ofis ve endüstriyel mekânlar için hassas iklim yönetimi.",
+    description:
+      "Inverter ve VRF teknolojisiyle bireysel, ofis ve endüstriyel mekânlar için hassas iklim yönetimi.",
     accentColor: "var(--electric-cyan, #00f0ff)",
   },
   {
@@ -32,7 +32,8 @@ const CARDS: CardDef[] = [
     label: "Kazan Sistemleri",
     category: "HEATING / BOILER",
     spec: "A+ · 24–500 kW",
-    description: "Yoğuşmalı ve döküm kazanlar. Konut, hastane ve sanayi tesislerinde düşük emisyon, yüksek verim.",
+    description:
+      "Yoğuşmalı ve döküm kazanlar. Konut, hastane ve sanayi tesislerinde düşük emisyon, yüksek verim.",
     accentColor: "var(--gold, #c9a84c)",
   },
   {
@@ -41,7 +42,8 @@ const CARDS: CardDef[] = [
     label: "Isı Pompası",
     category: "HEAT PUMP / HVA",
     spec: "A+++ · COP 4.8",
-    description: "Toprak ve hava kaynaklı ısı pompalarıyla hem ısıtma hem soğutma; yüzde 70'e varan enerji tasarrufu.",
+    description:
+      "Toprak ve hava kaynaklı ısı pompalarıyla hem ısıtma hem soğutma; yüzde 70'e varan enerji tasarrufu.",
     accentColor: "#e07840",
   },
   {
@@ -50,7 +52,8 @@ const CARDS: CardDef[] = [
     label: "Yangın Sistemleri",
     category: "FIRE SAFETY / FM",
     spec: "EN 54 · FM200",
-    description: "Dedektörden söndürme sistemine kadar bütünleşik yangın güvenliği. ISO 9001 sertifikalı kurulum.",
+    description:
+      "Dedektörden söndürme sistemine kadar bütünleşik yangın güvenliği. ISO 9001 sertifikalı kurulum.",
     accentColor: "var(--alert-red, #ff3b55)",
   },
 ];
@@ -58,15 +61,16 @@ const CARDS: CardDef[] = [
 const ProductFour = () => {
   const navigate = useNavigate();
   const sectionRef = useRef<HTMLElement>(null);
-  const cardsRef   = useRef<HTMLDivElement>(null);
+  const cardsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const motionOk = !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (!motionOk || !cardsRef.current) return;
+    const host = cardsRef.current;
+    if (!motionOk || !host) return undefined;
 
-    const ctx = gsap.context(() => {
-      const cards = cardsRef.current!.querySelectorAll<HTMLElement>(".pf-card");
+    const cards = host.querySelectorAll<HTMLElement>(".pf-card");
 
+    return revealOnView(host, () => {
       gsap.fromTo(
         cards,
         { y: 60, opacity: 0 },
@@ -76,25 +80,27 @@ const ProductFour = () => {
           duration: 0.7,
           stagger: 0.12,
           ease: "power3.out",
-          scrollTrigger: {
-            trigger: cardsRef.current,
-            start: "top 78%",
-          },
-        }
+        },
       );
     });
-
-    return () => ctx.revert();
   }, []);
 
   const handleMouseEnter = (el: HTMLElement) => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    animate(el, { translateY: -6, scale: 1.015, easing: spring({ stiffness: 80, damping: 14 }) });
+    animate(el, {
+      translateY: -6,
+      scale: 1.015,
+      easing: spring({ stiffness: 80, damping: 14 }),
+    });
   };
 
   const handleMouseLeave = (el: HTMLElement) => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    animate(el, { translateY: 0, scale: 1, easing: spring({ stiffness: 80, damping: 12 }) });
+    animate(el, {
+      translateY: 0,
+      scale: 1,
+      easing: spring({ stiffness: 80, damping: 12 }),
+    });
   };
 
   return (
@@ -170,13 +176,13 @@ const ProductFour = () => {
               const el = e.currentTarget as HTMLElement;
               handleMouseEnter(el);
               el.style.borderColor = "var(--terminal-border-hover, rgba(0,240,255,0.35))";
-              el.style.boxShadow   = "0 0 32px rgba(0,240,255,0.08)";
+              el.style.boxShadow = "0 0 32px rgba(0,240,255,0.08)";
             }}
             onMouseLeave={(e) => {
               const el = e.currentTarget as HTMLElement;
               handleMouseLeave(el);
               el.style.borderColor = "var(--terminal-border, rgba(0,240,255,0.12))";
-              el.style.boxShadow   = "none";
+              el.style.boxShadow = "none";
             }}
             onClick={() => navigate({ to: "/urunler/$slug", params: { slug: card.slug } })}
             style={{
@@ -193,7 +199,6 @@ const ProductFour = () => {
               overflow: "hidden",
             }}
           >
-            {/* Serial number label */}
             <span
               style={{
                 display: "block",
@@ -207,7 +212,6 @@ const ProductFour = () => {
               SN: {card.serialCode}
             </span>
 
-            {/* Category badge */}
             <span
               style={{
                 display: "inline-block",
@@ -226,7 +230,6 @@ const ProductFour = () => {
               {card.category}
             </span>
 
-            {/* Title */}
             <h3
               style={{
                 fontFamily: "var(--font-premium-display)",
@@ -240,7 +243,6 @@ const ProductFour = () => {
               {card.label}
             </h3>
 
-            {/* Spec line */}
             <p
               style={{
                 fontFamily: "var(--font-premium-mono)",
@@ -253,7 +255,6 @@ const ProductFour = () => {
               {card.spec}
             </p>
 
-            {/* Description */}
             <p
               style={{
                 fontFamily: "var(--font-premium-body)",
@@ -266,7 +267,6 @@ const ProductFour = () => {
               {card.description}
             </p>
 
-            {/* CTA */}
             <button
               type="button"
               onClick={(e) => {

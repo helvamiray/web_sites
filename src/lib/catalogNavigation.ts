@@ -11,7 +11,7 @@ export function productBackNavigationIsHomeTop(product: Product | null | undefin
   return Boolean(product && SHOWROOM_TOP_BACK_CATEGORIES.has(product.category));
 }
 
-/** Ana sayfa en üstü (showroom başlangıcı); Lenis’te anında. */
+/** Ana sayfa en üstü (showroom başlangıcı). */
 function scrollHomeTopImmediate(): void {
   scrollMainDocumentTo(0);
 }
@@ -32,7 +32,7 @@ function navigateToHomeClearHash(navigate: NavigateFn): void {
   });
 }
 
-/** `#urun-konfigurator` (ana sayfa ürün seçici) DOM’a girince Lenis/native ile anında kaydır (smooth scroll yok). */
+/** `#urun-konfigurator` (ana sayfa ürün seçici) DOM’a girince anında kaydır. */
 function scrollCatalogSectionIntoViewImmediate(): boolean {
   const el = document.getElementById(PRODUCT_CONFIGURATOR_HASH_ID);
   if (!el) return false;
@@ -68,7 +68,7 @@ function navigateToCatalogGrid(navigate: NavigateFn): void {
 /**
  * Ürün detayından dönüş:
  * - Kazan / ısı pompası / yangın → ana sayfa **üstü** (Dev Ekran showroom başlangıcı).
- * - Diğer ürünler → ana sayfadaki `#urun-konfigurator` ürün seçici bölümü (hash ile tutarlı; uzun smooth Lenis yok).
+ * - Diğer ürünler → ana sayfadaki `#urun-konfigurator` ürün seçici bölümü (hash ile tutarlı).
  */
 export function navigateBackToCatalog(navigate: NavigateFn, product?: Product | null): void {
   if (productBackNavigationIsHomeTop(product)) {

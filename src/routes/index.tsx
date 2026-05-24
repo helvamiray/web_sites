@@ -6,9 +6,11 @@ import { Navbar } from "@/components/Navbar";
 import InteractiveShowroomHero from "@/components/showroom/InteractiveShowroomHero";
 import { ShowroomFilterProvider } from "@/context/ShowroomFilterContext";
 
+import { getMainScrollY } from "@/lib/smoothScroll";
 import { hashScrollIntoViewOptions } from "@/utils/navigateToHashSection";
 import { VEGA_CATALOG_SCROLL_KEY } from "@/constants/catalogScroll";
 import "@/styles/gravity.css";
+import { scheduleIdleTask } from "@/utils/scheduleIdle";
 
 const HomeDeferredSections = lazy(() => import("@/components/home/HomeDeferredSections"));
 
@@ -52,19 +54,17 @@ function Index() {
   useDeferredHashScroll();
 
   useEffect(() => {
-    const prefetchDeferred = window.setTimeout(() => {
+    const cancelPrefetch = scheduleIdleTask(() => {
       void import("@/components/home/HomeDeferredSections");
-    }, 0);
+    }, 1800);
 
     return () => {
-      clearTimeout(prefetchDeferred);
-      void import("@/lib/smoothScroll").then((m) => {
-        try {
-          sessionStorage.setItem(VEGA_CATALOG_SCROLL_KEY, String(m.getMainScrollY()));
-        } catch {
-          /* ignore */
-        }
-      });
+      cancelPrefetch();
+      try {
+        sessionStorage.setItem(VEGA_CATALOG_SCROLL_KEY, String(getMainScrollY()));
+      } catch {
+        /* ignore */
+      }
       void import("gsap/ScrollTrigger").then((ST) => {
         ST.ScrollTrigger.getAll().forEach((t) => t.kill());
       });

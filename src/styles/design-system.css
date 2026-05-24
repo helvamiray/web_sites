@@ -38,7 +38,7 @@
   --cat-heatpump: var(--gold);
 
   /* Premium Typography — luxury editorial + geometric UI (Cormorant: Canela-adj display) */
-  --font-premium-display: "Bodoni Moda", "Cormorant Garamond", "Instrument Serif", ui-serif, Georgia, serif;
+  --font-premium-display: "Playfair Display", "Bodoni Moda", "Cormorant Garamond", "Instrument Serif", ui-serif, Georgia, serif;
   --font-premium-body: "Satoshi", "Inter", system-ui, -apple-system, sans-serif;
   --font-premium-mono: 'JetBrains Mono', monospace;
 
@@ -503,7 +503,7 @@
   gap: 4rem;
   min-height: 60vh;
   padding: 5rem 2rem;
-  background: var(--navy-primary);
+  background: transparent;
   position: relative;
   overflow: hidden;
 }
@@ -534,28 +534,29 @@
 .twin-label {
   display: inline-block;
   font-family: var(--font-premium-mono);
-  font-size: 0.6875rem;
-  letter-spacing: 0.2em;
+  font-size: 10px;
+  letter-spacing: 0.34em;
+  font-weight: 500;
   text-transform: uppercase;
-  color: var(--vega-cyan);
+  color: rgba(103, 232, 249, 0.42);
   margin-bottom: 1.25rem;
 }
 
 .twin-headline {
-  font-family: var(--font-premium-display);
+  font-family: var(--font-lux-serif, "Playfair Display", "Bodoni Moda", ui-serif, serif);
   font-size: clamp(2rem, 4vw, 3.25rem);
-  font-weight: 800;
-  line-height: 1.1;
-  color: white;
-  margin: 0 0 1.25rem;
-  letter-spacing: -0.02em;
+  font-weight: 600;
+  line-height: 1.06;
+  color: rgba(248, 250, 252, 0.97);
+  margin-bottom: 1rem;
 }
 
 .twin-body {
   font-family: var(--font-premium-body);
   font-size: 1rem;
-  line-height: 1.7;
-  color: rgba(255, 255, 255, 0.65);
+  line-height: 1.68;
+  font-weight: 400;
+  color: rgba(200, 212, 228, 0.74);
   margin: 0 0 2rem;
 }
 
@@ -563,24 +564,7 @@
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  background: white;
-  color: var(--navy-primary);
-  border: 2px solid var(--accent, var(--vega-cyan));
   padding: 0.875rem 1.75rem;
-  border-radius: 100px;
-  font-family: var(--font-premium-display);
-  font-size: 0.9375rem;
-  font-weight: 700;
-  cursor: pointer;
-  transition: all var(--dur-med) var(--ease-premium);
-  box-shadow: 0 0 0 0 rgba(0, 212, 255, 0);
-}
-
-.twin-cta:hover {
-  background: var(--navy-primary);
-  color: white;
-  border-color: var(--accent, var(--vega-cyan));
-  box-shadow: 0 0 24px rgba(0, 212, 255, 0.35);
 }
 
 /* ====================================================================

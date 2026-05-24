@@ -1,3 +1,4 @@
+import { Suspense, lazy, useEffect, useState, type ReactNode } from "react";
 import { Canvas } from "@react-three/fiber";
 import {
   Boxes,
@@ -7,12 +8,18 @@ import {
   Wind,
   Zap,
 } from "lucide-react";
-import { useEffect, useState, type ReactNode } from "react";
-import { TwinShowroomScene } from "@/components/digital-twin/TwinShowroomScene";
+
+import { useDocumentVisibility } from "@/hooks/useDocumentVisibility";
 import { DIGITAL_TWIN_HVAC_ZONES } from "@/constants/digitalTwinShowroom";
 import { useDigitalTwinExperience } from "@/context/DigitalTwinExperienceContext";
 import { RoomNavigator } from "@/components/RoomNavigator";
 import { cn } from "@/lib/utils";
+
+const TwinShowroomScene = lazy(() =>
+  import("@/components/digital-twin/TwinShowroomScene").then((m) => ({
+    default: m.TwinShowroomScene,
+  })),
+);
 
 interface DigitalTwinViewerProps {
   className?: string;
@@ -172,6 +179,7 @@ function HudToggle({ active, onClick, label, children }: HudToggleProps) {
 
 export function DigitalTwinViewer({ className }: DigitalTwinViewerProps) {
   const [ready, setReady] = useState(false);
+  const docVisible = useDocumentVisibility();
 
   useEffect(() => {
     setReady(true);
@@ -194,11 +202,15 @@ export function DigitalTwinViewer({ className }: DigitalTwinViewerProps) {
         {ready ? (
           <Canvas
             shadows
+            frameloop={docVisible ? "always" : "never"}
             className="h-full w-full touch-none [&>div]:h-full"
             camera={{ position: [11.8, 7.8, 14.2], fov: 40, near: 0.1, far: 90 }}
+            dpr={[1, Math.min(1.5, typeof window !== "undefined" ? window.devicePixelRatio : 1)]}
             gl={{ alpha: true, antialias: true, powerPreference: "high-performance" }}
           >
-            <TwinShowroomScene />
+            <Suspense fallback={null}>
+              <TwinShowroomScene />
+            </Suspense>
           </Canvas>
         ) : (
           <div className="flex h-full min-h-[inherit] items-center justify-center bg-black/35 text-sm text-slate-400">

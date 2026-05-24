@@ -1,8 +1,8 @@
 /* Engineering Configuration Studio — luxury HVAC lab, not cyberpunk */
 .ecs-studio {
-  --ecs-bg-a: #071521;
-  --ecs-bg-b: #0d2d4d;
-  --ecs-bg-c: #12395e;
+  --ecs-bg-a: var(--site-canvas-bg, #0d2d4a);
+  --ecs-bg-b: var(--site-canvas-bg, #0d2d4a);
+  --ecs-bg-c: var(--site-canvas-bg, #0d2d4a);
   --ecs-accent: #67e8f9;
   --ecs-accent-soft: rgba(103, 232, 249, 0.14);
   --ecs-text: #f4f8fc;
@@ -15,12 +15,7 @@
   position: relative;
   overflow: hidden;
   color: var(--ecs-text);
-  background: linear-gradient(
-    165deg,
-    var(--ecs-bg-a) 0%,
-    var(--ecs-bg-b) 42%,
-    var(--ecs-bg-c) 100%
-  );
+  background: var(--site-canvas-bg, #0d2d4a);
   font-family: "Satoshi", "Plus Jakarta Sans", system-ui, sans-serif;
 }
 

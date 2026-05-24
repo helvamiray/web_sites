@@ -1,7 +1,7 @@
 /**
  * Cinematic showroom hero — technical label → serif title → lead → supporting copy.
  * Nav labels (`navLabel*`) mirror the uppercase technical eyebrow above the title.
- * Images: showcase art is paused for this skin — `showcaseImageSrc` reserved for reinstatement later.
+ * Images: ana vitrin görseli `showcaseImageSrc` — `/img/showcase/*` sinematik sahneler.
  */
 export type ShowcaseHudDatum = {
   readonly labelTr: string;
@@ -47,7 +47,7 @@ export const CINEMATIC_SHOWCASE_HERO_SLIDES: readonly CinematicShowcaseSlideDef[
   {
     id: "klima",
     productSlug: "p-ac-residential",
-    showcaseImageSrc: "/img/hero-klima-showcase.png",
+    showcaseImageSrc: "/img/showcase/hero-klima-studio.png",
     showcaseImageAltTr:
       "Duvar tipi klima — sinematik karanlık gövde ve cyan cephe aydınlatması",
     showcaseImageAltEn:
@@ -95,7 +95,7 @@ export const CINEMATIC_SHOWCASE_HERO_SLIDES: readonly CinematicShowcaseSlideDef[
   {
     id: "fancoil",
     productSlug: "p-ac-daikin",
-    showcaseImageSrc: "/img/hero-fancoil-showcase.png",
+    showcaseImageSrc: "/img/showcase/hero-fancoil-studio.png",
     showcaseImageAltTr:
       "Premium iç iklim ünitesi — cam kontrol yüzeyi ve cyan nümerik halo",
     showcaseImageAltEn:
@@ -143,7 +143,7 @@ export const CINEMATIC_SHOWCASE_HERO_SLIDES: readonly CinematicShowcaseSlideDef[
   {
     id: "mekanik",
     productSlug: "p-pump-wilo",
-    showcaseImageSrc: "/img/hero-mekanik-showcase.png",
+    showcaseImageSrc: "/img/showcase/hero-mekanik-studio.png",
     showcaseImageAltTr:
       "Mekanik malzeme seçkisi — valf, fitting ve bağlantı elemanları sinematik vitrin",
     showcaseImageAltEn:
@@ -191,7 +191,7 @@ export const CINEMATIC_SHOWCASE_HERO_SLIDES: readonly CinematicShowcaseSlideDef[
   {
     id: "isi-pompasi",
     productSlug: "p-heatpump-daikin",
-    showcaseImageSrc: "/img/hero-heatpump-showcase.png",
+    showcaseImageSrc: "/img/showcase/hero-hp-studio.png",
     showcaseImageAltTr:
       "Isı pompası dış ünite — mat metal gövde ve sinematik cyan rim ışık",
     showcaseImageAltEn:
@@ -239,7 +239,7 @@ export const CINEMATIC_SHOWCASE_HERO_SLIDES: readonly CinematicShowcaseSlideDef[
   {
     id: "yangin",
     productSlug: "p-fire-tyco",
-    showcaseImageSrc: "/img/hero-yangin-showcase.png",
+    showcaseImageSrc: "/img/showcase/hero-yangin-studio.png",
     showcaseImageAltTr:
       "Yangın güvenliği — sprinkler, hidrant ve basınç göstergesi sinematik kompozisyon",
     showcaseImageAltEn:

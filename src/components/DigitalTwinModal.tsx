@@ -1,7 +1,8 @@
 import { lazy, Suspense, useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { X, Maximize2 } from "lucide-react";
-import Mini3DPreview from "@/components/Mini3DPreview";
+
+const Mini3DPreview = lazy(() => import("@/components/Mini3DPreview"));
 
 // Villa3D is loaded lazily — zero cost until user clicks
 const Villa3DLazy = lazy(() => import("@/components/Villa3D"));
@@ -19,26 +20,26 @@ const DigitalTwinModal = () => {
     if (!open || !overlayRef.current || !panelRef.current) return;
 
     const motionOk = !window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
+      "(prefers-reduced-motion: reduce)",
     ).matches;
 
     if (motionOk) {
       gsap.fromTo(
         overlayRef.current,
         { opacity: 0 },
-        { opacity: 1, duration: 0.4, ease: "power2.out" }
+        { opacity: 1, duration: 0.4, ease: "power2.out" },
       );
       gsap.fromTo(
         panelRef.current,
         { scale: 0.9, opacity: 0 },
-        { scale: 1, opacity: 1, duration: 0.5, ease: "power3.out" }
+        { scale: 1, opacity: 1, duration: 0.5, ease: "power3.out" },
       );
     }
   }, [open]);
 
   const closeModal = () => {
     const motionOk = !window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
+      "(prefers-reduced-motion: reduce)",
     ).matches;
 
     if (motionOk && overlayRef.current && panelRef.current) {
@@ -71,7 +72,9 @@ const DigitalTwinModal = () => {
   // Prevent background scroll when modal open
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
-    return () => { document.body.style.overflow = ""; };
+    return () => {
+      document.body.style.overflow = "";
+    };
   }, [open]);
 
   return (
@@ -82,7 +85,9 @@ const DigitalTwinModal = () => {
           {/* Left: thumbnail preview */}
           <div className="twin-thumb-wrap" aria-hidden="true">
             <div className="twin-thumb-canvas">
-              <Mini3DPreview kind="heatpump" spinning />
+              <Suspense fallback={null}>
+                <Mini3DPreview kind="heatpump" spinning />
+              </Suspense>
             </div>
             {/* Play overlay */}
             <div className="twin-thumb-overlay">
@@ -96,13 +101,13 @@ const DigitalTwinModal = () => {
           <div className="twin-cta-text">
             <span className="twin-eyebrow">● DİJİTAL İKİZ · 3D İNTERAKTİF</span>
             <h2 className="twin-cta-headline">
-              Vega Dijital İkiz<br />
+              Vega Dijital İkiz
+              <br />
               <span style={{ color: "var(--vega-cyan)" }}>Deneyimi</span>
             </h2>
             <p className="twin-cta-body">
-              Sistemlerimizin bir villa içerisindeki gerçek kurulumunu
-              interaktif olarak keşfedin. Isı pompasından yangın sistemine,
-              her bileşeni 3D ortamda inceleyin.
+              Sistemlerimizin bir villa içerisindeki gerçek kurulumunu interaktif olarak keşfedin. Isı
+              pompasından yangın sistemine, her bileşeni 3D ortamda inceleyin.
             </p>
             <button
               className="twin-open-btn"
@@ -110,7 +115,9 @@ const DigitalTwinModal = () => {
               aria-label="3D Villa Deneyimini Başlat"
             >
               3D Villa Deneyimini Başlat
-              <span className="twin-btn-arrow" aria-hidden="true">→</span>
+              <span className="twin-btn-arrow" aria-hidden="true">
+                →
+              </span>
             </button>
           </div>
         </div>
@@ -127,16 +134,10 @@ const DigitalTwinModal = () => {
           aria-label="3D Villa Deneyimi"
         >
           <div ref={panelRef} className="twin-modal-panel">
-            {/* Close button */}
-            <button
-              className="twin-modal-close"
-              onClick={closeModal}
-              aria-label="Kapat"
-            >
+            <button className="twin-modal-close" onClick={closeModal} aria-label="Kapat">
               <X size={20} />
             </button>
 
-            {/* Lazy 3D scene */}
             <Suspense
               fallback={
                 <div className="twin-modal-loading">

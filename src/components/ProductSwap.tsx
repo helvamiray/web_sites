@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, lazy, Suspense } from "react";
 import { useNavigate } from "@tanstack/react-router";
 import { animate, spring } from "animejs";
 import { ShoppingCart, ArrowRight } from "lucide-react";
@@ -6,8 +6,7 @@ import { PRODUCTS, type Product, CATEGORY_LABEL } from "@/data/products";
 import { useCart } from "@/providers/CartContext";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { useTheme, type ProductTheme } from "@/context/ThemeContext";
-import Mini3DPreview from "@/components/Mini3DPreview";
-import { getCategoryRender } from "@/components/ProductRenders";
+const Mini3DPreview = lazy(() => import("@/components/Mini3DPreview"));
 
 const THEME_MAP: Record<string, ProductTheme> = {
   "isi-pompasi": "heatpump",
@@ -174,7 +173,9 @@ const ProductSwap = () => {
           <div ref={centerRef} className="swap-center" aria-live="polite">
             <div className="swap-3d-wrap" aria-label={name}>
               {selected.preview3d ? (
-                <Mini3DPreview kind={selected.preview3d} spinning />
+                <Suspense fallback={null}>
+                  <Mini3DPreview kind={selected.preview3d} spinning />
+                </Suspense>
               ) : (
                 <div
                   style={{

@@ -1,8 +1,7 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-gsap.registerPlugin(ScrollTrigger);
+import { revealOnView } from "@/utils/revealOnView";
 
 interface Props {
   text: string;
@@ -14,13 +13,10 @@ interface Props {
   as?: "p" | "h2" | "h3" | "span";
   className?: string;
   style?: React.CSSProperties;
-  /** How much of the section to scrub over (0–1 of trigger height). Default: 0.8 */
-  scrubRatio?: number;
 }
 
 /**
- * Splits `text` into word-spans and scrubs them from dim → lit
- * as the user scrolls through the element.  prefers-reduced-motion safe.
+ * Splits `text` into word-spans — one-shot staggered reveal on view (no scroll scrub).
  */
 const WordReveal = ({
   text,
@@ -29,62 +25,46 @@ const WordReveal = ({
   as: Tag = "p",
   className,
   style,
-  scrubRatio = 0.85,
 }: Props) => {
   const ref = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
     const el = ref.current;
-    if (!el) return;
+    if (!el) return undefined;
 
-    const motionOk = !window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
-    ).matches;
+    const motionOk = !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    // Split text into word spans
     const words = text.trim().split(/\s+/);
     el.innerHTML = words
       .map(
         (w) =>
-          `<span class="wr-word" style="display:inline; white-space:pre-wrap;">${w} </span>`
+          `<span class="wr-word" style="display:inline; white-space:pre-wrap;">${w} </span>`,
       )
       .join("");
 
-    if (!motionOk) return; // static full opacity for reduced-motion users
+    if (!motionOk) {
+      const wordEls = el.querySelectorAll<HTMLSpanElement>(".wr-word");
+      gsap.set(wordEls, { opacity: 1 });
+      return undefined;
+    }
 
     const wordEls = el.querySelectorAll<HTMLSpanElement>(".wr-word");
-
-    // Dim all words initially
     gsap.set(wordEls, { opacity: dimOpacity });
 
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: el,
-        start: "top 78%",
-        end: `bottom+=${el.offsetHeight * scrubRatio}px 30%`,
-        scrub: 1.2,
+    return revealOnView(
+      el,
+      () => {
+        gsap.to(wordEls, {
+          opacity: 1,
+          color: litColor,
+          duration: 1.05,
+          stagger: 0.04,
+          ease: "power2.out",
+        });
       },
-    });
-
-    tl.to(wordEls, {
-      opacity: 1,
-      color: litColor,
-      stagger: {
-        each: 0.04,
-        from: "start",
-      },
-      ease: "none",
-    });
-
-    return () => {
-      tl.kill();
-      ScrollTrigger.getAll()
-        .filter((t) => t.vars.trigger === el)
-        .forEach((t) => t.kill());
-      // Restore plain text so it's readable without JS
-      el.textContent = text;
-    };
-  }, [text, dimOpacity, litColor, scrubRatio]);
+      { rootMargin: "0px 0px -14% 0px", threshold: 0 },
+    );
+  }, [text, dimOpacity, litColor]);
 
   return (
     <Tag

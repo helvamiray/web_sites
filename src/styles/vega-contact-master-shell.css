@@ -1,0 +1,256 @@
+/* =========================================================================
+   VEGA — Contact showroom as global design master
+   Deep canvas, glass cards, typography rhythm, primary cyan vs outline CTAs.
+   Load after section styles so these win on specificity where needed.
+   ========================================================================= */
+
+:root {
+  /* Contact showroom — exact canvas stack (also applied on body in global.css) */
+  --vega-canvas-base: #061421;
+  --vega-canvas-mid: #082033;
+  --vega-canvas-rise: #0a2740;
+  --vega-canvas-radial-a: rgba(103, 232, 249, 0.055);
+  --vega-canvas-radial-b: rgba(103, 232, 249, 0.04);
+
+  /* Value card + form glass (lux-contact--showroom) */
+  --vega-surface-card: rgba(255, 255, 255, 0.035);
+  --vega-surface-panel: rgba(8, 20, 35, 0.45);
+  --vega-edge-subtle: rgba(120, 220, 255, 0.14);
+  --vega-edge-hover: rgba(120, 220, 255, 0.32);
+  --vega-card-inset: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  --vega-card-ambient: 0 12px 36px -20px rgba(6, 20, 33, 0.52);
+
+  /* Primary CTA — lux-contact-submit--showroom */
+  --vega-cta-fill-bg: linear-gradient(
+    118deg,
+    #0891b2 0%,
+    #22d3ee 32%,
+    #67e8f9 52%,
+    #0e7490 100%
+  );
+  --vega-cta-fill-bg-size: 200% 100%;
+  --vega-cta-fill-ink: #041018;
+  --vega-cta-fill-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.22) inset,
+    0 10px 32px -8px rgba(34, 211, 238, 0.35),
+    0 0 36px rgba(103, 232, 249, 0.18);
+
+  /* Secondary / outline — dark sections */
+  --vega-cta-outline-border: rgba(255, 255, 255, 0.28);
+  --vega-cta-outline-ink: rgba(248, 250, 252, 0.95);
+}
+
+@keyframes vega-contact-master-cta-shift {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes vega-contact-master-cta-shine {
+  0% {
+    translate: -130% 0;
+  }
+  55%,
+  100% {
+    translate: 130% 0;
+  }
+}
+
+/* ── Typography: italic accent lines (contact heading accent) ─────────── */
+.ultra-premium-hero__title-accent,
+.premium-product-selection__title-accent,
+.lux-about__title-accent,
+.ecs-studio__title-italic {
+  font-family:
+    var(--font-lux-serif, "Playfair Display", "Bodoni Moda", ui-serif, Georgia, serif) !important;
+  font-style: italic !important;
+  font-weight: 550 !important;
+  background: linear-gradient(118deg, #e0fdff 0%, #67e8f9 38%, #22d3ee 92%) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  color: transparent !important;
+  filter: drop-shadow(0 0 14px rgba(103, 232, 249, 0.14)) !important;
+  text-shadow: none !important;
+}
+
+/* ── Primary filled CTAs ─────────────────────────────────────────────── */
+.lux-contact-submit--showroom {
+  background: var(--vega-cta-fill-bg);
+  background-size: var(--vega-cta-fill-bg-size);
+  color: var(--vega-cta-fill-ink);
+  box-shadow: var(--vega-cta-fill-shadow);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .lux-contact-submit--showroom:not(:hover) {
+    animation: vega-contact-master-cta-shift 8s ease infinite;
+  }
+}
+
+.grav-navbar .grav-nav-cta.lux-cinematic-target,
+.twin-cta.btn-send,
+.product-detail-page .btn-add-cart {
+  border: none !important;
+  border-radius: 0.85rem !important;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+  font-family: var(--font-lux-sans, "Inter", "Satoshi", system-ui, sans-serif) !important;
+  font-size: clamp(0.82rem, 0.92vw, 0.94rem) !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.04em !important;
+  text-transform: none !important;
+  color: var(--vega-cta-fill-ink) !important;
+  background: var(--vega-cta-fill-bg) !important;
+  background-size: var(--vega-cta-fill-bg-size) !important;
+  box-shadow: var(--vega-cta-fill-shadow) !important;
+  transition:
+    transform 0.38s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.35s ease !important;
+}
+
+/* Homepage hero primary — showroom cyan + cinematic pill sizing */
+.landing-page .studio-vega-hero__cta-primary.studio-vega-hero__cta-explore.hero-cinematic-btn,
+.landing-page
+  .ultra-premium-hero__cta-primary.hero-cinematic-btn.studio-vega-hero__cta-primary {
+  border: none !important;
+  border-radius: 999px !important;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+  font-family: var(--font-lux-sans, "Inter", "Satoshi", system-ui, sans-serif) !important;
+  font-size: clamp(0.65rem, 0.72vw, 0.75rem) !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.16em !important;
+  text-transform: uppercase !important;
+  color: var(--vega-cta-fill-ink) !important;
+  background: var(--vega-cta-fill-bg) !important;
+  background-size: var(--vega-cta-fill-bg-size) !important;
+  box-shadow: var(--vega-cta-fill-shadow) !important;
+  transition:
+    transform 0.38s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.35s ease !important;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .landing-page .studio-vega-hero__cta-primary.studio-vega-hero__cta-explore.hero-cinematic-btn,
+  .landing-page
+    .ultra-premium-hero__cta-primary.hero-cinematic-btn.studio-vega-hero__cta-primary,
+  .grav-navbar .grav-nav-cta.lux-cinematic-target,
+  .twin-cta.btn-send,
+  .product-detail-page .btn-add-cart {
+    animation: vega-contact-master-cta-shift 8s ease infinite;
+  }
+}
+
+.landing-page .studio-vega-hero__cta-primary.studio-vega-hero__cta-explore.hero-cinematic-btn:hover,
+.landing-page
+  .ultra-premium-hero__cta-primary.hero-cinematic-btn.studio-vega-hero__cta-primary:hover,
+.grav-navbar .grav-nav-cta.lux-cinematic-target:hover,
+.twin-cta.btn-send:hover,
+.product-detail-page .btn-add-cart:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.3) inset,
+    0 16px 44px -6px rgba(34, 211, 238, 0.45),
+    0 0 48px rgba(103, 232, 249, 0.28) !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lux-contact-submit--showroom,
+  .landing-page .studio-vega-hero__cta-primary.studio-vega-hero__cta-explore.hero-cinematic-btn,
+  .landing-page
+    .ultra-premium-hero__cta-primary.hero-cinematic-btn.studio-vega-hero__cta-primary,
+  .grav-navbar .grav-nav-cta.lux-cinematic-target,
+  .twin-cta.btn-send,
+  .product-detail-page .btn-add-cart {
+    animation: none !important;
+  }
+}
+
+/* Navbar quote — capsule padding coherent with cinematic nav */
+.grav-navbar .grav-nav-cta.lux-cinematic-target {
+  padding: 0.52rem 1.15rem !important;
+}
+
+/* ── Outline / ghost CTAs ──────────────────────────────────────────────── */
+.landing-page .studio-vega-hero__cta-explore-outline.hero-cinematic-btn,
+.landing-page .hero-cinematic .ultra-premium-hero__cta-secondary.hero-cinematic-btn--ghost,
+.pps-studio-cart-btn,
+.ecs-studio-btn--ghost {
+  background: transparent !important;
+  color: var(--vega-cta-outline-ink) !important;
+  border: 1px solid var(--vega-cta-outline-border) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04) !important;
+}
+
+.landing-page .studio-vega-hero__cta-explore-outline.hero-cinematic-btn:hover,
+.pps-studio-cart-btn:hover,
+.ecs-studio-btn--ghost:hover {
+  border-color: rgba(255, 255, 255, 0.42) !important;
+  background: rgba(255, 255, 255, 0.04) !important;
+  transform: translateY(-1px);
+}
+
+.pps-studio-cart-btn {
+  background: rgba(255, 255, 255, 0.03) !important;
+}
+
+/* Navbar cart — capsule outline on white chrome */
+.grav-navbar .grav-nav-cart {
+  border: 1px solid rgba(15, 41, 66, 0.14) !important;
+  border-radius: 999px !important;
+  padding: 0.42rem !important;
+  background: transparent !important;
+}
+
+.grav-navbar .grav-nav-cart:hover {
+  background: rgba(15, 41, 66, 0.05) !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .landing-page .studio-vega-hero__cta-explore-outline.hero-cinematic-btn:hover,
+  .pps-studio-cart-btn:hover,
+  .ecs-studio-btn--ghost:hover {
+    transform: none !important;
+  }
+}
+
+/* Engineering studio — lone primary stays filled */
+.ecs-studio-btn--primary:not(.ecs-studio-btn--ghost) {
+  border: none !important;
+  color: var(--vega-cta-fill-ink) !important;
+  background: var(--vega-cta-fill-bg) !important;
+  background-size: var(--vega-cta-fill-bg-size) !important;
+  box-shadow: var(--vega-cta-fill-shadow) !important;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .ecs-studio-btn--primary:not(.ecs-studio-btn--ghost) {
+    animation: vega-contact-master-cta-shift 8s ease infinite;
+  }
+}
+
+/* Product quote secondary — reinforced white outline */
+.product-detail-page .btn-quote-outline {
+  border-color: rgba(255, 255, 255, 0.32) !important;
+  color: rgba(248, 250, 252, 0.95) !important;
+  background: transparent !important;
+}
+
+/* Glass utility panels pick up showroom card language */
+.twin-cta.btn-send::before {
+  display: none !important;
+}
+
+.me-glass-panel {
+  background: var(--vega-surface-panel) !important;
+  border-color: var(--vega-edge-subtle) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.05),
+    var(--vega-card-ambient) !important;
+}

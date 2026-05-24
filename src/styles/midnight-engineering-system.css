@@ -9,19 +9,25 @@
   --ease-lux-smooth: cubic-bezier(0.4, 0, 0.2, 1);
   --pvs-radius-premium: 14px;
 
-  /* Core midnight surfaces — layered navy cinema */
-  --midnight-hero: #071521;
-  --midnight-navy-2: #0a2036;
-  --midnight-navy-3: #0d2d4d;
-  --midnight-navy-4: #12395e;
-  --midnight-about: #0a2036;
-  --midnight-contact: #071521;
+  /** Contact showroom base — aligns body + midnight sections */
+  --vega-canvas-base: #061421;
+
+  /** Single unified page canvas */
+  --site-canvas-bg: #082033;
+
+  /* Core midnight strata — flattened to unified canvas */
+  --midnight-hero: var(--site-canvas-bg);
+  --midnight-navy-2: var(--site-canvas-bg);
+  --midnight-navy-3: var(--site-canvas-bg);
+  --midnight-navy-4: var(--site-canvas-bg);
+  --midnight-about: var(--site-canvas-bg);
+  --midnight-contact: var(--site-canvas-bg);
 
   /* Typography — no black on navy */
-  --me-heading: #f4f8fc;
-  --me-body: #b8c7d9;
-  --me-label: #8fb8d4;
-  --me-accent-italic: #67e8f9;
+  --me-heading: rgba(244, 248, 252, 0.97);
+  --me-body: rgba(200, 212, 228, 0.82);
+  --me-label: rgba(103, 232, 249, 0.42);
+  --me-accent-italic: transparent;
   --me-accent-italic-glow: 0 0 18px rgba(103, 232, 249, 0.22);
 
   --me-accent: #57dfff;
@@ -29,9 +35,9 @@
   --me-text: var(--me-heading);
   --me-text-secondary: var(--me-body);
   --me-text-muted: #8ea3b8;
-  --me-border: rgba(120, 220, 255, 0.12);
-  --me-glass: rgba(15, 30, 50, 0.72);
-  --me-glass-border: rgba(120, 220, 255, 0.15);
+  --me-border: rgba(120, 220, 255, 0.14);
+  --me-glass: rgba(8, 20, 35, 0.45);
+  --me-glass-border: rgba(120, 220, 255, 0.14);
 
   /* Top bar — premium white glass (nav only) */
   --me-nav-glass: rgba(255, 255, 255, 0.92);
@@ -40,14 +46,14 @@
   --me-nav-border: rgba(15, 40, 70, 0.1);
   --me-nav-shadow: 0 1px 0 rgba(255, 255, 255, 0.85) inset, 0 8px 32px -12px rgba(15, 35, 55, 0.18);
 
-  --font-lux-serif: "Cormorant Garamond", "Bodoni Moda", "Instrument Serif", ui-serif, Georgia, serif;
+  --font-lux-serif: "Playfair Display", "Bodoni Moda", "Cormorant Garamond", "Instrument Serif", ui-serif, Georgia, serif;
   --font-lux-sans: "Satoshi", "Plus Jakarta Sans", "Inter", system-ui, sans-serif;
 
   /* shadcn-compatible — body is readable engineering gray */
-  --background: var(--midnight-navy-2);
+  --background: var(--site-canvas-bg);
   --foreground: var(--me-body);
 
-  --card: rgba(15, 35, 55, 0.78);
+  --card: rgba(255, 255, 255, 0.035);
   --card-foreground: var(--me-heading);
 
   --popover: rgba(10, 22, 40, 0.94);
@@ -76,19 +82,19 @@
   --cyan-glow: rgba(87, 223, 255, 0.35);
   --amber: oklch(0.72 0.12 65);
 
-  --gradient-hero:
-    radial-gradient(ellipse 100% 70% at 50% -15%, rgba(103, 232, 249, 0.07), transparent 52%),
-    radial-gradient(ellipse 80% 45% at 100% 0%, rgba(15, 60, 100, 0.12), transparent 48%),
-    linear-gradient(180deg, var(--midnight-hero) 0%, var(--midnight-navy-2) 38%, var(--midnight-navy-3) 72%, var(--midnight-navy-4) 100%);
+  --gradient-hero: linear-gradient(180deg, var(--site-canvas-bg) 0%, var(--site-canvas-bg) 100%);
 
   --gradient-cyan: linear-gradient(135deg, var(--me-accent) 0%, var(--me-accent-soft) 100%);
   --gradient-amber: linear-gradient(135deg, oklch(0.72 0.12 65), oklch(0.62 0.14 50));
 
-  --glass-bg: var(--me-glass);
+  --glass-bg: rgba(255, 255, 255, 0.035);
   --glass-border: var(--me-glass-border);
-  --shadow-glass: 0 12px 48px -20px rgba(0, 0, 0, 0.55);
+  --shadow-glass:
+    inset 0 1px 0 rgba(255, 255, 255, 0.04),
+    0 12px 42px -18px rgba(0, 0, 0, 0.5),
+    0 12px 36px -20px rgba(6, 20, 33, 0.45);
 
-  --terminal-bg: var(--midnight-navy-2);
+  --terminal-bg: var(--site-canvas-bg);
   --terminal-surface: rgba(12, 28, 46, 0.92);
   --terminal-surface2: rgba(16, 41, 68, 0.65);
   --terminal-border: var(--me-border);
@@ -97,7 +103,7 @@
   --electric-cyan: var(--me-accent);
 
   /* Premium visual system (legacy aliases) */
-  --pvs-bg-page: var(--midnight-navy-2);
+  --pvs-bg-page: var(--site-canvas-bg);
   --pvs-bg-ice: rgba(18, 40, 62, 0.5);
   --pvs-accent: var(--me-accent);
   --pvs-ink-deep: var(--me-heading);
@@ -108,9 +114,9 @@
   --pvs-gradient-cinematic: var(--gradient-hero);
 
   /* Products catalog */
-  --products-bg: var(--midnight-navy-3);
-  --products-card-bg: rgba(15, 35, 55, 0.82);
-  --products-card-border: var(--me-border);
+  --products-bg: var(--site-canvas-bg);
+  --products-card-bg: rgba(255, 255, 255, 0.035);
+  --products-card-border: rgba(120, 220, 255, 0.14);
   --products-text-primary: var(--me-heading);
   --products-text-secondary: var(--me-body);
   --products-sidebar-bg: rgba(8, 22, 38, 0.95);
@@ -124,7 +130,7 @@
   --page-text: var(--me-body);
   --partner-heading: var(--me-heading);
   --partner-wordmark: var(--me-heading);
-  --partner-section-bg: var(--midnight-navy-4);
+  --partner-section-bg: var(--site-canvas-bg);
   --partner-sub: var(--me-text-muted);
   --projects-map-overlay: rgba(6, 18, 32, 0.88);
   --projects-map-overlay-deep: rgba(4, 12, 24, 0.92);
@@ -137,7 +143,7 @@
   --quote-body: var(--me-body);
   --quote-link: var(--me-heading);
   --quote-link-hover: var(--me-accent);
-  --quote-card-bg: rgba(15, 32, 52, 0.55);
+  --quote-card-bg: rgba(255, 255, 255, 0.035);
   --quote-card-border: var(--me-border);
   --quote-input-bg: rgba(8, 18, 32, 0.72);
   --quote-input-border: var(--me-border);
@@ -160,11 +166,12 @@
   position: fixed;
   inset: 0;
   z-index: 0;
-  opacity: 0.22;
+  opacity: 0.11;
   background-image:
-    linear-gradient(rgba(120, 220, 255, 0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(120, 220, 255, 0.05) 1px, transparent 1px);
-  background-size: 48px 48px;
+    linear-gradient(rgba(120, 220, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(120, 220, 255, 0.035) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(ellipse 78% 68% at 50% 46%, black 28%, transparent 76%);
   animation: me-blueprint-drift 100s linear infinite;
 }
 
@@ -186,35 +193,35 @@
 }
 
 .midnight-section--hero {
-  background: linear-gradient(180deg, var(--midnight-hero) 0%, var(--midnight-navy-2) 100%);
+  background: var(--site-canvas-bg);
 }
 
 .midnight-section--tech {
-  background: linear-gradient(165deg, var(--midnight-navy-2) 0%, var(--midnight-navy-3) 55%, #0b2238 100%);
+  background: var(--site-canvas-bg);
 }
 
 .midnight-section--products {
-  background: linear-gradient(180deg, var(--midnight-navy-3) 0%, var(--midnight-navy-4) 50%, var(--midnight-navy-2) 100%);
+  background: var(--site-canvas-bg);
 }
 
 .midnight-section--studio {
-  background: linear-gradient(165deg, var(--midnight-hero) 0%, var(--midnight-navy-3) 55%, #10395c 100%);
+  background: var(--site-canvas-bg);
 }
 
 .midnight-section--about {
-  background: linear-gradient(180deg, #0a2036 0%, var(--midnight-navy-3) 100%);
+  background: var(--site-canvas-bg);
 }
 
 .midnight-section--partners {
-  background: linear-gradient(180deg, var(--midnight-navy-4) 0%, var(--midnight-navy-3) 100%);
+  background: var(--site-canvas-bg);
 }
 
 .midnight-section--contact {
-  background: linear-gradient(180deg, var(--midnight-hero) 0%, #0a2036 100%);
+  background: var(--site-canvas-bg);
 }
 
 .midnight-section--footer {
-  background: linear-gradient(180deg, #050d16 0%, var(--midnight-hero) 100%);
+  background: var(--site-canvas-bg);
 }
 
 /* Cinematic glass panel utility */
@@ -313,26 +320,38 @@
 }
 
 .grav-nav-cta {
-  border: 1px solid rgba(14, 140, 180, 0.28) !important;
-  color: #0b6d94 !important;
-  background: rgba(255, 255, 255, 0.45) !important;
-  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.65) inset;
+  border: none !important;
+  color: #041018 !important;
+  background: linear-gradient(
+    118deg,
+    #0891b2 0%,
+    #22d3ee 32%,
+    #67e8f9 52%,
+    #0e7490 100%
+  ) !important;
+  background-size: 200% 100% !important;
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.22) inset,
+    0 10px 32px -8px rgba(34, 211, 238, 0.35),
+    0 0 36px rgba(103, 232, 249, 0.18) !important;
 }
 
 .grav-nav-cta:hover {
   background: linear-gradient(
-    135deg,
-    rgba(103, 232, 249, 0.2),
-    rgba(14, 165, 233, 0.12)
+    118deg,
+    #0891b2 0%,
+    #22d3ee 32%,
+    #67e8f9 52%,
+    #0e7490 100%
   ) !important;
-  color: #063d54 !important;
-  border-color: rgba(14, 165, 233, 0.4) !important;
-  box-shadow: 0 8px 28px -10px rgba(14, 165, 233, 0.35) !important;
+  border-color: transparent !important;
+  color: #041018 !important;
+  transform: translateY(-1px);
 }
 
 .grav-navbar.scrolled .grav-nav-cta {
-  border-color: rgba(14, 140, 180, 0.32) !important;
-  color: #0b6d94 !important;
+  border: none !important;
+  color: #041018 !important;
 }
 
 .grav-cart-badge {
@@ -347,13 +366,4 @@
   .main-content :where(h1, h2, h3, h4, h5, h6) {
     color: var(--me-heading);
   }
-}
-
-/* Italic accent lines — soft cyan glow */
-.ultra-premium-hero__title-accent,
-.premium-product-selection__title-accent,
-.lux-about__title-accent,
-.ecs-studio__title-italic {
-  color: var(--me-accent-italic) !important;
-  text-shadow: var(--me-accent-italic-glow);
 }

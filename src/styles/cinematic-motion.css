@@ -1,6 +1,6 @@
 /**
  * Cinematic motion layer — minimal, premium, reduced-motion safe.
- * Utilities: ambient orbs, soft blur reveals, view-timeline parallax, floating chrome.
+ * Utilities: ambient orbs, soft blur reveals (no view-timeline scroll parallax), floating chrome.
  */
 
 :root {
@@ -61,7 +61,6 @@
   border-radius: 50%;
   filter: blur(104px);
   opacity: 0.48;
-  will-change: transform, opacity;
   animation: lux-ambient-orb-drift 22s var(--lux-motion-ease-smooth) infinite alternate;
 }
 
@@ -125,35 +124,8 @@
   }
 }
 
-/* ── Scroll-linked parallax (progressive enhancement) ──────────── */
-@supports (animation-timeline: view()) {
-  @media (prefers-reduced-motion: no-preference) {
-    .lux-parallax-view {
-      animation: lux-parallax-view-shift linear both;
-      animation-timeline: view(block);
-      animation-range: entry 0% cover 58%;
-    }
-  }
-}
-
-@keyframes lux-parallax-view-shift {
-  from {
-    transform: translate3d(0, calc(var(--lux-parallax-shift) * 0.55), 0);
-  }
-  to {
-    transform: translate3d(0, calc(var(--lux-parallax-shift) * -0.45), 0);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .lux-parallax-view {
-    animation: none !important;
-  }
-}
-
 .lux-parallax-wrap {
   width: 100%;
-  will-change: transform;
 }
 
 /* ── Floating nav chrome ─────────────────────────────────────────── */
@@ -206,4 +178,4 @@
   }
 }
 
-/* Scroll-scrubbed blur is driven from `scrollReveal.ts` + anime.js. */
+/* Section reveals: one-shot IO + anime.js (`scrollReveal.ts`). */

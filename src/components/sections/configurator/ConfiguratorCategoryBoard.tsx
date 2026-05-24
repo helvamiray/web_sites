@@ -42,11 +42,11 @@ export function ConfiguratorCategoryBoard({
             <motion.li key={c} variants={ITEM}>
               <motion.button
                 type="button"
+                data-lux-cursor=""
                 aria-pressed={sel}
                 className={`pps-studio-chip-btn${sel ? " pps-studio-chip-btn--selected" : ""}`}
                 onClick={() => onPick(c)}
-                whileHover={{ y: -1 }}
-                transition={{ duration: 0.32, ease: [0.16, 1, 0.3, 1] }}
+                transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
               >
                 {c}
               </motion.button>

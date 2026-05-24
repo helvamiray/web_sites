@@ -25,7 +25,7 @@ const Mini3DPreview = ({ kind, spinning = true }: Props) => {
     camera.lookAt(0, 0.4, 0);
 
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
     renderer.setSize(w, h);
     renderer.setClearColor(0x000000, 0);
     mount.appendChild(renderer.domElement);
@@ -246,17 +246,58 @@ const Mini3DPreview = ({ kind, spinning = true }: Props) => {
 
     scene.add(root);
 
-    let raf = 0;
     const start = performance.now();
-    const animate = () => {
-      raf = requestAnimationFrame(animate);
+
+    let raf = 0;
+    let inViewport = true;
+
+    const stopLoop = (): void => {
+      if (raf) {
+        cancelAnimationFrame(raf);
+        raf = 0;
+      }
+    };
+
+    const loop = (): void => {
+      if (!inViewport || document.hidden) {
+        raf = 0;
+        return;
+      }
       if (spinning) {
         const t = (performance.now() - start) * 0.0006;
         root.rotation.y = t;
       }
       renderer.render(scene, camera);
+      raf = requestAnimationFrame(loop);
     };
-    animate();
+
+    const startLoop = (): void => {
+      if (raf !== 0 || document.hidden || !inViewport) return;
+      raf = requestAnimationFrame(loop);
+    };
+
+    const io = new IntersectionObserver(
+      ([e]) => {
+        inViewport = Boolean(e?.isIntersecting);
+        if (inViewport && !document.hidden) startLoop();
+        else stopLoop();
+      },
+      { root: null, threshold: 0.06 },
+    );
+    io.observe(mount);
+
+    const onVisibility = (): void => {
+      if (document.hidden) {
+        stopLoop();
+        return;
+      }
+      startLoop();
+    };
+    document.addEventListener("visibilitychange", onVisibility);
+
+    if (!document.hidden) {
+      startLoop();
+    }
 
     const onResize = () => {
       const ww = mount.clientWidth;
@@ -269,7 +310,9 @@ const Mini3DPreview = ({ kind, spinning = true }: Props) => {
     ro.observe(mount);
 
     return () => {
-      cancelAnimationFrame(raf);
+      document.removeEventListener("visibilitychange", onVisibility);
+      io.disconnect();
+      stopLoop();
       ro.disconnect();
       renderer.dispose();
       if (renderer.domElement.parentNode) {

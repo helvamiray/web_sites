@@ -1,17 +1,12 @@
-import { useCallback, useMemo, useState } from "react";
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { useCallback, useMemo, useState, type ReactNode } from "react";
 
-import {
-  ConfiguratorBrandGallery,
-  ConfiguratorCategoryBoard,
-  ConfiguratorProductTypeGrid,
-  ConfiguratorRevealStage,
-} from "@/components/sections/configurator";
 import { PRODUCTS } from "@/data/products";
 import { PRODUCT_CONFIGURATOR_HASH_ID } from "@/constants/landingSections";
 import {
   CONFIGURATOR_HERO_IMAGE,
   CONFIGURATOR_TECH_CARDS,
+  CONFIGURATOR_TYPE_THUMB,
+  getConfiguratorBrandLogoUrl,
   getConfiguratorRepresentativeProductId,
   getCategoriesFor,
   PRODUCT_TYPES,
@@ -20,41 +15,82 @@ import {
 import { useConfiguratorStudioBrandsMerged, useSyncedConfiguratorTitles } from "@/hooks/useSyncedSiteCms";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { getMergedSubcategoriesForBrand } from "@/lib/cmsRuntime";
+import { cn } from "@/lib/utils";
 import { useCart } from "@/providers/CartContext";
+import { intersectBrandsForProductType } from "@/utils/intersectBrandsForProductType";
 
-type SelectionStep = "type" | "brand" | "category" | "reveal";
-
-const EASE_SOFT = [0.16, 1, 0.3, 1] as const;
-
-const PROGRESS = [
-  { key: "p1", label: "Ürün" },
-  { key: "p2", label: "Marka" },
-  { key: "p3", label: "Alt kategori" },
-  { key: "p4", label: "Ürün ön izleme" },
-  { key: "p5", label: "Sepete ekle" },
-] as const;
-
-function rankStep(s: SelectionStep): number {
-  switch (s) {
-    case "type":
-      return 1;
-    case "brand":
-      return 2;
-    case "category":
-      return 3;
-    case "reveal":
-      return 4;
-  }
+interface Copy {
+  stepType: string;
+  stepBrand: string;
+  stepCategory: string;
+  stepPreview: string;
+  stepCart: string;
+  summaryTitle: string;
+  summaryEmpty: string;
+  summaryPartial: string;
+  summarySku: string;
+  addToCart: string;
+  resetFlow: string;
+  backCategory: string;
 }
 
-/** Apple × Porsche konfiguratör sırası — koyu cam vitrin; doğrudan seçim ile başlar. */
+const COPY: Record<"tr" | "en", Copy> = {
+  tr: {
+    stepType: "Ürün tipi",
+    stepBrand: "Marka",
+    stepCategory: "Alt kategori",
+    stepPreview: "Ön izleme",
+    stepCart: "Sepete ekle",
+    summaryTitle: "Özet",
+    summaryEmpty: "Soldan ürün tipini seçerek başlayın.",
+    summaryPartial: "Seçimleriniz sağda güncellenir.",
+    summarySku: "Sepet ürünü",
+    addToCart: "Sepete ekle",
+    resetFlow: "Akışı sıfırla",
+    backCategory: "Alt kategoriye dön",
+  },
+  en: {
+    stepType: "Product type",
+    stepBrand: "Brand",
+    stepCategory: "Subcategory",
+    stepPreview: "Preview",
+    stepCart: "Add to cart",
+    summaryTitle: "Summary",
+    summaryEmpty: "Start by selecting a product type on the left.",
+    summaryPartial: "Your selections update here.",
+    summarySku: "Cart item",
+    addToCart: "Add to cart",
+    resetFlow: "Reset flow",
+    backCategory: "Back to subcategory",
+  },
+};
+
+interface SplitStepShellProps {
+  stepIndex: number;
+  title: string;
+  body: ReactNode;
+}
+
+function SplitStepShell({ stepIndex, title, body }: SplitStepShellProps) {
+  return (
+    <div className="pps-split__step" data-split-step="">
+      <p className="pps-split__step-head">
+        <span className="pps-split__step-num">{stepIndex}</span>
+        <span className="pps-split__step-title">{title}</span>
+      </p>
+      <div className="pps-split__step-body">{body}</div>
+    </div>
+  );
+}
+
+/** Split-screen accordion configurator — dark teal tones, minimal chrome */
 export function PremiumProductSelectionSection() {
-  const reduceMotion = useReducedMotion();
   const { add, openCart } = useCart();
   const { lang } = useLanguage();
   const configuratorTitles = useSyncedConfiguratorTitles();
   const studioBrands = useConfiguratorStudioBrandsMerged();
-  const [step, setStep] = useState<SelectionStep>("type");
+  const t = COPY[lang === "tr" ? "tr" : "en"];
+
   const [productId, setProductId] = useState<ProductTypeId | null>(null);
   const [brand, setBrand] = useState<string | null>(null);
   const [category, setCategory] = useState<string | null>(null);
@@ -72,7 +108,13 @@ export function PremiumProductSelectionSection() {
   const fallbackCategories = useMemo(() => (productId ? getCategoriesFor(productId) : []), [productId]);
   const effectiveSubcats = subCategories.length > 0 ? subCategories : fallbackCategories;
 
+  const brandsFiltered = useMemo(() => {
+    if (!productId) return [];
+    return intersectBrandsForProductType(productId, studioBrands);
+  }, [productId, studioBrands]);
+
   const heroAsset = productId ? CONFIGURATOR_HERO_IMAGE[productId] : null;
+  const typeThumb = productId ? CONFIGURATOR_TYPE_THUMB[productId] : null;
   const techCards = productId ? CONFIGURATOR_TECH_CARDS[productId] : [];
 
   const cartProductId = useMemo(() => {
@@ -90,56 +132,31 @@ export function PremiumProductSelectionSection() {
       ? (configuratorTitles.titleTr ?? "Ürün konfigürasyonu")
       : (configuratorTitles.titleEn ?? "Product configuration");
 
-  const fadePanel = reduceMotion
-    ? { initial: { opacity: 1 }, animate: { opacity: 1 }, exit: { opacity: 1 } }
-    : {
-        initial: { opacity: 0, y: 14 },
-        animate: { opacity: 1, y: 0, transition: { duration: 0.52, ease: EASE_SOFT } },
-        exit: { opacity: 0, y: -10, transition: { duration: 0.4, ease: EASE_SOFT } },
-      };
+  const selectionComplete = Boolean(productId && brand && category && heroAsset && productMeta);
 
   const pickType = useCallback((id: ProductTypeId) => {
     setProductId(id);
     setBrand(null);
     setCategory(null);
-    setStep("brand");
   }, []);
 
   const pickBrand = useCallback((b: string) => {
     setBrand(b);
     setCategory(null);
-    setStep("category");
   }, []);
 
   const pickCategory = useCallback((c: string) => {
     setCategory(c);
-    setStep("reveal");
   }, []);
 
-  const goBack = useCallback(() => {
-    if (step === "reveal") {
-      setCategory(null);
-      setStep("category");
-      return;
-    }
-    if (step === "category") {
-      setCategory(null);
-      setStep("brand");
-      return;
-    }
-    if (step === "brand") {
-      setProductId(null);
-      setBrand(null);
-      setCategory(null);
-      setStep("type");
-    }
-  }, [step]);
+  const clearCategory = useCallback(() => {
+    setCategory(null);
+  }, []);
 
   const resetFlow = useCallback(() => {
     setProductId(null);
     setBrand(null);
     setCategory(null);
-    setStep("type");
   }, []);
 
   const handleAddConfigured = useCallback(() => {
@@ -151,136 +168,226 @@ export function PremiumProductSelectionSection() {
   return (
     <section
       id={PRODUCT_CONFIGURATOR_HASH_ID}
-      className="premium-product-selection pps-studio midnight-section midnight-section--products"
+      className="premium-product-selection premium-product-selection--split"
     >
-      <div className="pps-studio__veil" aria-hidden />
-      <div className="premium-product-selection__inner pps-studio__inner">
-        {configuratorTitles.visible ? (
-          <h2 className="pps-studio-heading mb-6 text-lg font-semibold tracking-tight text-white/92 text-center font-[family-name:var(--font-sans)]">
-            {headline}
-          </h2>
-        ) : (
-          <h2 className="pps-studio-sr-only">{headline}</h2>
-        )}
+      <div className="pps-split__inner">
+        <header className="pps-split__header">
+          {configuratorTitles.visible ? (
+            <h2 className="pps-split__heading">{headline}</h2>
+          ) : (
+            <h2 className="pps-split__sr-only">{headline}</h2>
+          )}
+          <button type="button" className="pps-split__reset" onClick={resetFlow} data-lux-cursor="">
+            {t.resetFlow}
+          </button>
+        </header>
 
-        <ol className="pps-studio-steps" aria-label="Adımlar">
-          {PROGRESS.map((p, i) => {
-            const idx = i + 1;
-            const rank = rankStep(step);
-            const atReveal = step === "reveal";
+        <div className="pps-split__grid">
+          <div className="pps-split__left" role="region" aria-label={headline}>
+            <SplitStepShell
+              stepIndex={1}
+              title={t.stepType}
+              body={
+                <ul className="pps-split__rows" role="list">
+                  {PRODUCT_TYPES.map((p) => {
+                    const thumb = CONFIGURATOR_TYPE_THUMB[p.id];
+                    const active = productId === p.id;
+                    return (
+                      <li key={p.id}>
+                        <button
+                          type="button"
+                          className={cn("pps-split__row", active && "is-selected")}
+                          onClick={() => pickType(p.id)}
+                          data-lux-cursor=""
+                          aria-pressed={active}
+                        >
+                          <span className="pps-split__row-icon" aria-hidden>
+                            <img src={thumb.src} alt="" width={40} height={40} loading="lazy" />
+                          </span>
+                          <span className="pps-split__row-text">
+                            <span className="pps-split__row-title">{p.label}</span>
+                            <span className="pps-split__row-desc">{p.description}</span>
+                          </span>
+                        </button>
+                      </li>
+                    );
+                  })}
+                </ul>
+              }
+            />
 
-            let state: "done" | "active" | "todo" = "todo";
-            if (atReveal) {
-              state = idx === 5 ? "active" : "done";
-            } else if (idx < rank) {
-              state = "done";
-            } else if (idx === rank) {
-              state = "active";
-            }
-
-            const dim = state === "todo";
-
-            return (
-              <motion.li
-                key={p.key}
-                className={`pps-studio-steps__pill${state === "active" ? " is-active" : ""}${state === "done" ? " is-done" : ""}${dim ? " is-todo" : ""}`}
-                initial={false}
-                animate={{ opacity: dim ? 0.38 : 1 }}
-              >
-                <span className="pps-studio-steps__n">{idx}</span>
-                <span className="pps-studio-steps__t">{p.label}</span>
-              </motion.li>
-            );
-          })}
-        </ol>
-
-        <AnimatePresence mode="wait">
-          {step !== "reveal" ? (
-            <motion.div key="wizard" {...fadePanel} className="pps-studio-wizard">
-              <ConfiguratorProductTypeGrid products={PRODUCT_TYPES} activeId={productId} onPick={pickType} />
-
-              <AnimatePresence>
-                {(step === "brand" || step === "category") && productId ? (
-                  <motion.div key="brands-wrap" {...fadePanel}>
-                    <ConfiguratorBrandGallery brands={studioBrands} selected={brand} onPick={pickBrand} />
-                  </motion.div>
-                ) : null}
-              </AnimatePresence>
-
-              <AnimatePresence>
-                {step === "category" && brand && effectiveSubcats.length ? (
-                  <motion.div key="subs-wrap" {...fadePanel}>
-                    <ConfiguratorCategoryBoard
-                      categories={effectiveSubcats}
-                      selected={category}
-                      onPick={pickCategory}
-                    />
-                  </motion.div>
-                ) : null}
-              </AnimatePresence>
-
-              {(step === "brand" || step === "category") && (
-                <div className="pps-studio-foot">
-                  <button type="button" className="pps-studio-quiet" onClick={goBack}>
-                    ← Geri
-                  </button>
-                  <button type="button" className="pps-studio-quiet is-ghost" onClick={resetFlow}>
-                    Akışı sıfırla
-                  </button>
-                </div>
-              )}
-            </motion.div>
-          ) : null}
-        </AnimatePresence>
-
-        <AnimatePresence>
-          {step === "reveal" && productId && brand && category && heroAsset && productMeta ? (
-            <motion.div key="studio-reveal" {...fadePanel} className="pps-studio-reveal">
-              <aside className="pps-studio-recap">
-                <div className="pps-studio-recap__row">
-                  <span className="pps-studio-chip-static">{productMeta.label}</span>
-                  <span className="pps-studio-chip-static">{brand}</span>
-                  <span className="pps-studio-chip-static">{category}</span>
-                </div>
-                <p className="pps-studio-recap__hint">
-                  Sepet SKU: <strong>{resolvedProduct?.name ?? "—"}</strong>
-                </p>
-                <div className="pps-studio-recap__actions">
-                  <button type="button" className="pps-studio-quiet" onClick={goBack}>
-                    ← Alt kategoriye dön
-                  </button>
-                  <button type="button" className="pps-studio-quiet is-ghost" onClick={resetFlow}>
-                    Yeni konfigürasyon
-                  </button>
-                </div>
-              </aside>
-
-              <ConfiguratorRevealStage
-                brand={brand}
-                category={category}
-                imageSrc={heroAsset.src}
-                imageAlt={heroAsset.alt}
-                techCards={techCards}
+            {productId ? (
+              <SplitStepShell
+                stepIndex={2}
+                title={t.stepBrand}
+                body={
+                  <ul className="pps-split__rows pps-split__rows--compact" role="list">
+                    {brandsFiltered.map((b) => {
+                      const active = brand === b;
+                      const logo = getConfiguratorBrandLogoUrl(b);
+                      return (
+                        <li key={b}>
+                          <button
+                            type="button"
+                            className={cn("pps-split__row pps-split__row--brand", active && "is-selected")}
+                            onClick={() => pickBrand(b)}
+                            data-lux-cursor=""
+                            aria-pressed={active}
+                          >
+                            <span className="pps-split__row-icon pps-split__row-icon--round" aria-hidden>
+                              {logo ? (
+                                <img src={logo} alt="" width={36} height={36} loading="lazy" />
+                              ) : (
+                                <span className="pps-split__row-mono">{b.slice(0, 2)}</span>
+                              )}
+                            </span>
+                            <span className="pps-split__row-text">
+                              <span className="pps-split__row-title">{b}</span>
+                            </span>
+                          </button>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                }
               />
-            </motion.div>
-          ) : null}
-        </AnimatePresence>
+            ) : null}
 
-        <AnimatePresence>
-          {step === "reveal" && resolvedProduct ? (
-            <motion.div
-              key="cart-affix"
-              className="pps-studio-cart-affix"
-              initial={{ opacity: 0, y: reduceMotion ? 0 : 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.45, ease: EASE_SOFT }}
-            >
-              <button type="button" className="pps-studio-cart-btn" onClick={handleAddConfigured}>
-                Konfigürasyona Ekle
-              </button>
-            </motion.div>
-          ) : null}
-        </AnimatePresence>
+            {productId && brand && effectiveSubcats.length > 0 ? (
+              <SplitStepShell
+                stepIndex={3}
+                title={t.stepCategory}
+                body={
+                  <ul className="pps-split__rows pps-split__rows--dense" role="list">
+                    {effectiveSubcats.map((c) => {
+                      const active = category === c;
+                      return (
+                        <li key={c}>
+                          <button
+                            type="button"
+                            className={cn("pps-split__row pps-split__row--text", active && "is-selected")}
+                            onClick={() => pickCategory(c)}
+                            data-lux-cursor=""
+                            aria-pressed={active}
+                          >
+                            <span className="pps-split__row-glyph" aria-hidden>
+                              ·
+                            </span>
+                            <span className="pps-split__row-title">{c}</span>
+                          </button>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                }
+              />
+            ) : null}
+
+            {selectionComplete && typeThumb ? (
+              <SplitStepShell
+                stepIndex={4}
+                title={t.stepPreview}
+                body={
+                  <div className="pps-split__preview-inline">
+                    <img
+                      className="pps-split__preview-inline-img"
+                      src={typeThumb.src}
+                      alt={typeThumb.alt}
+                      width={120}
+                      height={120}
+                      loading="lazy"
+                    />
+                    <div className="pps-split__preview-inline-meta">
+                      <p className="pps-split__preview-inline-line">
+                        <span className="pps-split__preview-label">{productMeta.label}</span>
+                        <span className="pps-split__preview-sep">·</span>
+                        <span>{brand}</span>
+                      </p>
+                      <p className="pps-split__preview-inline-sub">{category}</p>
+                    </div>
+                  </div>
+                }
+              />
+            ) : null}
+
+            {selectionComplete ? (
+              <SplitStepShell
+                stepIndex={5}
+                title={t.stepCart}
+                body={
+                  <div className="pps-split__cart-step">
+                    <button
+                      type="button"
+                      className="pps-split__cta"
+                      onClick={handleAddConfigured}
+                      disabled={!resolvedProduct}
+                      data-lux-cursor=""
+                    >
+                      {t.addToCart}
+                    </button>
+                    <button type="button" className="pps-split__link" onClick={clearCategory} data-lux-cursor="">
+                      {t.backCategory}
+                    </button>
+                  </div>
+                }
+              />
+            ) : null}
+          </div>
+
+          <aside className="pps-split__right" aria-label={t.summaryTitle}>
+            <p className="pps-split__summary-kicker">{t.summaryTitle}</p>
+
+            {!productId ? (
+              <p className="pps-split__summary-muted">{t.summaryEmpty}</p>
+            ) : (
+              <>
+                <div className="pps-split__summary-stack">
+                  {productMeta ? (
+                    <p className="pps-split__summary-line">
+                      <span className="pps-split__summary-key">{t.stepType}</span>
+                      <span className="pps-split__summary-val">{productMeta.label}</span>
+                    </p>
+                  ) : null}
+                  {brand ? (
+                    <p className="pps-split__summary-line">
+                      <span className="pps-split__summary-key">{t.stepBrand}</span>
+                      <span className="pps-split__summary-val">{brand}</span>
+                    </p>
+                  ) : null}
+                  {category ? (
+                    <p className="pps-split__summary-line">
+                      <span className="pps-split__summary-key">{t.stepCategory}</span>
+                      <span className="pps-split__summary-val">{category}</span>
+                    </p>
+                  ) : null}
+                </div>
+
+                {!category ? <p className="pps-split__summary-muted">{t.summaryPartial}</p> : null}
+
+                {heroAsset ? (
+                  <div className="pps-split__hero">
+                    <img src={heroAsset.src} alt={heroAsset.alt} width={320} height={200} loading="lazy" />
+                  </div>
+                ) : null}
+
+                {category && techCards.length > 0 ? (
+                  <ul className="pps-split__specs">
+                    {techCards.slice(0, 3).map((card) => (
+                      <li key={card.title} className="pps-split__spec">
+                        <span className="pps-split__spec-title">{card.title}</span>
+                        <span className="pps-split__spec-value">{card.value}</span>
+                      </li>
+                    ))}
+                  </ul>
+                ) : null}
+
+                <p className="pps-split__sku">
+                  {t.summarySku}: <strong>{resolvedProduct?.name ?? "—"}</strong>
+                </p>
+              </>
+            )}
+          </aside>
+        </div>
       </div>
     </section>
   );

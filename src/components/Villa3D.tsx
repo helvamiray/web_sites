@@ -146,7 +146,7 @@ const Villa3D = ({ highlightedKey, productImageUrl }: Villa3DProps) => {
       return () => {};
     }
 
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
     renderer.setSize(width, height);
     renderer.setClearColor(0x000000, 0);
     renderer.shadowMap.enabled = true;
@@ -573,8 +573,20 @@ const Villa3D = ({ highlightedKey, productImageUrl }: Villa3DProps) => {
     ro.observe(mount);
 
     let raf = 0;
-    const animate = () => {
-      raf = requestAnimationFrame(animate);
+    let inViewport = true;
+
+    const stopRenderLoop = (): void => {
+      if (raf) {
+        cancelAnimationFrame(raf);
+        raf = 0;
+      }
+    };
+
+    const renderFrame = (): void => {
+      if (!inViewport || document.hidden) {
+        raf = 0;
+        return;
+      }
       const o = orbit;
       camera.position.set(
         o.target.x + Math.sin(o.yaw) * Math.cos(o.pitch) * o.radius,
@@ -616,7 +628,32 @@ const Villa3D = ({ highlightedKey, productImageUrl }: Villa3DProps) => {
       }
 
       renderer.render(scene, camera);
+      raf = requestAnimationFrame(renderFrame);
     };
+
+    const startRenderLoop = (): void => {
+      if (raf !== 0 || document.hidden || !inViewport) return;
+      raf = requestAnimationFrame(renderFrame);
+    };
+
+    const viewportIo = new IntersectionObserver(
+      ([e]) => {
+        inViewport = Boolean(e?.isIntersecting);
+        if (inViewport && !document.hidden) startRenderLoop();
+        else stopRenderLoop();
+      },
+      { root: null, threshold: 0.04, rootMargin: "80px 0px" },
+    );
+    viewportIo.observe(mount);
+
+    const onVisibility = (): void => {
+      if (document.hidden) {
+        stopRenderLoop();
+        return;
+      }
+      startRenderLoop();
+    };
+    document.addEventListener("visibilitychange", onVisibility);
 
     function clearCatalogTextures() {
       componentsRef.current.forEach((root) => {
@@ -680,9 +717,13 @@ const Villa3D = ({ highlightedKey, productImageUrl }: Villa3DProps) => {
     (mount as HTMLElement & { __villaApplyProduct?: typeof applyProductTextureHandler }).__villaApplyProduct =
       applyProductTextureHandler;
 
-    animate();
+    if (!document.hidden) {
+      startRenderLoop();
+    }
 
     return () => {
+      document.removeEventListener("visibilitychange", onVisibility);
+      viewportIo.disconnect();
       twinCancelled = true;
       disposeTwinAssets?.();
       disposeTwinAssets = null;

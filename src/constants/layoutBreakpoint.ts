@@ -1,6 +1,5 @@
 /**
- * Tailwind `lg` ile hizalı: bu genişliğin altında daha “snappy” UX (anında hash kaydırma, Lenis yok, hafif video ön yükleme).
- * Bu genişlik ve üzeri: yumuşak hash kaydırma + Lenis (masaüstü).
+ * Tailwind `lg` ile hizalı: bu genişliğin altında daha “snappy” UX (tam genişlikte native scroll ile tutarlı).
  */
 export const LAYOUT_DESKTOP_MIN_PX = 1024 as const;
 

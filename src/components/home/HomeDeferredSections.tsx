@@ -1,34 +1,80 @@
-import { useEffect } from "react";
-import { initScrollReveal } from "@/lib/scrollReveal";
+import { Suspense, lazy, useEffect } from "react";
+
 import { ParallaxLayer } from "@/components/motion/ParallaxLayer";
-import { PremiumAboutManifestoSection } from "@/components/sections/PremiumAboutManifestoSection";
-import { PremiumProductSelectionSection } from "@/components/sections/PremiumProductSelectionSection";
-import { SolutionPartners } from "@/components/SolutionPartners";
-import QuoteSimple from "@/components/QuoteSimple";
-import { SiteFooter } from "@/components/SiteFooter";
+import { scheduleIdleTask } from "@/utils/scheduleIdle";
+
+const PremiumAboutManifestoSection = lazy(() =>
+  import("@/components/sections/PremiumAboutManifestoSection").then((m) => ({
+    default: m.PremiumAboutManifestoSection,
+  })),
+);
+
+const PremiumProductSelectionSection = lazy(() =>
+  import("@/components/sections/PremiumProductSelectionSection").then((m) => ({
+    default: m.PremiumProductSelectionSection,
+  })),
+);
+
+const SolutionPartners = lazy(() =>
+  import("@/components/SolutionPartners").then((m) => ({ default: m.SolutionPartners })),
+);
+
+const QuoteSimple = lazy(() => import("@/components/QuoteSimple"));
+
+const SiteFooter = lazy(() =>
+  import("@/components/SiteFooter").then((m) => ({ default: m.SiteFooter })),
+);
 
 /**
- * Ana sayfa hero sonrası — hakkımızda manifesto → parametrik seçici → markalar → iletişim → footer.
+ * Ana sayfa hero sonrası — kod bölüm bölüm yüklenir; scrollReveal + anime düşük öncelikle gelir.
  */
 export default function HomeDeferredSections() {
   useEffect(() => {
-    return initScrollReveal();
+    let revealTeardown: (() => void) | undefined;
+    let cancelled = false;
+
+    const cancelSchedule = scheduleIdleTask(() => {
+      void import("@/lib/scrollReveal").then((mod) => {
+        if (cancelled) return;
+        revealTeardown = mod.initScrollReveal();
+      });
+    }, 1200);
+
+    return () => {
+      cancelled = true;
+      cancelSchedule();
+      revealTeardown?.();
+    };
   }, []);
 
   return (
     <>
-      <PremiumAboutManifestoSection />
+      <Suspense fallback={null}>
+        <PremiumAboutManifestoSection />
+      </Suspense>
+
       <ParallaxLayer travelPx={14}>
-        <PremiumProductSelectionSection />
+        <Suspense fallback={null}>
+          <PremiumProductSelectionSection />
+        </Suspense>
       </ParallaxLayer>
+
       <ParallaxLayer travelPx={20}>
-        <SolutionPartners />
+        <Suspense fallback={null}>
+          <SolutionPartners />
+        </Suspense>
       </ParallaxLayer>
+
       <ParallaxLayer travelPx={12}>
-        <QuoteSimple />
+        <Suspense fallback={null}>
+          <QuoteSimple />
+        </Suspense>
       </ParallaxLayer>
+
       <ParallaxLayer travelPx={8}>
-        <SiteFooter />
+        <Suspense fallback={null}>
+          <SiteFooter />
+        </Suspense>
       </ParallaxLayer>
     </>
   );

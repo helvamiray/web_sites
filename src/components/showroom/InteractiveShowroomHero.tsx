@@ -4,8 +4,8 @@ import {
   useMemo,
   useRef,
   useState,
+  memo,
   type CSSProperties,
-  type RefObject,
   type Transition,
 } from "react";
 import { useNavigate } from "@tanstack/react-router";
@@ -13,12 +13,8 @@ import {
   AnimatePresence,
   motion,
   useReducedMotion,
-  useScroll,
-  useTransform,
 } from "framer-motion";
 import { ChevronDown, ArrowRight } from "lucide-react";
-
-import { prefersSmoothHashScroll } from "@/utils/navigateToHashSection";
 import {
   CINEMATIC_SHOWCASE_HERO_SLIDES,
   type CinematicShowcaseSlideDef,
@@ -27,7 +23,9 @@ import { useSyncedCinematicHeroSlides } from "@/hooks/useSyncedSiteCms";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { useMagneticButton } from "@/hooks/useMagneticButton";
 import { ShowcaseHudOverlay } from "@/components/showroom/ShowcaseHudOverlay";
+import { ShowroomHeroEditorialStill } from "@/components/showroom/ShowroomHeroEditorialStill";
 
+const SCROLL_INTO_VIEW_OPTS: ScrollIntoViewOptions = { behavior: "auto", block: "start" };
 const SLIDE_DURATION_MS = 9800;
 const PROGRESS_TICK_MS = 50;
 
@@ -41,36 +39,28 @@ const clamp = (n: number, min: number, max: number) =>
   Math.min(Math.max(n, min), max);
 
 interface ShowroomHeroVisualColumnProps {
-  heroRef: RefObject<HTMLElement | null>;
   slideDef: CinematicShowcaseSlideDef;
   motionOff: boolean;
   isTr: boolean;
+  heroVisible: boolean;
   onHotChange: (hot: boolean) => void;
 }
 
-/** Sağ sütun: vitrin, parallax, HUD — yalnızca `showVisualStage` ile mount edilir. */
-function ShowroomHeroVisualColumn({
-  heroRef,
+/** Sağ sütun: vitrin, HUD — yalnızca `showVisualStage` ile mount edilir (no scroll-linked motion). */
+const ShowroomHeroVisualColumn = memo(function ShowroomHeroVisualColumnInner({
   slideDef,
   motionOff,
   isTr,
+  heroVisible,
   onHotChange,
 }: ShowroomHeroVisualColumnProps) {
   const visualStageRef = useRef<HTMLDivElement>(null);
   const [tilt, setTilt] = useState({ rx: 0, ry: 0 });
 
-  const { scrollYProgress } = useScroll({
-    target: heroRef,
-    offset: ["start start", "end start"],
-  });
-
-  const parallaxY = useTransform(scrollYProgress, [0, 1], motionOff ? [0, 0] : [0, 14]);
-  const parallaxScale = useTransform(scrollYProgress, [0, 1], motionOff ? [1, 1] : [1, 1.004]);
-
   /** Subtle cinematic tilt */
   useEffect(() => {
     const stage = visualStageRef.current;
-    if (!stage || motionOff) return;
+    if (!stage || motionOff || !heroVisible) return;
 
     const onMove = (ev: PointerEvent) => {
       const r = stage.getBoundingClientRect();
@@ -92,7 +82,7 @@ function ShowroomHeroVisualColumn({
       stage.removeEventListener("pointermove", onMove);
       stage.removeEventListener("pointerleave", onLeave);
     };
-  }, [motionOff, slideDef.id]);
+  }, [motionOff, slideDef.id, heroVisible]);
 
   const hudLocalized = useMemo(
     () => ({
@@ -161,27 +151,8 @@ function ShowroomHeroVisualColumn({
                 className="studio-vega-hero__present-visual-inner studio-vega-hero__present-visual-inner--immersive"
               >
                 <div className="studio-vega-hero__product-tilt" style={tiltStyle}>
-                  <motion.div
-                    className="studio-vega-hero__cinematic-parallax-shell"
-                    style={{ y: parallaxY, scale: parallaxScale }}
-                  >
-                    <motion.div
-                      className="studio-vega-hero__cinematic-float-shell"
-                      animate={
-                        motionOff
-                          ? undefined
-                          : {
-                              y: ["0%", "-1.05%", "0%"],
-                              rotateZ: [-0.25, 0.28, -0.25],
-                            }
-                      }
-                      transition={{
-                        duration: 13,
-                        repeat: Infinity,
-                        ease: "easeInOut",
-                        repeatType: "mirror",
-                      }}
-                    >
+                  <div className="studio-vega-hero__cinematic-parallax-shell">
+                    <div className="studio-vega-hero__cinematic-float-shell">
                       <div className="studio-vega-hero__cinematic-viewport studio-vega-hero__cinematic-viewport--bleed">
                         <div className="studio-vega-hero__cinematic-photo-wrap">
                           <div className="studio-vega-hero__showroom-focal" aria-hidden />
@@ -199,8 +170,8 @@ function ShowroomHeroVisualColumn({
                           reducedMotion={motionOff}
                         />
                       </div>
-                    </motion.div>
-                  </motion.div>
+                    </div>
+                  </div>
                 </div>
               </motion.div>
             </AnimatePresence>
@@ -209,7 +180,7 @@ function ShowroomHeroVisualColumn({
       </div>
     </div>
   );
-}
+});
 
 interface Props {
   nextSectionId?: string;
@@ -236,6 +207,7 @@ export function InteractiveShowroomHero({
   const [reduceMotionSys, setReduceMotionSys] = useState(false);
   const [visualHot, setVisualHot] = useState(false);
   const [heroReady, setHeroReady] = useState(false);
+  const [heroVisible, setHeroVisible] = useState(true);
   const heroRef = useRef<HTMLElement>(null);
   const progressRef = useRef(0);
   const slides = useSyncedCinematicHeroSlides();
@@ -252,6 +224,17 @@ export function InteractiveShowroomHero({
   }, []);
 
   useEffect(() => {
+    const root = heroRef.current;
+    if (!root) return;
+    const io = new IntersectionObserver(
+      ([e]) => setHeroVisible(Boolean(e?.isIntersecting)),
+      { root: null, threshold: 0.04, rootMargin: "48px 0px" },
+    );
+    io.observe(root);
+    return () => io.disconnect();
+  }, []);
+
+  useEffect(() => {
     if (motionOff) {
       setHeroReady(true);
       return undefined;
@@ -260,26 +243,34 @@ export function InteractiveShowroomHero({
     return () => clearTimeout(id);
   }, [motionOff]);
 
-  /** Cursor-linked ambient spotlight */
+  /** Cursor-linked ambient spotlight (RAF‑batched) — only while hero is on-screen. */
   useEffect(() => {
     const root = heroRef.current;
-    if (!root || motionOff) return;
+    if (!root || motionOff || !heroVisible) return;
+
+    let rafId = 0;
+    let xp = "";
+    let yp = "";
+
+    const flush = () => {
+      rafId = 0;
+      root.style.setProperty("--uph-ptr-x", xp);
+      root.style.setProperty("--uph-ptr-y", yp);
+    };
 
     const handle = (ev: PointerEvent) => {
       const r = root.getBoundingClientRect();
-      root.style.setProperty(
-        "--uph-ptr-x",
-        `${((ev.clientX - r.left) / Math.max(r.width, 1)) * 100}%`,
-      );
-      root.style.setProperty(
-        "--uph-ptr-y",
-        `${((ev.clientY - r.top) / Math.max(r.height, 1)) * 100}%`,
-      );
+      xp = `${((ev.clientX - r.left) / Math.max(r.width, 1)) * 100}%`;
+      yp = `${((ev.clientY - r.top) / Math.max(r.height, 1)) * 100}%`;
+      if (!rafId) rafId = requestAnimationFrame(flush);
     };
 
     root.addEventListener("pointermove", handle, { passive: true });
-    return () => root.removeEventListener("pointermove", handle);
-  }, [motionOff]);
+    return () => {
+      root.removeEventListener("pointermove", handle);
+      cancelAnimationFrame(rafId);
+    };
+  }, [motionOff, heroVisible]);
 
   useEffect(() => {
     if (slides.length === 0) return;
@@ -298,43 +289,30 @@ export function InteractiveShowroomHero({
 
   const localized = useMemo(
     () => ({
-      subtitle: isTr ? slideDef.subtitleTr : slideDef.subtitleEn,
-      description: isTr ? slideDef.descriptionTr : slideDef.descriptionEn,
       watermark: isTr ? slideDef.watermarkGlyphTr : slideDef.watermarkGlyphEn,
       headlinePrimary: isTr ? slideDef.headlinePrimaryTr : slideDef.headlinePrimaryEn,
       headlineAccent: isTr ? slideDef.headlineAccentTr : slideDef.headlineAccentEn,
-      studioRibbon:
-        lang === "tr"
-          ? "Studio Vega · iklim mühendisliği"
-          : "Studio Vega · climate engineering",
     }),
     [
       isTr,
-      lang,
-      slideDef.descriptionEn,
-      slideDef.descriptionTr,
       slideDef.headlineAccentEn,
       slideDef.headlineAccentTr,
       slideDef.headlinePrimaryEn,
       slideDef.headlinePrimaryTr,
-      slideDef.subtitleEn,
-      slideDef.subtitleTr,
       slideDef.watermarkGlyphEn,
       slideDef.watermarkGlyphTr,
     ],
   );
 
   const scrollToNext = () => {
-    const smooth = prefersSmoothHashScroll();
     const el = document.getElementById(nextSectionId);
-    if (el) el.scrollIntoView({ behavior: smooth ? "smooth" : "auto", block: "start" });
-    else window.scrollBy({ top: window.innerHeight, behavior: smooth ? "smooth" : "auto" });
+    if (el) el.scrollIntoView(SCROLL_INTO_VIEW_OPTS);
+    else window.scrollBy({ top: window.innerHeight, behavior: "auto" });
   };
 
   const scrollToProductShowcase = () => {
-    const smooth = prefersSmoothHashScroll();
     const el = document.getElementById("product-showcase");
-    if (el) el.scrollIntoView({ behavior: smooth ? "smooth" : "auto", block: "start" });
+    if (el) el.scrollIntoView(SCROLL_INTO_VIEW_OPTS);
   };
 
   const openProduct = (slug: string) => {
@@ -351,7 +329,7 @@ export function InteractiveShowroomHero({
   );
 
   useEffect(() => {
-    if (motionOff) {
+    if (motionOff || !heroVisible) {
       setProgressPct(0);
       return undefined;
     }
@@ -366,7 +344,7 @@ export function InteractiveShowroomHero({
       setProgressPct(p);
     }, PROGRESS_TICK_MS);
     return () => clearInterval(id);
-  }, [motionOff, slideCount]);
+  }, [motionOff, slideCount, heroVisible]);
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -414,7 +392,7 @@ export function InteractiveShowroomHero({
     <section
       ref={heroRef}
       id="hero"
-      className={`studio-vega-hero showroom-hero-fixed ultra-premium-hero hero-cinematic midnight-section midnight-section--hero studio-vega-hero--engineering-showcase studio-vega-hero--premium-keynote${showVisualStage ? "" : " studio-vega-hero--copy-only-home"}${hoverClass}${heroReady ? " studio-vega-hero--ready" : ""}`}
+      className={`studio-vega-hero showroom-hero-fixed ultra-premium-hero hero-cinematic midnight-section midnight-section--hero studio-vega-hero--engineering-showcase studio-vega-hero--premium-keynote${showVisualStage ? "" : " studio-vega-hero--home-lite-visual"}${hoverClass}${heroReady ? " studio-vega-hero--ready" : ""}`}
       style={
         {
           position: "relative",
@@ -483,9 +461,6 @@ export function InteractiveShowroomHero({
                 >
                   {String(slideIndex + 1).padStart(2, "0")}
                 </motion.p>
-                <motion.p variants={lineVariants} className="studio-vega-hero__present-studiov-tag">
-                  {localized.studioRibbon}
-                </motion.p>
 
                 <motion.h2 variants={lineVariants} className="studio-vega-hero__present-category">
                   <span className="studio-vega-hero__present-category-primary">
@@ -500,12 +475,6 @@ export function InteractiveShowroomHero({
                     </span>
                   ) : null}
                 </motion.h2>
-                <motion.p variants={lineVariants} className="studio-vega-hero__present-subtitle">
-                  {localized.subtitle}
-                </motion.p>
-                <motion.p variants={lineVariants} className="studio-vega-hero__present-description">
-                  {localized.description}
-                </motion.p>
 
                 <motion.div
                   variants={lineVariants}
@@ -541,13 +510,15 @@ export function InteractiveShowroomHero({
 
           {showVisualStage ? (
             <ShowroomHeroVisualColumn
-              heroRef={heroRef}
               slideDef={slideDef}
               motionOff={motionOff}
               isTr={isTr}
+              heroVisible={heroVisible}
               onHotChange={setVisualHot}
             />
-          ) : null}
+          ) : (
+            <ShowroomHeroEditorialStill slideDef={slideDef} motionOff={motionOff} isTr={isTr} />
+          )}
         </div>
 
         <nav

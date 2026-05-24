@@ -1,8 +1,7 @@
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-gsap.registerPlugin(ScrollTrigger);
+import { revealOnView } from "@/utils/revealOnView";
 
 interface Props {
   end: number;
@@ -25,17 +24,15 @@ export function AnimatedCounter({
     const el = ref.current;
     if (!el) return;
 
-    // Respect reduced-motion preference
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       el.textContent = `${prefix}${end}${suffix}`;
       return;
     }
 
     const counter = { value: 0 };
-    const trigger = ScrollTrigger.create({
-      trigger: el,
-      start: "top 85%",
-      onEnter: () => {
+    return revealOnView(
+      el,
+      () => {
         gsap.to(counter, {
           value: end,
           duration,
@@ -45,9 +42,8 @@ export function AnimatedCounter({
           },
         });
       },
-    });
-
-    return () => trigger.kill();
+      { rootMargin: "0px 0px -14% 0px", threshold: 0 },
+    );
   }, [end, suffix, prefix, duration]);
 
   return (

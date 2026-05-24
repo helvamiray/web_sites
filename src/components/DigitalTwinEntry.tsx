@@ -1,8 +1,9 @@
-import { useRef } from "react";
+import { lazy, Suspense } from "react";
 import { ArrowRight } from "lucide-react";
 import { useNavigate } from "@tanstack/react-router";
-import Mini3DPreview from "@/components/Mini3DPreview";
 import { useMagneticButton } from "@/hooks/useMagneticButton";
+
+const Mini3DPreview = lazy(() => import("@/components/Mini3DPreview"));
 
 const DigitalTwinEntry = () => {
   const magneticRef = useMagneticButton(0.3);
@@ -18,12 +19,12 @@ const DigitalTwinEntry = () => {
       aria-label="Dijital İkiz Deneyimi"
       data-reveal
     >
-      {/* Animated wireframe preview */}
       <div className="twin-preview" aria-hidden="true">
-        <Mini3DPreview kind="heatpump" spinning />
+        <Suspense fallback={null}>
+          <Mini3DPreview kind="heatpump" spinning />
+        </Suspense>
       </div>
 
-      {/* Text content */}
       <div className="twin-text">
         <span className="twin-label">● CANLI · DİJİTAL İKİZ</span>
         <h2 className="twin-headline">

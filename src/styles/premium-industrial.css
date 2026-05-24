@@ -68,13 +68,13 @@
 /* Note: base partners section uses .lux-partners; colors below support any shared classes */
 .premium-industrial-landing .section-headline,
 .premium-industrial-landing h1,
-.premium-industrial-landing h2,
-.premium-industrial-landing .solution-partners-title {
+.premium-industrial-landing h2:not(.lux-partners-hero-title),
+.premium-industrial-landing .solution-partners-section:not(.lux-partners--showcase) .solution-partners-title {
   font-family: var(--font-pi-serif);
   color: var(--me-heading);
 }
 
-.premium-industrial-landing .solution-partners-section {
+.premium-industrial-landing .solution-partners-section:not(.lux-partners--showcase) {
   background: transparent;
   border-top: 1px solid rgba(13, 42, 99, 0.06);
   border-bottom: 1px solid rgba(13, 42, 99, 0.05);

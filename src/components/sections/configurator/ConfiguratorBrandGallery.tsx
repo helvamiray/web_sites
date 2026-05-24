@@ -50,13 +50,12 @@ export function ConfiguratorBrandGallery({ brands, selected, onPick }: Configura
             <motion.li key={b} variants={ITEM}>
               <motion.button
                 type="button"
+                data-lux-cursor=""
                 aria-label={b}
                 aria-pressed={sel}
                 className={`pps-studio-brand-card${sel ? " pps-studio-brand-card--selected" : ""}`}
                 onClick={() => onPick(b)}
-                whileHover={{ scale: 1.025 }}
-                whileTap={{ scale: 0.99 }}
-                transition={{ duration: 0.42, ease: [0.16, 1, 0.3, 1] }}
+                transition={{ duration: 0.32, ease: [0.16, 1, 0.3, 1] }}
               >
                 <span className="pps-studio-brand-card__haze" aria-hidden />
                 <span className="pps-studio-brand-card__rim" aria-hidden />

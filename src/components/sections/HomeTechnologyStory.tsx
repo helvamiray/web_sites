@@ -1,9 +1,3 @@
-import { useLayoutEffect, useRef } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-gsap.registerPlugin(ScrollTrigger);
-
 const STORY_SCENES = [
   {
     id: "mechanical",
@@ -35,44 +29,11 @@ const STORY_SCENES = [
 ] as const;
 
 /**
- * Horizontal scroll — premium engineering film sequence (no deck / no cards).
+ * Horizontal storytelling track — native overflow scroll (no pin / no scroll-scrub tweening).
  */
 export function HomeTechnologyStory() {
-  const rootRef = useRef<HTMLElement>(null);
-  const trackRef = useRef<HTMLDivElement>(null);
-
-  useLayoutEffect(() => {
-    const root = rootRef.current;
-    const track = trackRef.current;
-    if (!root || !track) return;
-
-    const mqReduce = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const mqNarrow = window.matchMedia("(max-width: 900px)");
-    if (mqReduce.matches || mqNarrow.matches) return undefined;
-
-    const ctx = gsap.context(() => {
-      const scrollDistance = () => Math.max(0, track.scrollWidth - root.offsetWidth);
-
-      gsap.to(track, {
-        x: () => -scrollDistance(),
-        ease: "none",
-        scrollTrigger: {
-          trigger: root,
-          start: "top top",
-          end: () => "+=" + scrollDistance(),
-          pin: true,
-          scrub: 1.15,
-          invalidateOnRefresh: true,
-        },
-      });
-    }, root);
-
-    return () => ctx.revert();
-  }, []);
-
   return (
     <section
-      ref={rootRef}
       id="teknoloji"
       className="hp-tech-story hp-tech-story--film"
       aria-label="Mühendislik anahtarı — sinematik ürün akışı"
@@ -83,7 +44,7 @@ export function HomeTechnologyStory() {
       <div className="hp-tech-story__glow hp-tech-story__glow--c" aria-hidden />
 
       <div className="hp-tech-story__viewport">
-        <div ref={trackRef} className="hp-tech-story__track hp-tech-story__track--film">
+        <div className="hp-tech-story__track hp-tech-story__track--film">
           {STORY_SCENES.map((scene, index) => (
             <article
               key={scene.id}

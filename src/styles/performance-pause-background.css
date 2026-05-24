@@ -1,0 +1,19 @@
+/**
+ * When the tab is in the background, pause infinite CSS animations so the GPU/CPU idle.
+ * Visuals while focused remain unchanged (`data-page-visible` is `"true"` or unset during SSR paint).
+ */
+
+html[data-page-visible="false"] .landing-page .lux-cinematic-ambient,
+html[data-page-visible="false"] .landing-page .lux-cinematic-ambient *,
+html[data-page-visible="false"] .landing-page .studio-vega-hero,
+html[data-page-visible="false"] .landing-page .studio-vega-hero *,
+html[data-page-visible="false"] .landing-page .solution-partners-section.lux-partners,
+html[data-page-visible="false"] .landing-page .solution-partners-section.lux-partners *,
+html[data-page-visible="false"] .landing-page .premium-product-selection.pps-studio,
+html[data-page-visible="false"] .landing-page .premium-product-selection.pps-studio *,
+html[data-page-visible="false"] .landing-page .premium-product-selection--split,
+html[data-page-visible="false"] .landing-page .premium-product-selection--split *,
+html[data-page-visible="false"] .landing-page .premium-about-manifesto,
+html[data-page-visible="false"] .landing-page .premium-about-manifesto * {
+  animation-play-state: paused !important;
+}

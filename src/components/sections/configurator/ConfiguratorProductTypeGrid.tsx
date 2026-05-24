@@ -37,7 +37,7 @@ export function ConfiguratorProductTypeGrid({
     <div className="pps-studio-product">
       <p className="pps-studio-leg">1 · Ürün seç</p>
       <motion.ul
-        className="pps-studio-product__stripe"
+        className="pps-studio-product__grid-two"
         variants={ROW}
         initial="hidden"
         animate="show"
@@ -51,14 +51,13 @@ export function ConfiguratorProductTypeGrid({
             <motion.li key={p.id} variants={CELL} className="pps-studio-product__cell">
               <motion.button
                 type="button"
+                data-lux-cursor=""
+                aria-label={p.label}
                 className={`pps-studio-product-card${isActive ? " pps-studio-product-card--selected" : ""}`}
                 onClick={() => onPick(p.id)}
-                whileHover={{ scale: 1.006, y: -1 }}
-                whileTap={{ scale: 0.995 }}
-                transition={{ duration: 0.42, ease: [0.16, 1, 0.3, 1] }}
+                transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
               >
                 <span className="pps-studio-product-card__glow" aria-hidden />
-                <span className="pps-studio-product-card__glass" aria-hidden />
                 <span className="pps-studio-product-card__visual">
                   <img src={thumb.src} alt="" className="pps-studio-product-card__img" />
                 </span>

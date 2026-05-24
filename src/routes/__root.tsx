@@ -8,8 +8,8 @@ import CartSidebar from "@/components/CartSidebar";
 import { PremiumLuxuryCursor } from "@/components/luxury/PremiumLuxuryCursor";
 import { Toaster } from "@/components/ui/sonner";
 import { MotionConfig } from "framer-motion";
-import { useEffect } from "react";
 
+import { useHtmlPageVisibilityAttribute } from "@/hooks/useDocumentVisibility";
 import appCss from "../styles/global.css?url";
 
 function NotFoundComponent() {
@@ -73,16 +73,7 @@ function RootShell({ children }: { children: React.ReactNode }) {
 }
 
 function RootComponent() {
-  useEffect(() => {
-    void import("@/lib/smoothScroll").then((m) => {
-      m.initSmoothScroll();
-    });
-    return () => {
-      void import("@/lib/smoothScroll").then((m) => {
-        m.destroySmoothScroll();
-      });
-    };
-  }, []);
+  useHtmlPageVisibilityAttribute();
 
   return (
     <FlowbiteThemeProvider>

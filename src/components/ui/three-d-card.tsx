@@ -127,7 +127,6 @@ export function ThreeDCard({
         transform: tiltTransform,
         transformStyle: "preserve-3d",
         transition: hovering ? "none" : "transform 220ms ease-out",
-        willChange: "transform",
         backfaceVisibility: "hidden",
       };
 

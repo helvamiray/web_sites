@@ -1,15 +1,11 @@
 import type { NavigateFn } from "@tanstack/react-router";
-import { MEDIA_MAX_NARROW } from "@/constants/layoutBreakpoint";
 
 /**
- * Desktop (lg+): allow smooth in-page / hash scrolling.
- * Dar / orta viewport: anında atlama — uzun sayfada `smooth` çok uzun sürebilir.
+ * Prefer `behavior: "auto"` so programmatic scroll respects `html { scroll-behavior }` without JS easing libraries.
+ * @deprecated Use `hashScrollIntoViewOptions()` directly; kept for callers that branch on programmatic smooth.
  */
 export function prefersSmoothHashScroll(): boolean {
-  if (typeof window === "undefined") return false;
-  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return false;
-  if (window.matchMedia(MEDIA_MAX_NARROW).matches) return false;
-  return true;
+  return false;
 }
 
 /** Options for `scrollIntoView` and TanStack Router `hashScrollIntoView`. */
@@ -18,7 +14,7 @@ export function hashScrollIntoViewOptions(): {
   block: "start";
 } {
   return {
-    behavior: prefersSmoothHashScroll() ? "smooth" : "auto",
+    behavior: "auto",
     block: "start",
   };
 }

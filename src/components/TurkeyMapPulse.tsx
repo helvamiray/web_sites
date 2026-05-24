@@ -1,9 +1,8 @@
 import { useEffect, useRef, useState, useCallback } from "react";
 import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { animate, svg } from "animejs";
+import { animate, svg as svgAnimator } from "animejs";
 
-gsap.registerPlugin(ScrollTrigger);
+import { revealOnView } from "@/utils/revealOnView";
 
 /**
  * Simplified Turkey outline — 1600 × 748 viewBox
@@ -129,67 +128,80 @@ const TurkeyMapPulse = () => {
   // Animate connecting lines on scroll-enter + Anime.js border glow
   useEffect(() => {
     const motionOk = !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (!motionOk || !svgRef.current) return;
+    const svg = svgRef.current;
+    const container = containerRef.current;
+    if (!motionOk || !svg || !container) return undefined;
 
-    /* ── GSAP: city connecting lines draw in on scroll ── */
-    const lines = svgRef.current.querySelectorAll<SVGLineElement>(".conn-line");
+    /* ── GSAP: city connecting lines draw when map enters viewport ── */
+    const lines = svg.querySelectorAll<SVGLineElement>(".conn-line");
     lines.forEach((ln) => {
       const len = Math.hypot(
         ln.x2.baseVal.value - ln.x1.baseVal.value,
-        ln.y2.baseVal.value - ln.y1.baseVal.value
+        ln.y2.baseVal.value - ln.y1.baseVal.value,
       );
       gsap.set(ln, { strokeDasharray: len, strokeDashoffset: len, opacity: 0 });
     });
 
-    const ctx = gsap.context(() => {
+    const disposeLines = revealOnView(container, () => {
       gsap.to(lines, {
         strokeDashoffset: 0,
         opacity: 1,
         duration: 1.8,
         stagger: 0.2,
         ease: "power2.out",
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top 75%",
-          once: true,
-        },
       });
-    }, svgRef);
+    });
 
     /* ── Anime.js: border glow dot travels around Turkey ── */
     const borderPath = document.getElementById("turkey-outline-draw");
-    const borderDot  = document.getElementById("turkey-border-dot");
+    const borderDot = document.getElementById("turkey-border-dot");
 
-    let dotAnim:  ReturnType<typeof animate> | null = null;
+    let dotAnim: ReturnType<typeof animate> | null = null;
     let drawAnim: ReturnType<typeof animate> | null = null;
+
+    const ioAnime = new IntersectionObserver(
+      ([e]) => {
+        const on = Boolean(e?.isIntersecting);
+        if (on) {
+          dotAnim?.play?.();
+          drawAnim?.play?.();
+        } else {
+          dotAnim?.pause?.();
+          drawAnim?.pause?.();
+        }
+      },
+      { threshold: 0.06 },
+    );
+    ioAnime.observe(container);
 
     if (borderPath && borderDot) {
       try {
-        // Travelling dot via createMotionPath
         dotAnim = animate(borderDot, {
-          ...svg.createMotionPath("#turkey-outline-draw"),
+          ...svgAnimator.createMotionPath("#turkey-outline-draw"),
           duration: 16000,
           loop: true,
           ease: "linear",
         });
 
-        // Chasing "drawn segment" — a short lit segment travels the path
-        const drawable = svg.createDrawable("#turkey-outline-draw");
+        const drawable = svgAnimator.createDrawable("#turkey-outline-draw");
         drawAnim = animate(drawable, {
           draw: ["0 0.06", "0.94 1"],
           duration: 16000,
           loop: true,
           ease: "linear",
         });
+        dotAnim.pause?.();
+        drawAnim.pause?.();
       } catch (_) {
-        // If svg.createMotionPath/createDrawable not available, fallback gracefully
+        /* svg.createMotionPath/createDrawable unavailable */
       }
     }
 
     return () => {
-      ctx.revert();
-      dotAnim?.pause();
-      drawAnim?.pause();
+      disposeLines();
+      ioAnime.disconnect();
+      dotAnim?.pause?.();
+      drawAnim?.pause?.();
     };
   }, []);
 

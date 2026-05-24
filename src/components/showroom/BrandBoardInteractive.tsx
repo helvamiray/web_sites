@@ -4,7 +4,7 @@ import { useNavigate } from "@tanstack/react-router";
 import { SHOWROOM_BRAND_NODES, SHOWROOM_BRAND_SELECT_EVENT } from "@/data/showroomCatalog";
 import { useShowroomFilterOptional } from "@/context/ShowroomFilterContext";
 import { PRODUCT_CONFIGURATOR_HASH_ID } from "@/constants/landingSections";
-import { navigateToHashSection, prefersSmoothHashScroll } from "@/utils/navigateToHashSection";
+import { navigateToHashSection, hashScrollIntoViewOptions } from "@/utils/navigateToHashSection";
 
 export type ShowroomBrandNode = (typeof SHOWROOM_BRAND_NODES)[number];
 
@@ -113,10 +113,7 @@ export function BrandBoardInteractive({
         requestAnimationFrame(() => {
           const el = document.getElementById(PRODUCT_CONFIGURATOR_HASH_ID);
           if (el) {
-            el.scrollIntoView({
-              behavior: prefersSmoothHashScroll() ? "smooth" : "auto",
-              block: "start",
-            });
+            el.scrollIntoView(hashScrollIntoViewOptions());
           }
         });
       });

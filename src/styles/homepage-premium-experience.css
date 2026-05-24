@@ -17,42 +17,22 @@
 
 /* Light — atmospheric engineering steel / cyan haze (not corporate white) */
 [data-ui-theme="light"] .hp-premium-shell {
-  --hp-atmosphere-base: #cddfeb;
-  --hp-atmosphere-mid: #c2d8e8;
-  --hp-atmosphere-deep: #b6cfe3;
-  --hp-atmosphere-ink: #0f2744;
-  --hp-atmosphere-muted: rgba(15, 39, 68, 0.74);
+  --hp-atmosphere-base: var(--site-canvas-bg, #0d2d4a);
+  --hp-atmosphere-mid: var(--site-canvas-bg, #0d2d4a);
+  --hp-atmosphere-deep: var(--site-canvas-bg, #0d2d4a);
+  --hp-atmosphere-ink: #f4f8fc;
+  --hp-atmosphere-muted: rgba(244, 248, 252, 0.72);
 }
 
 .hp-premium-shell.main-content {
   position: relative;
   z-index: 2;
-  background:
-    linear-gradient(
-      180deg,
-      transparent 0%,
-      rgba(22, 48, 78, 0.22) 10%,
-      rgba(17, 38, 62, 0.62) 38%,
-      rgba(14, 28, 48, 0.92) 72%,
-      #121f36 100%
-    ),
-    radial-gradient(ellipse 120% 55% at 50% -12%, rgba(125, 211, 252, 0.06) 0%, transparent 52%);
+  background: var(--site-canvas-bg, #0d2d4a);
 }
 
 [data-ui-theme="light"] .hp-premium-shell.main-content {
-  color-scheme: light;
-  background:
-    radial-gradient(ellipse 100% 48% at 50% -8%, rgba(186, 230, 253, 0.42) 0%, transparent 55%),
-    radial-gradient(ellipse 72% 42% at 12% 38%, rgba(125, 211, 252, 0.14) 0%, transparent 50%),
-    radial-gradient(ellipse 58% 36% at 92% 62%, rgba(56, 189, 248, 0.08) 0%, transparent 48%),
-    linear-gradient(
-      180deg,
-      transparent 0%,
-      rgba(203, 223, 235, 0.55) 12%,
-      var(--hp-atmosphere-base, #cddfeb) 38%,
-      var(--hp-atmosphere-mid, #c2d8e8) 68%,
-      var(--hp-atmosphere-deep, #b6cfe3) 100%
-    );
+  color-scheme: dark;
+  background: var(--site-canvas-bg, #0d2d4a);
 }
 
 .hp-premium-shell.lux-cinematic-surface::before {
@@ -70,12 +50,9 @@
   isolation: isolate;
   min-height: 100vh;
   padding: clamp(4rem, 10vw, 6rem) 0 clamp(3.5rem, 8vw, 5rem);
-  background:
-    radial-gradient(ellipse 78% 60% at 85% -6%, rgba(88, 231, 255, 0.06) 0%, transparent 50%),
-    radial-gradient(ellipse 58% 50% at 8% 100%, rgba(15, 40, 70, 0.55) 0%, transparent 52%),
-    linear-gradient(182deg, #060d18 0%, #0c1828 42%, #0a1424 100%);
+  background: var(--site-canvas-bg, #0d2d4a);
   border-top: 1px solid rgba(125, 211, 252, 0.06);
-  overflow: hidden;
+  overflow-x: clip;
 }
 
 .hp-tech-story__ambient--film {
@@ -127,7 +104,12 @@
 .hp-tech-story__viewport {
   position: relative;
   z-index: 1;
-  overflow: hidden;
+  overflow-x: auto;
+  overflow-y: visible;
+  scroll-snap-type: x proximity;
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(88, 231, 255, 0.28) transparent;
 }
 
 .hp-tech-story__track--film {
@@ -146,6 +128,7 @@
   display: flex;
   align-items: center;
   min-height: min(74vh, 780px);
+  scroll-snap-align: center;
 }
 
 .hp-tech-story__scene-inner {
@@ -441,13 +424,7 @@
 
 /* Light theme — softened grid, ink typography */
 [data-ui-theme="light"] .hp-tech-story {
-  background:
-    radial-gradient(ellipse 80% 50% at 88% -4%, rgba(186, 230, 253, 0.32) 0%, transparent 50%),
-    linear-gradient(
-      182deg,
-      var(--hp-atmosphere-base, #cddfeb) 0%,
-      var(--hp-atmosphere-mid, #c2d8e8) 100%
-    );
+  background: var(--site-canvas-bg, #0d2d4a);
   border-top: 1px solid rgba(56, 189, 248, 0.12);
 }
 
@@ -579,16 +556,24 @@
   filter: drop-shadow(0 12px 28px rgba(45, 212, 191, 0.18));
 }
 
-/* ── Cinematic footer ───────────────────────────────────────────── */
-.site-footer.hp-cinematic-footer {
+/* ── Cinematic footer ───────────────────────────────────────────── */.site-footer.hp-cinematic-footer {
   position: relative;
   isolation: isolate;
   overflow: hidden;
   padding: clamp(3.5rem, 8vw, 5.5rem) clamp(1.25rem, 4vw, 2.5rem) clamp(2.5rem, 5vw, 3.5rem);
-  background:
-    radial-gradient(ellipse 82% 62% at 50% 108%, rgba(56, 189, 248, 0.09) 0%, transparent 56%),
-    linear-gradient(188deg, #101f34 0%, #172f46 42%, #132842 100%);
-  border-top: 1px solid rgba(125, 211, 252, 0.09);
+  background: transparent;
+  border-top: 1px solid rgba(120, 220, 255, 0.12);
+}
+
+/* Win over .premium-industrial-landing footer ice theme */
+.landing-page.vega-enerji-theme.premium-industrial-landing .site-footer.hp-cinematic-footer {
+  background: transparent;
+  border-top: 1px solid rgba(120, 220, 255, 0.12);
+}
+
+[data-ui-theme="light"] .landing-page .site-footer.hp-cinematic-footer {
+  background: transparent;
+  border-top-color: rgba(120, 220, 255, 0.12);
 }
 
 .site-footer.hp-cinematic-footer::before {
@@ -647,9 +632,10 @@
 .hp-footer__brand-tag {
   font-family: var(--font-premium-mono, "JetBrains Mono", ui-monospace, monospace);
   font-size: 10px;
-  letter-spacing: 0.2em;
+  font-weight: 500;
+  letter-spacing: 0.34em;
   text-transform: uppercase;
-  color: rgba(165, 243, 252, 0.72);
+  color: rgba(103, 232, 249, 0.42);
   margin: 0 0 1rem;
 }
 
@@ -716,47 +702,6 @@
 [data-ui-theme="light"] .premium-product-selection + .lux-about.about-section {
   border-top-color: rgba(56, 189, 248, 0.16);
   box-shadow: inset 0 32px 64px -42px rgba(125, 211, 252, 0.14);
-}
-
-/* Win over .premium-industrial-landing footer ice theme */
-.landing-page.vega-enerji-theme.premium-industrial-landing .site-footer.hp-cinematic-footer {
-  background:
-    radial-gradient(ellipse 82% 62% at 50% 108%, rgba(56, 189, 248, 0.09) 0%, transparent 56%),
-    linear-gradient(188deg, #101f34 0%, #172f46 42%, #132842 100%);
-  border-top: 1px solid rgba(125, 211, 252, 0.09);
-}
-
-[data-ui-theme="light"] .landing-page .site-footer.hp-cinematic-footer {
-  background:
-    radial-gradient(ellipse 92% 56% at 50% 108%, rgba(125, 211, 252, 0.22) 0%, transparent 56%),
-    linear-gradient(
-      188deg,
-      var(--hp-atmosphere-base, #cddfeb) 0%,
-      var(--hp-atmosphere-mid, #c2d8e8) 48%,
-      var(--hp-atmosphere-deep, #b6cfe3) 100%
-    );
-  border-top-color: rgba(56, 189, 248, 0.18);
-}
-
-[data-ui-theme="light"] .landing-page .site-footer.hp-cinematic-footer::before {
-  opacity: 0.38;
-}
-
-[data-ui-theme="light"] .landing-page .site-footer.hp-cinematic-footer .hp-footer__brand-title {
-  color: var(--hp-atmosphere-ink, #0f2744);
-}
-
-[data-ui-theme="light"] .landing-page .site-footer.hp-cinematic-footer .hp-footer__brand-tag {
-  color: rgba(14, 116, 144, 0.72);
-}
-
-[data-ui-theme="light"] .landing-page .site-footer.hp-cinematic-footer .hp-footer__location,
-[data-ui-theme="light"] .landing-page .site-footer.hp-cinematic-footer .hp-footer__link {
-  color: rgba(30, 58, 88, 0.82);
-}
-
-[data-ui-theme="light"] .landing-page .site-footer.hp-cinematic-footer .hp-footer__copy {
-  color: rgba(51, 84, 112, 0.72);
 }
 
 @media (max-width: 600px) {

@@ -31,10 +31,7 @@
   overflow: hidden;
   padding: clamp(4.5rem, 11vw, 7.25rem) clamp(1rem, 4vw, 3rem)
     clamp(4.75rem, 10vw, 6.75rem);
-  background:
-    radial-gradient(ellipse 92% 72% at 50% 118%, rgba(56, 189, 248, 0.09) 0%, transparent 56%),
-    radial-gradient(ellipse 62% 48% at 12% 22%, rgba(125, 211, 252, 0.055) 0%, transparent 52%),
-    linear-gradient(172deg, #111f34 0%, #172f46 46%, #142838 100%);
+  background: var(--site-canvas-bg, #0d2d4a);
   border-top: 1px solid rgba(125, 211, 252, 0.1);
   border-bottom: 1px solid rgba(125, 211, 252, 0.07);
 }
@@ -55,221 +52,99 @@
   );
 }
 
-/* ── Deep navy engineering showcase (.lux-partners--showcase) ── */
+/* ── Editorial light showcase (.lux-partners--showcase) — açık zemin ── */
 
+/* Showcase — açık zemin editorial blok; kenar çizgisi yok (::before / ::after kapalı) */
 .lux-partners.solution-partners-section.lux-partners--showcase {
-  --lp-ink: rgba(237, 242, 247, 0.96);
-  --lp-muted: rgba(160, 176, 196, 0.48);
-  --lp-accent: rgba(138, 202, 216, 0.9);
-  --lp-marquee-dur: 112s;
+  --lp-navy: var(--me-heading, #f4f8fc);
+  --lp-marquee-dur: 96s;
 
   position: relative;
   isolation: isolate;
   overflow: hidden;
-  padding: clamp(7.25rem, 17vw, 12rem) clamp(1.25rem, 5vw, 3.5rem)
-    clamp(7.5rem, 15vw, 11rem);
-  background:
-    radial-gradient(ellipse 120% 45% at 50% -8%, rgba(62, 110, 130, 0.075) 0%, transparent 46%),
-    radial-gradient(ellipse 48% 32% at 88% 88%, rgba(4, 18, 32, 0.55) 0%, transparent 58%),
-    linear-gradient(180deg, #030810 0%, #071622 46%, #0b1d30 72%, #07131f 100%);
-  border-top: 1px solid rgba(118, 180, 200, 0.07);
-  border-bottom: 1px solid rgba(2, 8, 16, 0.95);
+  padding: clamp(5.25rem, 11vw, 8rem) clamp(1.25rem, 4vw, 2.5rem)
+    clamp(5.5rem, 11vw, 8.25rem);
+  border: none !important;
+  outline: none;
+  box-shadow: none !important;
+  background-color: var(--site-canvas-bg, #0d2d4a);
+  background-image: none;
+}
+
+.lux-partners.solution-partners-section.lux-partners--showcase::before,
+.lux-partners.solution-partners-section.lux-partners--showcase::after {
+  content: none;
+  display: none;
 }
 
 .lux-partners--showcase:hover {
-  --lp-marquee-dur: 132s;
-}
-
-.lux-partners--showcase .lux-partners__layer {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  z-index: 0;
-}
-
-/* Ambient depth — no heavy blur */
-.lux-partners--showcase .lux-partners__layer--wash {
-  background:
-    radial-gradient(ellipse 70% 38% at 18% 12%, rgba(55, 95, 115, 0.07) 0%, transparent 52%),
-    radial-gradient(ellipse 55% 36% at 92% 22%, rgba(20, 45, 62, 0.12) 0%, transparent 50%);
-  opacity: 0.75;
-}
-
-/* Soft top sheen (Keynote-style) — stays sharp, not foggy */
-.lux-partners--showcase .lux-partners__layer--reflection {
-  background: linear-gradient(
-    180deg,
-    rgba(128, 188, 205, 0.045) 0%,
-    rgba(128, 188, 205, 0.012) 22%,
-    transparent 48%
-  );
-  opacity: 1;
-}
-
-/* Blueprint grid — technical, low contrast */
-.lux-partners--showcase .lux-partners__layer--grid {
-  opacity: 0.055;
-  background:
-    linear-gradient(rgba(110, 165, 185, 0.14) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(110, 165, 185, 0.14) 1px, transparent 1px);
-  background-size: 48px 48px;
-  mask-image: radial-gradient(ellipse 88% 72% at 50% 44%, black 14%, transparent 82%);
-}
-
-.lux-partners--showcase .lux-partners__layer--noise {
-  opacity: 0.012;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
-  mix-blend-mode: soft-light;
-}
-
-/* Edge darkening for cinematic frame */
-.lux-partners--showcase .lux-partners__layer--vignette {
-  background: radial-gradient(
-    ellipse 92% 78% at 50% 48%,
-    transparent 20%,
-    rgba(1, 4, 12, 0.38) 100%
-  );
-  opacity: 0.55;
-}
-
-.lux-partners--showcase .lux-partners__bg {
-  opacity: 0.14;
-  background:
-    linear-gradient(rgba(95, 150, 170, 0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(95, 150, 170, 0.05) 1px, transparent 1px);
-  background-size: 72px 72px;
-  mask-image: radial-gradient(ellipse 78% 66% at 50% 48%, black 22%, transparent 76%);
-}
-
-/* Single restrained volumetric core — minimal blur */
-.lux-partners--showcase .lux-partners__glow-orb,
-.lux-partners--showcase .lux-partners__glow-orb--ambient {
-  width: min(48vw, 280px);
-  height: min(48vw, 280px);
-  top: 44%;
-  background: radial-gradient(
-    circle,
-    rgba(100, 170, 190, 0.07) 0%,
-    rgba(40, 80, 100, 0.03) 42%,
-    transparent 72%
-  );
-  filter: blur(10px);
-  opacity: 0.42;
-}
-
-/* Ambient streaks — calmer sweep, short blur only */
-.lux-partners__rails-ambient {
-  position: absolute;
-  left: -15%;
-  right: -15%;
-  top: 52%;
-  height: 42%;
-  transform: translateY(-50%);
-  pointer-events: none;
-  z-index: 1;
-  background: linear-gradient(
-    105deg,
-    transparent 0%,
-    rgba(53, 215, 255, 0) 36%,
-    rgba(53, 215, 255, 0.05) 48%,
-    rgba(53, 215, 255, 0.09) 50%,
-    rgba(53, 215, 255, 0.045) 54%,
-    transparent 68%
-  );
-  filter: blur(18px);
-  opacity: 0.65;
-  animation: lux-partners-ambient-sweep 14s ease-in-out infinite;
-}
-
-.lux-partners--showcase .lux-partners__rails-ambient {
-  top: 55%;
-  height: 34%;
-  background: linear-gradient(
-    106deg,
-    transparent 0%,
-    rgba(115, 185, 200, 0) 46%,
-    rgba(115, 185, 200, 0.05) 50.5%,
-    rgba(115, 185, 200, 0.016) 55%,
-    transparent 72%
-  );
-  filter: blur(6px);
-  opacity: 0.22;
-}
-
-@keyframes lux-partners-ambient-sweep {
-  0%,
-  100% {
-    transform: translateY(-50%) translateX(-3%) skewX(-2deg);
-    opacity: 0.55;
-  }
-  50% {
-    transform: translateY(-50%) translateX(3%) skewX(-2deg);
-    opacity: 0.72;
-  }
+  --lp-marquee-dur: 112s;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .lux-partners__rails-ambient {
-    animation: none;
-    opacity: 0.42;
-  }
-
   .lux-partners--showcase:hover {
-    --lp-marquee-dur: 112s;
+    --lp-marquee-dur: 96s;
   }
 }
 
 .lux-partners--showcase .solution-partners-inner {
   position: relative;
-  z-index: 2;
-  max-width: min(1180px, 100%);
+  z-index: 1;
+  max-width: min(1200px, 100%);
   margin: 0 auto;
-  padding: 0 clamp(0rem, 1.6vw, 1rem);
+  padding: 0 clamp(0rem, 1vw, 0.5rem);
   text-align: center;
 }
 
-/* Serif headline + Swiss restraint */
+.lux-partners-showcase__head.lux-partners__head {
+  margin: 0 auto clamp(2.25rem, 5vw, 3.35rem);
+  max-width: min(40rem, 100%);
+}
+
+/* Başlık: güçlü sans satırı + zarif serif italik aksan — ikisi #0a1628 */
 .lux-partners--showcase .lux-partners-hero-title {
-  font-family: "Playfair Display", ui-serif, Georgia, serif !important;
-  font-weight: 600 !important;
-  font-size: clamp(2.15rem, 4.85vw, 3.35rem) !important;
+  font-family: var(--font-lux-sans, "Satoshi", "Plus Jakarta Sans", "Inter", system-ui, sans-serif) !important;
+  font-weight: 700 !important;
+  font-size: clamp(1.95rem, 4.65vw, 3.05rem) !important;
   line-height: 1.08 !important;
-  letter-spacing: -0.018em !important;
-  margin: 0 auto 1rem !important;
-  color: var(--lp-ink) !important;
+  letter-spacing: -0.03em !important;
+  margin: 0 auto 0.65rem !important;
+  color: var(--lp-navy) !important;
   text-shadow: none !important;
   display: flex !important;
   flex-direction: column !important;
   align-items: center !important;
-  gap: 0.06em !important;
+  gap: 0.02em !important;
 }
 
 .lux-partners--showcase .lux-partners-hero-title__primary {
   font-style: normal;
-  font-weight: 600;
-  color: var(--lp-ink) !important;
+  font-weight: 700;
+  color: var(--lp-navy) !important;
 }
 
-/* Refined italic — solid tone, avoids neon gradient chip */
 .lux-partners--showcase .lux-partners-hero-title__accent {
-  font-style: italic;
-  font-weight: 500;
-  letter-spacing: 0.01em !important;
-  color: var(--lp-accent) !important;
+  margin-top: 0.06em;
+  font-family:
+    var(--font-lux-serif, "Cormorant Garamond", "Instrument Serif", "Playfair Display", Georgia,
+    serif) !important;
+  font-style: italic !important;
+  font-weight: 500 !important;
+  letter-spacing: -0.01em !important;
+  color: var(--lp-navy) !important;
+  text-shadow: none !important;
 }
 
-.lux-partners-hero-sub.solution-partners-sub,
-.lux-partners--showcase .solution-partners-sub {
-  font-family: "Inter", "Satoshi", system-ui, sans-serif !important;
-  font-size: clamp(0.68rem, 0.72vw, 0.78rem) !important;
-  line-height: 1.65 !important;
-  font-weight: 300 !important;
-  letter-spacing: 0.32em !important;
-  text-transform: uppercase !important;
-  font-variant-numeric: tabular-nums;
-  color: var(--lp-muted) !important;
-  margin: 0 auto clamp(3.35rem, 6.75vw, 4.85rem) !important;
-  max-width: 36rem !important;
+.lux-partners-showcase__sub {
+  margin: 0 auto;
+  max-width: 32rem;
+  font-family: var(--font-lux-sans, "Satoshi", "Inter", system-ui, sans-serif);
+  font-size: clamp(11px, 1.08vw, 13px);
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--me-text-muted, rgba(226, 232, 240, 0.55));
+  line-height: 1.55;
 }
 
 .lux-partners--showcase .lux-partners-marquee-wrap {
@@ -282,59 +157,18 @@
   padding: clamp(0.85rem, 2vw, 1.35rem) 0;
 }
 
-/* Marquee trough light — cinematic but minimal */
-.lux-partners--showcase .lux-partners-marquee__beam {
-  position: absolute;
-  top: 50%;
-  height: 100%;
-  transform: translateY(-50%);
-  left: -12%;
-  width: 124%;
-  pointer-events: none;
-  z-index: 0;
-  opacity: 0.11;
-  background: linear-gradient(
-    102deg,
-    transparent 0%,
-    rgba(120, 190, 205, 0) 43%,
-    rgba(120, 190, 205, 0.07) 50%,
-    rgba(120, 190, 205, 0) 56%,
-    transparent 100%
-  );
-  animation: lux-partners-beam-row 22s ease-in-out infinite;
-}
-
-@keyframes lux-partners-beam-row {
-  0%,
-  100% {
-    transform: translateY(-50%) translateX(-5%);
-    opacity: 0.1;
-  }
-  50% {
-    transform: translateY(-50%) translateX(5%);
-    opacity: 0.16;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .lux-partners--showcase .lux-partners-marquee__beam {
-    animation: none;
-    opacity: 0.085;
-  }
-}
-
 .lux-partners--showcase .lux-partners-marquee__mask {
   position: relative;
   z-index: 1;
   overflow: hidden;
-  mask-image: linear-gradient(90deg, transparent 0%, black 7%, black 93%, transparent 100%);
-  -webkit-mask-image: linear-gradient(90deg, transparent 0%, black 7%, black 93%, transparent 100%);
+  mask-image: linear-gradient(90deg, transparent 0%, black 14%, black 86%, transparent 100%);
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, black 14%, black 86%, transparent 100%);
 }
 
 .lux-partners--showcase .lux-partners-marquee__track {
   display: flex;
   align-items: center;
-  gap: clamp(1.15rem, 2.6vw, 1.85rem);
+  gap: clamp(1.55rem, 3.6vw, 2.75rem);
   width: max-content;
   animation-timing-function: linear;
   animation-iteration-count: infinite;
@@ -367,176 +201,122 @@
   }
 }
 
-/* Glass cards — calm, light blur, soft glass rim */
+/* Minimal beyaz kartlar — açık zemin için */
 .lux-partners--showcase .lux-partners-logo-slide {
   position: relative;
   flex: 0 0 auto;
-  width: clamp(7.5rem, 14vw, 9.85rem);
-  height: clamp(3.95rem, 8.2vw, 4.75rem);
+  width: clamp(7.6rem, 14.8vw, 10.35rem);
+  height: clamp(4.05rem, 8.2vw, 4.92rem);
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0.72rem 1.12rem;
-  border-radius: 1.05rem;
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  background:
-    linear-gradient(
-      152deg,
-      rgba(255, 255, 255, 0.055) 0%,
-      rgba(255, 255, 255, 0.02) 40%,
-      rgba(8, 24, 40, 0.42) 100%
-    );
-  backdrop-filter: blur(12px) saturate(125%);
-  -webkit-backdrop-filter: blur(12px) saturate(125%);
+  padding: 0.85rem 1.15rem;
+  border-radius: 18px;
+  border: 1px solid rgba(10, 22, 40, 0.1);
+  background: #ffffff;
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.06),
-    inset 0 -1px 0 rgba(0, 0, 0, 0.22),
-    0 10px 28px -14px rgba(0, 0, 0, 0.5);
+    0 1px 2px rgba(10, 22, 40, 0.04),
+    0 8px 28px rgba(10, 22, 40, 0.07);
   transition:
-    transform 0.62s cubic-bezier(0.22, 1, 0.32, 1),
-    border-color 0.52s cubic-bezier(0.22, 1, 0.32, 1),
-    box-shadow 0.62s cubic-bezier(0.22, 1, 0.32, 1);
-}
-
-/* Specular pass — restrained */
-.lux-partners--showcase .lux-partners-logo-slide::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  pointer-events: none;
-  z-index: 1;
-  opacity: 0;
-  background: linear-gradient(
-    118deg,
-    transparent 38%,
-    rgba(255, 255, 255, 0.06) 50%,
-    transparent 62%
-  );
-  transition: opacity 0.5s cubic-bezier(0.22, 1, 0.32, 1);
-}
-
-.lux-partners--showcase .lux-partners-logo-slide::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  pointer-events: none;
-  z-index: 0;
-  opacity: 0.28;
-  background: radial-gradient(
-    ellipse 95% 75% at 50% -8%,
-    rgba(118, 192, 210, 0.09) 0%,
-    transparent 58%
-  );
+    border-color 0.35s ease,
+    box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .lux-partners--showcase .lux-partners-logo-slide:hover {
-  transform: translateY(-5px);
-  border-color: rgba(130, 200, 218, 0.22);
+  transform: none;
+  border-color: rgba(10, 22, 40, 0.18);
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.08),
-    0 0 0 1px rgba(120, 195, 210, 0.12),
-    0 4px 20px rgba(95, 170, 195, 0.07),
-    0 22px 48px -26px rgba(0, 0, 0, 0.55);
+    0 1px 3px rgba(10, 22, 40, 0.06),
+    0 14px 36px rgba(10, 22, 40, 0.1);
 }
 
-.lux-partners--showcase .lux-partners-logo-slide:hover::before {
-  opacity: 0.72;
-}
-
-/* Logos unified — subdued, luxury legibility */
 .lux-partners--showcase .lux-partners-logo-slide img {
   position: relative;
-  z-index: 2;
+  z-index: 1;
   width: auto;
-  max-width: 84%;
-  height: 2.15rem;
-  max-height: 2.15rem;
+  max-width: 86%;
+  height: 2.1rem;
+  max-height: 2.1rem;
   object-fit: contain;
   object-position: center;
-  opacity: 0.76;
-  filter: saturate(0.9) brightness(0.93) contrast(1.04);
+  opacity: 0.94;
+  filter: saturate(0.98) brightness(1) contrast(1.06);
   transition:
-    filter 0.52s cubic-bezier(0.22, 1, 0.32, 1),
-    opacity 0.52s ease,
-    transform 0.52s cubic-bezier(0.22, 1, 0.32, 1);
+    opacity 0.35s ease,
+    filter 0.35s ease;
 }
 
-.lux-partners--showcase .lux-partners-logo-slide[data-partner-id="daikin"] img {
-  filter: saturate(0.94) brightness(0.93) contrast(1.04);
-  opacity: 0.76;
-}
-
+/* Samsung markası beyaz zeminde görünür olsun */
 .lux-partners--showcase .lux-partners-logo-slide[data-partner-id="samsung"] img {
-  filter: brightness(0) invert(1) contrast(0.92) brightness(0.88);
-  opacity: 0.72;
-}
-
-.lux-partners--showcase .lux-partners-logo-slide[data-partner-id="mitsubishi"] img {
-  filter: saturate(0.92) brightness(0.9) contrast(1.04);
-  opacity: 0.74;
-}
-
-.lux-partners--showcase .lux-partners-logo-slide[data-partner-id="viessmann"] img {
-  filter: saturate(0.92) brightness(0.9) contrast(1.05);
-  opacity: 0.74;
-}
-
-.lux-partners--showcase .lux-partners-logo-slide[data-partner-id="wilo"] img {
-  filter: saturate(0.93) brightness(0.91) contrast(1.04);
-  opacity: 0.74;
-}
-
-.lux-partners--showcase .lux-partners-logo-slide[data-partner-id="caleffi"] img,
-.lux-partners--showcase .lux-partners-logo-slide[data-partner-id="frankische"] img,
-.lux-partners--showcase .lux-partners-logo-slide[data-partner-id="tyco"] img {
-  filter: saturate(0.88) brightness(0.9) contrast(1.06);
-  opacity: 0.74;
+  filter: saturate(1) brightness(0.92) contrast(1.05);
 }
 
 .lux-partners--showcase .lux-partners-logo-slide:hover img {
-  opacity: 0.86;
-  transform: translateY(-1px);
-  filter: saturate(0.96) brightness(0.97) contrast(1.06)
-    drop-shadow(0 6px 18px rgba(0, 0, 0, 0.22));
+  opacity: 1;
+  transform: none;
+  filter: saturate(1) brightness(1) contrast(1.06);
 }
 
 .lux-partners--showcase .lux-partners-logo-slide[data-partner-id="samsung"]:hover img {
-  filter: brightness(0) invert(1) contrast(0.94) brightness(0.94)
-    drop-shadow(0 6px 16px rgba(0, 0, 0, 0.2));
-}
-
-.lux-partners--showcase .lux-partners-logo-slide[data-partner-id="daikin"]:hover img,
-.lux-partners--showcase .lux-partners-logo-slide[data-partner-id="mitsubishi"]:hover img,
-.lux-partners--showcase .lux-partners-logo-slide[data-partner-id="viessmann"]:hover img,
-.lux-partners--showcase .lux-partners-logo-slide[data-partner-id="wilo"]:hover img,
-.lux-partners--showcase .lux-partners-logo-slide[data-partner-id="caleffi"]:hover img,
-.lux-partners--showcase .lux-partners-logo-slide[data-partner-id="frankische"]:hover img,
-.lux-partners--showcase .lux-partners-logo-slide[data-partner-id="tyco"]:hover img {
-  filter: saturate(0.98) brightness(0.96) contrast(1.06)
-    drop-shadow(0 6px 18px rgba(0, 0, 0, 0.22));
+  filter: saturate(1) brightness(0.96) contrast(1.08);
 }
 
 .lux-partners--showcase .lux-partners-logo-fallback {
   position: relative;
   z-index: 1;
-  font-family: "Inter", "Satoshi", system-ui, sans-serif;
+  font-family: var(--font-lux-sans, "Satoshi", "Inter", system-ui, sans-serif);
   font-size: 9px;
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: rgba(170, 186, 204, 0.48);
+  color: var(--lp-navy);
   text-align: center;
   line-height: 1.25;
   padding: 0 4px;
+  opacity: 0.85;
+}
+
+.lux-partners-showcase__cta-wrap {
+  margin: clamp(2.25rem, 5vw, 3.35rem) 0 0;
+  padding: 0;
+}
+
+.lux-partners-showcase__cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.65rem;
+  padding: 0.45rem 1.35rem;
+  font-family: var(--font-lux-sans, "Satoshi", "Inter", system-ui, sans-serif);
+  font-size: clamp(11px, 1.05vw, 13px);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--lp-navy);
+  text-decoration: none;
+  border-radius: 999px;
+  border: 1px solid rgba(10, 22, 40, 0.28);
+  background: transparent;
+  transition:
+    border-color 0.3s ease,
+    color 0.3s ease,
+    background-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.lux-partners-showcase__cta:hover {
+  border-color: rgba(10, 22, 40, 0.45);
+  color: var(--lp-navy);
+  background-color: rgba(10, 22, 40, 0.03);
+  box-shadow: none;
+}
+
+.lux-partners-showcase__cta:focus-visible {
+  outline: 2px solid rgba(10, 22, 40, 0.35);
+  outline-offset: 3px;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .lux-partners--showcase .lux-partners-logo-slide:hover {
-    transform: none;
-  }
-
   .lux-partners--showcase .lux-partners-logo-slide:hover img {
     transform: none;
   }

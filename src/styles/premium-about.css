@@ -5,10 +5,7 @@
   isolation: isolate;
   overflow: hidden;
   padding: clamp(4.25rem, 10vw, 7.25rem) clamp(1.25rem, 5vw, 4rem);
-  background:
-    radial-gradient(ellipse 92% 72% at 82% 18%, rgba(125, 211, 252, 0.085) 0%, transparent 56%),
-    radial-gradient(ellipse 74% 58% at 10% 82%, rgba(56, 189, 248, 0.055) 0%, transparent 52%),
-    linear-gradient(172deg, #121f36 0%, #172f46 38%, #142838 100%);
+  background: var(--site-canvas-bg, #0d2d4a);
   border-top: 1px solid rgba(125, 211, 252, 0.1);
   border-bottom: 1px solid rgba(125, 211, 252, 0.07);
 }

@@ -1,9 +1,8 @@
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useLanguage } from "@/i18n/LanguageContext";
 
-gsap.registerPlugin(ScrollTrigger);
+import { revealOnView } from "@/utils/revealOnView";
 
 interface ShowcaseSection {
   id: string;
@@ -83,28 +82,13 @@ const ShowcaseItem = ({ s, isFirst }: { s: ShowcaseSection; isFirst: boolean }) 
   useEffect(() => {
     const el = sectionRef.current;
     const textEl = textRef.current;
-    const visualEl = visualRef.current;
-    if (!el || !textEl || !visualEl) return;
+    if (!el || !textEl) return undefined;
+
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduced) return;
+    if (reduced) return undefined;
 
-    // Pin + parallax on the visual
-    const ctx = gsap.context(() => {
-      ScrollTrigger.create({
-        trigger: el,
-        start: "top top",
-        end: "+=100%",
-        pin: true,
-        anticipatePin: 1,
-        scrub: 1,
-      });
-
+    return revealOnView(el, () => {
       gsap.from(textEl.querySelectorAll<HTMLElement>("[data-text-reveal]"), {
-        scrollTrigger: {
-          trigger: el,
-          start: "top 80%",
-          toggleActions: "play none none reverse",
-        },
         y: 40,
         opacity: 0,
         duration: 0.9,
@@ -112,8 +96,6 @@ const ShowcaseItem = ({ s, isFirst }: { s: ShowcaseSection; isFirst: boolean }) 
         ease: "power3.out",
       });
     });
-
-    return () => ctx.revert();
   }, []);
 
   return (

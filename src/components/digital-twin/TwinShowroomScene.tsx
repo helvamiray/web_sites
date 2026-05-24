@@ -1,6 +1,6 @@
 import { useFrame, useThree } from "@react-three/fiber";
 import { Environment, Grid, Line, OrbitControls } from "@react-three/drei";
-import { useMemo, useRef } from "react";
+import { useMemo, useRef, useLayoutEffect } from "react";
 import { Color, MeshStandardMaterial, Vector3, type Mesh } from "three";
 import type { OrbitControls as OrbitControlsImpl } from "three-stdlib";
 import {
@@ -24,7 +24,9 @@ const ATT_CYAN = new Color(DIGITAL_TWIN_CYAN_SOFT);
 
 function ResizeListener() {
   const gl = useThree((s) => s.gl);
-  gl.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  useLayoutEffect(() => {
+    gl.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
+  }, [gl]);
   return null;
 }
 
@@ -141,8 +143,13 @@ function HvacHotspots({
 }: HvacHotspotsProps) {
   const { selectZone } = useDigitalTwinExperience();
   const meshRefs = useRef<(Mesh | null)[]>([]);
+  /** Half the hotspot material updates (~30 Hz subjective) — same look, less GPU churn. */
+  const frameStride = useRef(0);
 
   useFrame(({ clock }) => {
+    frameStride.current = (frameStride.current + 1) % 2;
+    if (frameStride.current !== 0) return;
+
     const t = clock.elapsedTime;
     meshRefs.current.forEach((mesh, i) => {
       if (!mesh?.material) return;
@@ -179,7 +186,7 @@ function HvacHotspots({
               document.body.style.cursor = "";
             }}
           >
-            <sphereGeometry args={[cutawayHighlight && selected ? 0.26 : 0.2, 28, 28]} />
+            <sphereGeometry args={[cutawayHighlight && selected ? 0.26 : 0.2, 18, 18]} />
             <meshStandardMaterial
               color={cyan}
               metalness={0.35}
@@ -283,8 +290,8 @@ export function TwinShowroomScene() {
         castShadow
         intensity={0.92}
         position={[10, 18, 10]}
-        shadow-mapSize-width={1024}
-        shadow-mapSize-height={1024}
+        shadow-mapSize-width={512}
+        shadow-mapSize-height={512}
         shadow-bias={-0.00025}
         color="#f8fafc"
       />

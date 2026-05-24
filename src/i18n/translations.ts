@@ -55,6 +55,8 @@ export const translations = {
     "cart.clear": "Sepeti Temizle",
     "about.eyebrow": "◉ Bölüm · Hakkımızda",
     "about.title": "Hakkımızda",
+    "about.manifesto.heroSubtitle":
+      "Konfor, enerji ve güvenlik — parametrik seçim ve sahada ölçülebilir teslim için tek düzlemde iklim mühendisliği.",
     "about.body":
       "Vega İklimlendirme ve Enerji A.Ş., iklimlendirme ve mekanik tesisat alanlarında güçlü marka portföyüyle proje odaklı tedarik ve mühendislik desteği sunar. Doğru ürün seçimi, teknik doğrulama ve zamanında teslimle iş ortaklarımızın yanındayız.",
     "mission.eyebrow": "◆ Misyon",
@@ -225,6 +227,8 @@ export const translations = {
     "cart.clear": "Clear Cart",
     "about.eyebrow": "◉ Section · About",
     "about.title": "About Us",
+    "about.manifesto.heroSubtitle":
+      "Comfort, energy, and safety — climate engineering on one plane with parametric selection and measurable delivery in the field.",
     "about.body":
       "Vega Climate & Energy Inc. delivers project-driven supply and engineering support across HVAC and mechanical systems with a strong portfolio of leading brands — from product selection to technical validation and on-time delivery.",
     "mission.eyebrow": "◆ Mission",

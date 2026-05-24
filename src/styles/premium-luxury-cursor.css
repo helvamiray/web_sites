@@ -1,7 +1,7 @@
 /**
- * Futuristic luxury cursor — cyan energy orb, inertia, magnetic pull,
- * hover captions (data-lux-cursor), glass hover halo, cinematic dual ripple on click.
- * Desktop + motion only.
+ * Luxury cursor — cyan glow orb + glass ring + hover labels (desktop + motion only).
+ * Tuned for performance: fixed blur sizes, no backdrop-filter layer, simplified click pulse,
+ * trails + animated conic halo removed from the GPU path.
  */
 
 body.lux-premium-cursor,
@@ -22,13 +22,13 @@ body.lux-premium-cursor :is(a, button, input, textarea, select, summary, [role="
   mix-blend-mode: normal;
 }
 
-/* Ambient bloom — lags behind pointer */
+/* Ambient bloom — static CSS blur (no JS `filter:` churn). */
 .lux-cursor-glow {
   position: fixed;
   left: 0;
   top: 0;
-  width: 168px;
-  height: 168px;
+  width: min(136px, 22vw);
+  height: min(136px, 22vw);
   margin: 0;
   border-radius: 50%;
   background: radial-gradient(
@@ -38,14 +38,14 @@ body.lux-premium-cursor :is(a, button, input, textarea, select, summary, [role="
     rgba(0, 120, 200, 0.03) 58%,
     transparent 74%
   );
-  filter: blur(22px);
+  filter: blur(16px);
   opacity: 0.82;
   transform: translate3d(-100px, -100px, 0);
-  will-change: transform, opacity, filter;
+  will-change: transform, opacity;
 }
 
 .lux-cursor-ring {
-  --lux-trail-stretch: 1;
+  --lux-scroll-stretch: 1;
   position: fixed;
   left: 0;
   top: 0;
@@ -60,7 +60,6 @@ body.lux-premium-cursor :is(a, button, input, textarea, select, summary, [role="
   background:
     radial-gradient(circle at 34% 26%, rgba(255, 255, 255, 0.14) 0%, transparent 42%),
     radial-gradient(circle at 62% 72%, rgba(12, 46, 72, 0.35) 0%, rgba(8, 18, 32, 0.08) 62%);
-  backdrop-filter: blur(0);
   box-shadow:
     0 0 28px rgba(0, 191, 255, 0.1),
     0 0 1px rgba(140, 235, 255, 0.32) inset,
@@ -69,38 +68,27 @@ body.lux-premium-cursor :is(a, button, input, textarea, select, summary, [role="
   transition:
     border-color 0.55s cubic-bezier(0.16, 1, 0.3, 1),
     box-shadow 0.55s cubic-bezier(0.16, 1, 0.3, 1),
-    backdrop-filter 0.55s cubic-bezier(0.16, 1, 0.3, 1),
     background 0.55s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: transform;
   display: grid;
   place-items: center;
 }
 
-/* Orbiting cyan veil behind ring — cinematic hover accent */
+/* Soft halo — static gradient (no infinite rotation animation). */
 .lux-cursor-ring::before {
   content: "";
   position: absolute;
-  inset: -8px;
+  inset: -7px;
   border-radius: 50%;
   opacity: 0;
   z-index: -1;
-  background: conic-gradient(
-    from 210deg,
-    rgba(165, 243, 252, 0.65),
-    transparent 22%,
-    rgba(56, 189, 248, 0.45),
-    transparent 48%,
-    rgba(103, 232, 249, 0.55),
-    transparent 76%,
-    rgba(224, 242, 254, 0.35)
-  );
-  filter: blur(5px);
-  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-  animation: lux-cursor-ring-orbit 4.8s linear infinite;
-  animation-play-state: paused;
+  background:
+    radial-gradient(circle at 30% 30%, rgba(165, 243, 252, 0.5) 0%, transparent 45%),
+    radial-gradient(circle at 72% 70%, rgba(56, 189, 248, 0.42) 0%, transparent 50%);
+  filter: blur(4px);
+  transition: opacity 0.48s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Inner frost edge — subtle glass rim */
 .lux-cursor-ring::after {
   content: "";
   position: absolute;
@@ -114,7 +102,6 @@ body.lux-premium-cursor :is(a, button, input, textarea, select, summary, [role="
 
 .lux-cursor-ring--hover {
   border-color: rgba(129, 237, 255, 0.52);
-  backdrop-filter: blur(22px) saturate(175%);
   background:
     radial-gradient(circle at 38% 22%, rgba(255, 255, 255, 0.18) 0%, transparent 46%),
     rgba(6, 16, 30, 0.42);
@@ -126,18 +113,11 @@ body.lux-premium-cursor :is(a, button, input, textarea, select, summary, [role="
 }
 
 .lux-cursor-ring--hover::before {
-  opacity: 0.92;
-  animation-play-state: running;
+  opacity: 0.86;
 }
 
 .lux-cursor-ring--hover::after {
   opacity: 0.85;
-}
-
-@keyframes lux-cursor-ring-orbit {
-  to {
-    transform: rotate(360deg);
-  }
 }
 
 .lux-cursor-label {
@@ -168,7 +148,6 @@ body.lux-premium-cursor :is(a, button, input, textarea, select, summary, [role="
   transform: translate(-50%, -50%) scale(1);
 }
 
-/* Core orb — compact luminous cyan */
 .lux-cursor-dot {
   position: fixed;
   left: 0;
@@ -181,46 +160,11 @@ body.lux-premium-cursor :is(a, button, input, textarea, select, summary, [role="
   box-shadow:
     0 0 22px rgba(0, 191, 255, 0.55),
     0 0 4px rgba(255, 255, 255, 0.95);
-  filter: blur(0.28px);
   transform: translate3d(-100px, -100px, 0) translate(-50%, -50%) scale(1);
   will-change: transform;
 }
 
-/* Trailing echoes — motion-blurred */
-.lux-cursor-trail {
-  position: fixed;
-  left: 0;
-  top: 0;
-  width: 6px;
-  height: 6px;
-  margin: 0;
-  border-radius: 50%;
-  background: rgba(118, 243, 255, 0.36);
-  box-shadow: 0 0 14px rgba(0, 191, 255, 0.22);
-  filter: blur(0.85px);
-  transform: translate3d(-100px, -100px, 0) translate(-50%, -50%) scale(1, 1);
-  will-change: transform, opacity;
-  pointer-events: none;
-  opacity: 0.4;
-}
-
-.lux-cursor-trail--1 {
-  width: 5px;
-  height: 5px;
-  background: rgba(118, 243, 255, 0.24);
-  box-shadow: 0 0 12px rgba(0, 191, 255, 0.14);
-  filter: blur(1.05px);
-}
-
-.lux-cursor-trail--2 {
-  width: 4px;
-  height: 4px;
-  background: rgba(118, 243, 255, 0.14);
-  box-shadow: 0 0 10px rgba(0, 191, 255, 0.1);
-  filter: blur(1.2px);
-}
-
-/* Click: primary energy pulse */
+/* Click: single pulse — transform + opacity only (cheap compositing). */
 .lux-cursor-energy {
   position: fixed;
   left: 0;
@@ -230,47 +174,23 @@ body.lux-premium-cursor :is(a, button, input, textarea, select, summary, [role="
   margin: -11px 0 0 -11px;
   border-radius: 50%;
   pointer-events: none;
-  border: 1px solid rgba(129, 237, 255, 0.58);
-  background: radial-gradient(circle, rgba(0, 191, 255, 0.16) 0%, transparent 62%);
+  border: 1px solid rgba(129, 237, 255, 0.52);
+  background: radial-gradient(circle, rgba(0, 191, 255, 0.14) 0%, transparent 62%);
   box-shadow:
-    0 0 32px rgba(0, 191, 255, 0.32),
-    0 0 72px rgba(118, 243, 255, 0.12);
-  animation: lux-cursor-energy-out 0.72s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  will-change: transform, opacity, filter;
-}
-
-/* Delayed softer ripple — glow bloom */
-.lux-cursor-energy--echo {
-  animation-name: lux-cursor-energy-echo;
-  animation-duration: 0.95s;
-  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
-  border-color: rgba(129, 237, 255, 0.32);
-  background: radial-gradient(circle, rgba(56, 189, 248, 0.08) 0%, transparent 58%);
+    0 0 28px rgba(0, 191, 255, 0.28),
+    0 0 56px rgba(118, 243, 255, 0.1);
+  animation: lux-cursor-energy-out 0.62s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  will-change: transform, opacity;
 }
 
 @keyframes lux-cursor-energy-out {
   0% {
-    transform: scale(0.62);
-    opacity: 0.96;
-    filter: blur(0.45px);
+    transform: scale(0.72);
+    opacity: 0.92;
   }
   100% {
-    transform: scale(3.95);
+    transform: scale(3.35);
     opacity: 0;
-    filter: blur(14px);
-  }
-}
-
-@keyframes lux-cursor-energy-echo {
-  0% {
-    transform: scale(0.38);
-    opacity: 0.52;
-    filter: blur(2px);
-  }
-  100% {
-    transform: scale(5.4);
-    opacity: 0;
-    filter: blur(26px);
   }
 }
 
